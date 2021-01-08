@@ -1,4 +1,4 @@
-int main()
+int main2()
 {
 	// integer: 내부적으로 2진수
 	// real number: 내부적으로 부동소수점(floating point) 표현법 사용
@@ -21,13 +21,14 @@ int main()
 	// 32bit signed integer
 	// +1010101 01010101 01010101 01010101 = ...
 	
-	// 부동소수점
+	// 부동소수점 - 연산이 느리지만, 하드웨어의 발달로 빨라졌다.
 	// sign / Exponent / Fraction
 	// 32bit single precision
 	// sign(1) / Exponent(8) / Fraction(23)
+	// 0.0f;
 
 	// 64bit double precision
 	// sign(1) / Exponent(11) / Fraction(52)
-
+	// 0.0 f가 안 붙는다.
 	return 0;
 }

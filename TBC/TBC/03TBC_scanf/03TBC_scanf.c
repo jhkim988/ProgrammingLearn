@@ -1,7 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int main()
+int main1()
 {
 	// (자료형) (변수명) = (리터럴 상수);
 	int pizza = 5900; 
