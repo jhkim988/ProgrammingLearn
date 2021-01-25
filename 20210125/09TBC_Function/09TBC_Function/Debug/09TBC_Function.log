@@ -1,0 +1,3 @@
+﻿  09TBC_Function.c
+C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\09TBC_Function\09TBC_Function.c(217,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'int *'
+  09TBC_Function.vcxproj -> C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\Debug\09TBC_Function.exe
