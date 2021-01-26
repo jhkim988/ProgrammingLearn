@@ -36,6 +36,9 @@ void MyTry_print_binary_loop(unsigned long n);
 // 9.10
 int fibonacci(int num);
 
+// 9.18
+void swap(int* a, int* b);
+
 int main()
 {
 	// 9.1 함수가 필요할 때
@@ -211,14 +214,119 @@ int main()
 	//int *a_ptr = &a;
 	
 	// 간접접근 indirection, 역참조 dereferencing, 방향재지정 redirection
-	int a = 7;
-	int *a_ptr = &a; // a의 주소를 a_ptr에 저장
-	*a_ptr = 8; // 간접접근 operator *, a_ptr에 저장돼 있는 주소를 찾아간다. 포인터 선언할 때 int가 있으므로 a_ptr으로부터 4칸
-	printf("%d %d\n", a, &a);
+	//int a = 7;
+	//int *a_ptr = &a; // a의 주소를 a_ptr에 저장
+	//*a_ptr = 8; // 간접접근 operator *, a_ptr에 저장돼 있는 주소를 찾아간다. 포인터 선언할 때 int가 있으므로 a_ptr으로부터 4칸
+	//printf("%d %d\n", a, &a);
 
-	int c = 9;
-	c += *a_ptr;
-	printf("%d\n", c);
+	//int c = 9;
+	//c += *a_ptr;
+	//printf("%d\n", c);
+
+
+	// 9.13 포인터의 기본적인 사용방법
+	//int a, b;
+	//a = 123;
+
+	//int* a_ptr; // *: asterisk
+	//a_ptr = &a; // & 연산자로 변수 a의 메모리 공간 중 가장 첫 번째 주소를 가져온다. 이를 포인터 변수에 저장한다.
+
+	//printf("%d %d %p\n", a, *a_ptr, a_ptr); // 포인터의 형식지정자는 %p이다.
+
+	//*a_ptr = 456; // redirection, dereferencing
+	//printf("%d %d %p\n", a, *a_ptr, a_ptr);
+
+	////b = a_ptr; // 정수형 변수에 주소를 대입, 에러가 아닌 warning... b = (int) a_ptr을 의도한 것일수도 있으니까.
+	//b = *a_ptr;
+	//printf("%d\n", b);
+
+	//*a_ptr = 789;
+	//printf("%d\n", b);
+	//printf("%d %d %p\n", a, *a_ptr, a_ptr);
+	//printf("%d %d %p\n", b, *(&b), &b);
+
+	//b = 12;
+	//printf("%d\n", b);
+	//printf("%d %d %p\n", a, *a_ptr, a_ptr);
+
+	//a = 1004;
+	//printf("%d %d %p %d\n", a, *a_ptr, a_ptr, b);
+
+
+	// 9.14 포인터와 코딩스타일
+	//int *a, b; // a만 포인터변수가 된다.
+	// Tool -> Options -> Text Editor -> C/C++ -> Formatting style -> LLVM(int *a), VisualStudio(int* a), Google(both)
+
+
+	// 9.15 NULL 포인터와 런타임 에러
+	//int a = 1234;
+	//printf("%p\n", &a);
+	//printf("%d\n", a); // 초기화 하지 않으면 쓰레기 값
+
+	//int* ptr; // 초기화 하지 않으면 컴파일조차 되지 않는다. 포인터변수에 정수를 넣으면 redirection을 할 때 런타임 에러가 발생한다.(exit code...)
+	//printf("%p\n", ptr);
+	//printf("%d\n", *ptr);
+	
+	//int* safer_ptr;
+	//int* safer_ptr = NULL;
+	//int a = 123;
+
+	////safer_ptr = &a;
+	//if (a % 2 == 0)
+	//	safer_ptr = &a; // 어떤 조건에 따라서 포인터에 적절한 값이 저장될 수도 있고 안 될 수도 있다. 런타임에 따라 결정된다.
+
+	//// 예를 들면...
+	//int b;
+	//scanf("%d", &b);
+
+	//if (b % 2 == 0)
+	//	safer_ptr = &a; // b의 값에 따라 safer_ptr은 제대로 된 값을 갖거나, 초기화가 안 된 상태로 문제가 생긴다.
+
+	//// 따라서 대부분의 프로그래머들은 포인터변수를 선언할 때 NULL값으로 초기화한다.
+	//if (safer_ptr != NULL)
+	//	printf("%p\n", safer_ptr); // NULL이 아닐 때만 사용 가능하도록
+
+
+	// 9.16 디버거로 메모리 들여다보기
+	// 디버깅해서 주소 확인
+	// debug -> window -> memory (주의, 디버깅 상태일 때만 가능)
+	// 디버거에서 포인터변수의 값(주소)를 memory 1에서 검색해서 실제 어떤 값이 들어있는지 검색해본다. 
+	//	int a = 3, b = 5, c = 5, d = 9;
+	//int* a_ptr = &a, * b_ptr = &b, * c_ptr = &c, * d_ptr = &d;
+	//printf("%p %p %p %p", &a, &b, &c, &d);
+
+
+	// 9.17 포인터 변수의 크기
+	// x86은 4, x64는 8
+	/*char a;
+	float b;
+	double c;
+
+	char* ptr_a = &a;
+	float* ptr_b = &b;
+	double* ptr_c = &c;
+
+	printf("%zd %zd %zd\n", sizeof(a), sizeof(b), sizeof(c));
+	printf("%zd %zd %zd\n", sizeof(ptr_a), sizeof(ptr_b), sizeof(ptr_c));
+	printf("%zd %zd %zd\n", sizeof(&a), sizeof(&b), sizeof(&c));
+	printf("%zd %zd %zd\n", sizeof(char*), sizeof(float*), sizeof(double*));*/
+
+
+	// 9.18 포인터형 매개변수
+	int a = 123;
+	int b = 456;
+
+	//printf("%p %p\n", &a, &b);
+	// swap
+	//int temp = a;
+	//a = b;
+	//b = temp;
+	//printf("%p %p\n", &a, &b);
+
+	swap(&a, &b);
+
+	printf("%d %d\n", a, b);
+
 
 	return 0;
 }
@@ -365,4 +473,27 @@ int fibonacci(int num)
 	
 	// 재귀함수의 장점: 구현이 간단하다.
 	// 재귀함수의 단점: 메모리를 많이 사용한다. 계산의 중복이 생긴다.
+}
+
+// 9.18
+void swap(int* a, int* b) // 주소에 의한 호출
+{
+	//printf("%p %p\n", &a, &b);
+	// 인자로 넣어준 a, b와 함수 내부에서의 a, b의 주소가 다르다. 따라서 여기서 swap을 해도 함수 밖에서는 swap되지 않는다.
+	// 함수 내에서 변수를 새로 선언하고 값만 넣어준 인자로 초기화한 것이다. 지역변수다.
+	// 값에 의한 호출
+
+	//int temp = a;
+	//a = b;
+	//b = temp;
+
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+
+	// 왜 아래와 같이 하면 안 되는지 생각해보자.
+	//int* temp = a;
+	//a = b;
+	//b = temp;
+
 }
