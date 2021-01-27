@@ -1,7 +1,10 @@
-ï»¿#include <stdio.h>
+#include <stdio.h>
 
 #define YEARS 3
 #define MONTHS 12
+#define ROWS 3
+#define COLS 4
+
 
 // 10.7
 double average(double[], int);
@@ -14,27 +17,41 @@ void print_array(const int arr[], const int n);
 void add_value(int arr[], const int n, const int val);
 int sum(const int ar[], const int n);
 
+// 10.16
+int sum2d_1(int ar[ROWS][COLS]); // ROWS, COLS¸¦ ³Ö¾îÁÖ´õ¶óµµ ÇÔ¼ö ³»¿¡¼­ »ç¿ëÇÒ ¼ö ¾ø´Ù. #define ÇÑ °ÍÀ» ÅëÇØ¼­ Á¢±Ù °¡´ÉÇÏ°Ô...
+int sum2d_2(int ar[][COLS], int row); // row °³¼ö°¡ ¸î °³ÀÎÁö ÀÎÀÚ·Î ³Ö¾îÁàµµ µÈ´Ù. (COLS)´Â Àû¾îÁà¾ßÇÑ´Ù.
+//int sum2d_2(int(*ar)[COLS], int row); // pointer-to-int[COLS]
+int sum2d_3(int* ar, int row, int col); // ¹è¿­À» ³Ö´õ¶óµµ ¹è¿­ÀÇ ÀÌ¸§Àº ¹è¿­ ¿ø¼ÒÀÇ Ã¹ ÁÖ¼ÒÀÌ±â ¶§¹®¿¡ Æ÷ÀÎÅÍ·Î º¯È¯ÀÌ µÈ´Ù. µ¿ÀûÇÒ´çÀ» »ç¿ëÇÒ ¶§µµ 1Â÷¿øÀ¸·Î »ı°¢ÇÏ°í »ç¿ëÇÏ±â ¶§¹®¿¡...
+//int sum2d_3(int*, int, int); //µ¿ÀûÇÒ´çÀ» ÇÒ ¶§
+
+// 10.17
+//int sum2d_4(int row, int col, int ar[row][col]); // ¸Å°³º¯¼öÀÇ ¹è¿­¿¡µµ µé¾î°£´Ù.
+
+// 10.18
+int sum1d(int [], int);
+int sum2d(int[][COLS], int);
+
 int main()
 {
-	// 10.1 ë°°ì—´ê³¼ ë©”ëª¨ë¦¬
+	// 10.1 ¹è¿­°ú ¸Ş¸ğ¸®
 	//int high[12] = { 2, 5, 11, 18, 23, 27, 29, 30, 26, 20, 12, 4 }; // type name[length] = { ... element ... }
 	//int low[12] = { -7, -5, 1, 7, 13, 18, 22, 22, 16, 9, 2, -5};
 
-	// indexë¥¼ ì´ìš©í•˜ì—¬ ì ‘ê·¼í•œë‹¤.
+	// index¸¦ ÀÌ¿ëÇÏ¿© Á¢±ÙÇÑ´Ù.
 	//for (int i = 0; i < 12; ++i)
 	//	printf("%d, %d\n", high[i], low[i]);
 
-	// arrë¥¼ ì„ ì–¸í•˜ê²Œ ë˜ë©´ ì—°ì†ëœ ë©”ëª¨ë¦¬ ê³µê°„ì„ í• ë‹¹ë°›ëŠ”ë‹¤.
-	// intëŠ” 4ë°”ì´íŠ¸ì´ë¯€ë¡œ 4ë°”ì´íŠ¸ì”© 4ê°œ, 16ë°”ì´íŠ¸ì˜ ì—°ì†ëœ ê³µê°„ì„ í• ë‹¹ë°›ëŠ”ë‹¤.
+	// arr¸¦ ¼±¾ğÇÏ°Ô µÇ¸é ¿¬¼ÓµÈ ¸Ş¸ğ¸® °ø°£À» ÇÒ´ç¹Ş´Â´Ù.
+	// int´Â 4¹ÙÀÌÆ®ÀÌ¹Ç·Î 4¹ÙÀÌÆ®¾¿ 4°³, 16¹ÙÀÌÆ®ÀÇ ¿¬¼ÓµÈ °ø°£À» ÇÒ´ç¹Ş´Â´Ù.
 	//int arr[4];
 	//arr[0] = 2;
 	//arr[1] = 5;
 	//arr[2] = 11;
 	//arr[3] = 18;
-	// ë°°ì—´ì€ ì—°ì†ëœ ë©”ëª¨ë¦¬ ê³µê°„ì„ í• ë‹¹ ë°›ê¸° ë•Œë¬¸ì— arr[0]ê³¼ arr[1]ì˜ ì£¼ì†Œ ì°¨ì´ëŠ” 4ì”© ë‚˜ê²Œ ëœë‹¤.(intí˜•)
+	// ¹è¿­Àº ¿¬¼ÓµÈ ¸Ş¸ğ¸® °ø°£À» ÇÒ´ç ¹Ş±â ¶§¹®¿¡ arr[0]°ú arr[1]ÀÇ ÁÖ¼Ò Â÷ÀÌ´Â 4¾¿ ³ª°Ô µÈ´Ù.(intÇü)
 
 
-	// 10.2 ë°°ì—´ì˜ ê¸°ë³¸ì ì¸ ì‚¬ìš©ë°©ë²•
+	// 10.2 ¹è¿­ÀÇ ±âº»ÀûÀÎ »ç¿ë¹æ¹ı
 	//int high[MONTHS] = { 2, 5, 11, 18, 23, 27, 29, 30, 26, 20, 12, 4 };
 
 	//for (int i = 0; i < MONTHS; ++i)
@@ -43,30 +60,30 @@ int main()
 
 	//high = { 2, 5, 11, 18, 23, 27, 29, 30, 26, 20, 12, 4 }; // not working
 	//high[12] = { 2, 5, 11, 18, 23, 27, 29, 30, 26, 20, 12, 4 }; // not working
-	// ì„ ì–¸í•  ë•Œë§Œ ë‚˜ì—´í•´ì„œ ì´ˆê¸°í™” ê°€ëŠ¥í•˜ë‹¤.
+	// ¼±¾ğÇÒ ¶§¸¸ ³ª¿­ÇØ¼­ ÃÊ±âÈ­ °¡´ÉÇÏ´Ù.
 
-	//printf("%p %p\n", high, &high[0]); // ê°™ë‹¤.
+	//printf("%p %p\n", high, &high[0]); // °°´Ù.
 
 	//for (int i = 0; i < MONTHS; ++i)
-	//	printf("%lld\n", (long long)&high[i]); // 4ì”© ì»¤ì§€ëŠ”ê²ƒ í™•ì¸
+	//	printf("%lld\n", (long long)&high[i]); // 4¾¿ Ä¿Áö´Â°Í È®ÀÎ
 
-	// Error, ì»´íŒŒì¼ëŸ¬ê°€ ì¡ì•„ì£¼ì§€ ì•ŠëŠ”ë‹¤.
+	// Error, ÄÄÆÄÀÏ·¯°¡ Àâ¾ÆÁÖÁö ¾Ê´Â´Ù.
 	//high[12] = 4;
 	//high[-1] = 123;
 
 	// const array
 	//const int low[MONTHS] = { -7, -5, 1, 7, 13, 18, 22, 22, 16, 9, 2, -5 };
-	//low[0] = 1; ë°°ì—´ì˜ ì›ì†Œë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤.
+	//low[0] = 1; ¹è¿­ÀÇ ¿ø¼Ò¸¦ ¹Ù²Ü ¼ö ¾ø´Ù.
 
 	//int not_init[4]; // try static(storage class)
 	//for (int i = 0; i < 4; ++i)
-	//	printf("%d\n", not_init[i]); // ì»´íŒŒì¼ì€ ëœë‹¤. Release/Debug, x86/x64ì— ë”°ë¼ ë‹¤ë¥´ë‹¤.
+	//	printf("%d\n", not_init[i]); // ÄÄÆÄÀÏÀº µÈ´Ù. Release/Debug, x86/x64¿¡ µû¶ó ´Ù¸£´Ù.
 
 	//int insuff[4] = { 2, 4 };
 	//for (int i = 0; i < 4; ++i)
-	//	printf("%d\n", insuff[i]); // ë¹„ì–´ ìˆëŠ” ê²ƒì„ 0 ìœ¼ë¡œ ì•Œì•„ì„œ ì±„ì›Œì¤€ë‹¤.
+	//	printf("%d\n", insuff[i]); // ºñ¾î ÀÖ´Â °ÍÀ» 0 À¸·Î ¾Ë¾Æ¼­ Ã¤¿öÁØ´Ù.
 
-	//int over[2] = { 2, 4, 8, 16 }; // ì»´íŒŒì¼ ì—ëŸ¬
+	//int over[2] = { 2, 4, 8, 16 }; // ÄÄÆÄÀÏ ¿¡·¯
 	//for (int i = 0; i < 4; ++i)
 	//	printf("%d\n", over[i]);
 
@@ -75,19 +92,19 @@ int main()
 	//printf("%d\n", sizeof(int));
 	//printf("%d\n", sizeof(power_of_twos[0]));
 
-	//// ë°°ì—´í¬ê¸°ë¥¼ ìƒëµí•˜ë©´ for loopë¥¼ ë‹¤ìŒê³¼ ê°™ì´ êµ¬ì„±í•  ìˆ˜ ìˆë‹¤.
-	//for (int i = 0; i < sizeof(power_of_twos) / sizeof(power_of_twos[0]); ++i) // ë™ì í• ë‹¹ì—ì„œëŠ” ì´ë ‡ê²Œ í•  ìˆ˜ ì—†ë‹¤.
+	//// ¹è¿­Å©±â¸¦ »ı·«ÇÏ¸é for loop¸¦ ´ÙÀ½°ú °°ÀÌ ±¸¼ºÇÒ ¼ö ÀÖ´Ù.
+	//for (int i = 0; i < sizeof(power_of_twos) / sizeof(power_of_twos[0]); ++i) // µ¿ÀûÇÒ´ç¿¡¼­´Â ÀÌ·¸°Ô ÇÒ ¼ö ¾ø´Ù.
 	//	printf("%d ", power_of_twos[i]);
 	//printf("\n");
 	//// Designated initializers
-	//int days[MONTHS] = { 31, 28, [4] = 31, 30, 31, [1] = 29 }; // ì–´ëŠ ì¹¸ì— ì–´ë–¤ ê°’ì´ ë“¤ì–´ê°ˆì§€ ì •í•´ì¤€ë‹¤.
+	//int days[MONTHS] = { 31, 28, [4] = 31, 30, 31, [1] = 29 }; // ¾î´À Ä­¿¡ ¾î¶² °ªÀÌ µé¾î°¥Áö Á¤ÇØÁØ´Ù.
 	//for (int i = 0; i < MONTHS; ++i)
 	//	printf("%d ", days[i]);
 
 	//// array size
 	//int arr1[MONTHS];
 	//double arr2[2];
-	//float arr3[3 * 4 + 1]; // ì»´íŒŒì¼í•  ë•Œ ë¯¸ë¦¬ ê³„ì‚°í•´ì„œ ì²˜ë¦¬í•œë‹¤.
+	//float arr3[3 * 4 + 1]; // ÄÄÆÄÀÏÇÒ ¶§ ¹Ì¸® °è»êÇØ¼­ Ã³¸®ÇÑ´Ù.
 	//float arr4[sizeof(int) + 1];
 	//float arr5[-10]; // Error
 	//float arr6[0]; // Error
@@ -95,31 +112,31 @@ int main()
 	//float arr8[(int)1.5];
 
 	//int n = 8;
-	//float arr9[n]; // Variable-Length Array is optional from C11, visual studio ì»´íŒŒì¼ëŸ¬ì—ì„œëŠ” ì•ˆëœë‹¤. ë™ì í• ë‹¹ìœ¼ë¡œ êµ¬í˜„ ê°€ëŠ¥í•˜ë‹¤.
+	//float arr9[n]; // Variable-Length Array is optional from C11, visual studio ÄÄÆÄÀÏ·¯¿¡¼­´Â ¾ÈµÈ´Ù. µ¿ÀûÇÒ´çÀ¸·Î ±¸Çö °¡´ÉÇÏ´Ù.
 
 
-	// 10.3 í¬ì¸í„°ì˜ ì‚°ìˆ ì—°ì‚° Pointer Arithmetics
+	// 10.3 Æ÷ÀÎÅÍÀÇ »ê¼ú¿¬»ê Pointer Arithmetics
 	//int* ptr = 0; // (int*) 0, NULL
 
 	//printf("%p %lld\n", ptr, (long long)ptr);
-	//ptr++; // ìë£Œí˜•ì˜ í¬ê¸°ë§Œí¼ ë”í•˜ëŠ” ì—°ì‚°ì´ ëœë‹¤. try ptr += 2; ë”í•˜ê¸° ë¹¼ê¸° ë‹¤ ëœë‹¤.
-	//printf("%p %lld\n", ptr, (long long)ptr); // 4ê°€ ë‚˜ì˜¨ë‹¤.
+	//ptr++; // ÀÚ·áÇüÀÇ Å©±â¸¸Å­ ´õÇÏ´Â ¿¬»êÀÌ µÈ´Ù. try ptr += 2; ´õÇÏ±â »©±â ´Ù µÈ´Ù.
+	//printf("%p %lld\n", ptr, (long long)ptr); // 4°¡ ³ª¿Â´Ù.
 
-	//// void* void í¬ì¸í„°ëŠ” ì‚°ìˆ ì—°ì‚°ì„ í•  ìˆ˜ ì—†ë‹¤.
-	//// ë‹¨í•­ì—°ì‚°ì +, -ëŠ” í¬ì¸í„° ì‚°ìˆ ë¡œ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.
+	//// void* void Æ÷ÀÎÅÍ´Â »ê¼ú¿¬»êÀ» ÇÒ ¼ö ¾ø´Ù.
+	//// ´ÜÇ×¿¬»êÀÚ +, -´Â Æ÷ÀÎÅÍ »ê¼ú·Î »ç¿ëÇÒ ¼ö ¾ø´Ù.
 	////ptr = +ptr; // Error
 	////ptr = -ptr; // Error
 
 	//int arr[10];
 	//int* ptr1 = &arr[3], * ptr2 = &arr[5];
-	//// ptr2 = ptr1 + ptr2; // Not working, í¬ì¸í„° ì£¼ì†Œë¼ë¦¬ ë”í•˜ëŠ” ê²ƒì€ ì•ˆëœë‹¤.
-	//int i = ptr2 - ptr1; // meaning? í¬ì¸í„° ì£¼ì†Œë¼ë¦¬ ë¹¼ëŠ” ê²ƒì€ ëœë‹¤. (array íƒ€ì…ê³¼ëŠ” ìƒê´€ ì—†ì´ ì°¨ì´ëŠ” intì´ë‹¤.) ì£¼ì†Œê°’ì˜ ì°¨ì´ë¥¼ ìë£Œí˜•ì˜ í¬ê¸°(int)ë¡œ ë‚˜ëˆˆ ê°’ì´ë‹¤. ì¦‰ ë°°ì—´ indexì˜ ì°¨ì´ë‹¤.
+	//// ptr2 = ptr1 + ptr2; // Not working, Æ÷ÀÎÅÍ ÁÖ¼Ò³¢¸® ´õÇÏ´Â °ÍÀº ¾ÈµÈ´Ù.
+	//int i = ptr2 - ptr1; // meaning? Æ÷ÀÎÅÍ ÁÖ¼Ò³¢¸® »©´Â °ÍÀº µÈ´Ù. (array Å¸ÀÔ°ú´Â »ó°ü ¾øÀÌ Â÷ÀÌ´Â intÀÌ´Ù.) ÁÖ¼Ò°ªÀÇ Â÷ÀÌ¸¦ ÀÚ·áÇüÀÇ Å©±â(int)·Î ³ª´« °ªÀÌ´Ù. Áï ¹è¿­ indexÀÇ Â÷ÀÌ´Ù.
 
 	//printf("%p %p %d\n", ptr1, ptr2, i);
 
 
-	// 10.4 í¬ì¸í„°ì™€ ë°°ì—´
-	//int arr[10]; // 40ë°”ì´íŠ¸(int 10ê°œ) ê³µê°„ ì¤‘ ê°€ì¥ ë§¨ ì• ì£¼ì†Œ
+	// 10.4 Æ÷ÀÎÅÍ¿Í ¹è¿­
+	//int arr[10]; // 40¹ÙÀÌÆ®(int 10°³) °ø°£ Áß °¡Àå ¸Ç ¾Õ ÁÖ¼Ò
 	//const int num = sizeof(arr) / sizeof(arr[0]);
 	//for (int i = 0; i < num; ++i)
 	//	arr[i] = (i + 1) * 100;
@@ -147,13 +164,13 @@ int main()
 	//}
 
 
-	// 10.5 2ì°¨ì› ë°°ì—´ê³¼ ë©”ëª¨ë¦¬
+	// 10.5 2Â÷¿ø ¹è¿­°ú ¸Ş¸ğ¸®
 	//int arr[2][3] = { {1, 2, 3}, {4, 5, 6} };
-	////int arr[2][3] = { 1, 2, 3, 4, 5, 6 }; // ì´ë ‡ê²Œ í•´ë„ ëœë‹¤.
-	////int arr[2][3] = { 1, 2 }; // ë‚˜ë¨¸ì§€ ì›ì†Œê°€ 0ìœ¼ë¡œ ì±„ì›Œì§„ë‹¤.
+	////int arr[2][3] = { 1, 2, 3, 4, 5, 6 }; // ÀÌ·¸°Ô ÇØµµ µÈ´Ù.
+	////int arr[2][3] = { 1, 2 }; // ³ª¸ÓÁö ¿ø¼Ò°¡ 0À¸·Î Ã¤¿öÁø´Ù.
 	//printf("%d\n\n", arr[1][1]);
 
-	//for (int j = 0; j < 2; ++j) // ì¼ë°˜ì ìœ¼ë¡œ ì•ˆìª½ ë£¨í”„ê°€ ì˜¤ë¥¸ìª½ indexë¥¼ ìˆœíšŒí•œë‹¤. 2ì¤‘ë°°ì—´ë„ ë‚´ë¶€ì ìœ¼ë¡œëŠ” 1ì°¨ì›ì´ê¸° ë•Œë¬¸ì— ì´ë ‡ê²Œ í•˜ë©´ ìˆœíšŒë¥¼ ìˆœì„œëŒ€ë¡œ í•  ìˆ˜ ìˆë‹¤.(ì†ë„ë„ ë¹ ë¥´ë‹¤.)
+	//for (int j = 0; j < 2; ++j) // ÀÏ¹İÀûÀ¸·Î ¾ÈÂÊ ·çÇÁ°¡ ¿À¸¥ÂÊ index¸¦ ¼øÈ¸ÇÑ´Ù. 2Áß¹è¿­µµ ³»ºÎÀûÀ¸·Î´Â 1Â÷¿øÀÌ±â ¶§¹®¿¡ ÀÌ·¸°Ô ÇÏ¸é ¼øÈ¸¸¦ ¼ø¼­´ë·Î ÇÒ ¼ö ÀÖ´Ù.(¼Óµµµµ ºü¸£´Ù.)
 	//{
 	//	for (int i = 0; i < 3; ++i)
 	//		printf("%d ", arr[j][i]); 
@@ -161,7 +178,7 @@ int main()
 	//}
 
 	//int* ptr = &arr[0][0];
-	//for (int k = 0; k < 6; ++k) // ë‚´ë¶€ì ìœ¼ë¡œëŠ” 1ì°¨ì›ì´ë¯€ë¡œ í¬ì¸í„°ë¡œ ë°”ê¿”ì„œ 1ì°¨ì›ì²˜ëŸ¼ ìˆœíšŒí•  ìˆ˜ ìˆë‹¤.
+	//for (int k = 0; k < 6; ++k) // ³»ºÎÀûÀ¸·Î´Â 1Â÷¿øÀÌ¹Ç·Î Æ÷ÀÎÅÍ·Î ¹Ù²ã¼­ 1Â÷¿øÃ³·³ ¼øÈ¸ÇÒ ¼ö ÀÖ´Ù.
 	//	printf("%d ", ptr[k]);
 	//printf("\n\n");
 
@@ -169,7 +186,7 @@ int main()
 	//printf("\n");
 
 
-	// 10.6 2ì°¨ì› ë°°ì—´ ì—°ìŠµë¬¸ì œ
+	// 10.6 2Â÷¿ø ¹è¿­ ¿¬½À¹®Á¦
 	//double year2016[MONTHS] = { -3.2, 0.2, 7.0, 14.1, 19.6, 23.6, 26.2, 28.0, 23.1, 16.1, 6.8, 1.2 };
 	//double year2017[MONTHS] = { -1.8, -0.2, 6.3, 13.9, 19.5, 23.3, 26.9, 25.9, 22.1, 16.4, 5.6, -1.9 };
 	//double year2018[MONTHS] = { -4.0, -1.6, 8.1, 13.0, 18.2, 23.1, 27.8, 28.8, 21.5, 13.1, 7.8, -0.6 };
@@ -240,8 +257,8 @@ int main()
 	//printf("\n");
 
 
-	// 10.7 ë°°ì—´ì„ í•¨ìˆ˜ì—ê²Œ ì „ë‹¬í•´ì£¼ëŠ” ë°©ë²•
-	//// í•¨ìˆ˜ì— ë°°ì—´ ì „ì²´ë¥¼ ì „ë‹¬í•˜ëŠ” ê²ƒ ë³´ë‹¤ ë°°ì—´ì˜ ì²« ì£¼ì†Œë§Œ ì „ë‹¬í•˜ëŠ” ê²ƒì´ íš¨ìœ¨ì ì´ë‹¤.
+	// 10.7 ¹è¿­À» ÇÔ¼ö¿¡°Ô Àü´ŞÇØÁÖ´Â ¹æ¹ı
+	//// ÇÔ¼ö¿¡ ¹è¿­ ÀüÃ¼¸¦ Àü´ŞÇÏ´Â °Í º¸´Ù ¹è¿­ÀÇ Ã¹ ÁÖ¼Ò¸¸ Àü´ŞÇÏ´Â °ÍÀÌ È¿À²ÀûÀÌ´Ù.
 	//double arr1[5] = { 10, 13, 12, 7, 8 };
 	////double arr2[5] = { 1.8, -0.2, 6.3, 13.9, 20.5 };
 	//double arr2[3] = { 1.8, -0.2, 6.3 };
@@ -261,35 +278,35 @@ int main()
 	//printf("Avg = %f\n", average(arr2, 3));
 
 
-	// 10.8 ë‘ ê°œì˜ í¬ì¸í„°ë¡œ ë°°ì—´ì„ í•¨ìˆ˜ì—ê²Œ ì „ë‹¬í•´ì£¼ëŠ” ë°©ë²•
+	// 10.8 µÎ °³ÀÇ Æ÷ÀÎÅÍ·Î ¹è¿­À» ÇÔ¼ö¿¡°Ô Àü´ŞÇØÁÖ´Â ¹æ¹ı
 	//double arr1[5] = { 10, 13, 12, 7, 8 };
 	//printf("Avg = %f\n", average10_8(arr1, arr1 + 5));
 
 
-	// 10.9 í¬ì¸í„° ì—°ì‚° ì´ì •ë¦¬
+	// 10.9 Æ÷ÀÎÅÍ ¿¬»ê ÃÑÁ¤¸®
 
 
 
-	// 10.10 constì™€ ë°°ì—´ê³¼ í¬ì¸í„°
+	// 10.10 const¿Í ¹è¿­°ú Æ÷ÀÎÅÍ
 	// type qualifiers: const, volatile, ...
-	//const double PI = 3.14159; // ê°’ì„ ë°”ê¿€ ìˆ˜ê°€ ì—†ë‹¤. ì»´íŒŒì¼ëŸ¬ê°€ ë§‰ëŠ”ë‹¤.
+	//const double PI = 3.14159; // °ªÀ» ¹Ù²Ü ¼ö°¡ ¾ø´Ù. ÄÄÆÄÀÏ·¯°¡ ¸·´Â´Ù.
 
-	//const int arr[5] = { 1, 2, 3, 4, 5 }; // ë°°ì—´ì˜ ì›ì†Œë„ ìˆ˜ì •í•  ìˆ˜ ì—†ë‹¤.
+	//const int arr[5] = { 1, 2, 3, 4, 5 }; // ¹è¿­ÀÇ ¿ø¼Òµµ ¼öÁ¤ÇÒ ¼ö ¾ø´Ù.
 
 	//const double arr2[3] = { 1.0, 2.0, 3.0 };
-	//double* pd = arr2; // ê°’ì´ ë°”ë€Œì–´ë²„ë¦°ë‹¤. warnings í¬ì¸í„° ë³€ìˆ˜ì—ë„ constë¥¼ ë¶™ì´ë©´ ê°’ì„ ìˆ˜ì •í•  ìˆ˜ ì—†ê²Œ ëœë‹¤.
+	//double* pd = arr2; // °ªÀÌ ¹Ù²î¾î¹ö¸°´Ù. warnings Æ÷ÀÎÅÍ º¯¼ö¿¡µµ const¸¦ ºÙÀÌ¸é °ªÀ» ¼öÁ¤ÇÒ ¼ö ¾ø°Ô µÈ´Ù.
 	//*pd = 3.0; // pd[0] = 3.0; arr2[0] = 3.0;
 	//pd[2] = 1024.0; // arr2[2] = 1024.0;
 	//printf("%f %f\n", pd[2], arr2[2]);
 
-	//pd--; // ì¦ê°ì—°ì‚°ìëŠ” ëœë‹¤. í¬ì¸í„° ë³€ìˆ˜ì— ë“¤ì–´ìˆëŠ” ì£¼ì†Œê°’ì€ ë°”ê¿€ ìˆ˜ ìˆê²Œ ë¼ ìˆë‹¤.
-	//// ì´ê²ƒì¡°ì°¨ ë°”ë€Œì§€ ì•Šê²Œ í•˜ê¸° ìœ„í•´ì„œëŠ” const double* const pd = arr2;ë¡œ ì‘ì„±í•œë‹¤.
-	//// const double* : í•´ë‹¹ í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ê³  ìˆëŠ” ë©”ëª¨ë¦¬ë¥¼ ë°”ê¾¸ì§€ ëª»í•œë‹¤.
-	//// double* const: í¬ì¸í„°ë³€ìˆ˜ì˜ ê°’ ìì²´ë¥¼ ë°”ê¾¸ì§€ ëª»í•œë‹¤.
+	//pd--; // Áõ°¨¿¬»êÀÚ´Â µÈ´Ù. Æ÷ÀÎÅÍ º¯¼ö¿¡ µé¾îÀÖ´Â ÁÖ¼Ò°ªÀº ¹Ù²Ü ¼ö ÀÖ°Ô µÅ ÀÖ´Ù.
+	//// ÀÌ°ÍÁ¶Â÷ ¹Ù²îÁö ¾Ê°Ô ÇÏ±â À§ÇØ¼­´Â const double* const pd = arr2;·Î ÀÛ¼ºÇÑ´Ù.
+	//// const double* : ÇØ´ç Æ÷ÀÎÅÍ°¡ °¡¸®Å°°í ÀÖ´Â ¸Ş¸ğ¸®¸¦ ¹Ù²ÙÁö ¸øÇÑ´Ù.
+	//// double* const: Æ÷ÀÎÅÍº¯¼öÀÇ °ª ÀÚÃ¼¸¦ ¹Ù²ÙÁö ¸øÇÑ´Ù.
 	//printf("%f %f\n", pd[2], arr2[2]);
 
 
-	// 10.11 ë°°ì—´ ë§¤ê°œë³€ìˆ˜ì™€ const
+	// 10.11 ¹è¿­ ¸Å°³º¯¼ö¿Í const
 	//int arr[] = { 1, 2, 3, 4, 5 };
 	//const int n = sizeof(arr) / sizeof(arr[0]);
 
@@ -298,11 +315,11 @@ int main()
 	//print_array(arr, n);
 
 	//int s = sum(arr, n);
-	//printf("Sum is %d\n", s); // sum í•¨ìˆ˜ë¥¼ ì˜ëª» êµ¬í˜„í•˜ì—¬ ë°°ì—´ì˜ ê°’ì´ ë°”ë€Œì—ˆë‹¤. í•¨ìˆ˜ ì •ì˜ì—ì„œ ì¸ìì— constë¥¼ ë¶™ì—¬ì£¼ë©´ ëœë‹¤.
+	//printf("Sum is %d\n", s); // sum ÇÔ¼ö¸¦ Àß¸ø ±¸ÇöÇÏ¿© ¹è¿­ÀÇ °ªÀÌ ¹Ù²î¾ú´Ù. ÇÔ¼ö Á¤ÀÇ¿¡¼­ ÀÎÀÚ¿¡ const¸¦ ºÙ¿©ÁÖ¸é µÈ´Ù.
 	//print_array(arr, n);
 
 
-	// 10.12 2ì¤‘í¬ì¸í„°ì˜ ì‘ë™ì›ë¦¬
+	// 10.12 2ÁßÆ÷ÀÎÅÍÀÇ ÀÛµ¿¿ø¸®
 	//int a = 7;
 	//int* ptr = &a;
 	//*ptr = 8;
@@ -311,20 +328,20 @@ int main()
 	//**pptr = 9;
 
 
-	// 10.13 í¬ì¸í„°ì™€ ë°°ì—´ì˜ 2ì°¨ì› ë°°ì—´
-	// í¬ì¸í„°ì˜ ë°°ì—´ì„ 2ì°¨ì›(í˜¹ì€ ë‹¤ì°¨ì›)ë°°ì—´ë¡œ ì‚¬ìš©í•˜ëŠ” ë°©ë²•ì— ëŒ€í•´ ì•Œì•„ë³¸ë‹¤.
+	// 10.13 Æ÷ÀÎÅÍ¿Í ¹è¿­ÀÇ 2Â÷¿ø ¹è¿­
+	// Æ÷ÀÎÅÍÀÇ ¹è¿­À» 2Â÷¿ø(È¤Àº ´ÙÂ÷¿ø)¹è¿­·Î »ç¿ëÇÏ´Â ¹æ¹ı¿¡ ´ëÇØ ¾Ë¾Æº»´Ù.
 	//int arr[2][3] = { {1, 2, 3}, {4, 5, 6} };
-	//int* parr[2] = { arr[0], arr[1] }; // í¬ì¸í„°ì˜ ë°°ì—´
+	//int* parr[2] = { arr[0], arr[1] }; // Æ÷ÀÎÅÍÀÇ ¹è¿­
 
 	// two of 1D arrays
 	//int arr0[3] = { 1, 2, 3 };
 	//int arr1[3] = { 4, 5, 6 };
-	//int* parr[2] = { arr0, arr1 }; // arr0, arr1ì„ í•˜ë‚˜ë¡œ ë¬¶ì–´ì„œ ì´ì¤‘ for loopë¡œ í•´ê²°í•œë‹¤.
+	//int* parr[2] = { arr0, arr1 }; // arr0, arr1À» ÇÏ³ª·Î ¹­¾î¼­ ÀÌÁß for loop·Î ÇØ°áÇÑ´Ù.
 
 	//for (int j = 0; j < 2; ++j)
 	//{
 	//	for (int i = 0; i < 3; ++i)
-	//		printf("%d(==%d==%d==%d) ", parr[j][i], *(parr[j] + i), *(*(parr + j) + i), (*(parr + j))[i]); // 2ì°¨ì› ë°°ì—´ì²˜ëŸ¼
+	//		printf("%d(==%d==%d==%d) ", parr[j][i], *(parr[j] + i), *(*(parr + j) + i), (*(parr + j))[i]); // 2Â÷¿ø ¹è¿­Ã³·³
 	//	printf("\n");
 	//}
 	//printf("\n");
@@ -371,41 +388,215 @@ int main()
 	//printf("%p\n", &arr[0][0]);
 
 	// Array of string of diverse lengths example
-	char* name[] = { "Aladin", "Jasmine", "Magic Carpet", "Genie" }; // í¬ì¸í„°ì˜ ë°°ì—´
-	const int n = sizeof(name) / sizeof(char*);
-	for (int i = 0; i < n; ++i)
-		printf("%s at %u\n", name[i], (unsigned)name[i]); // use ull in x64, ê¸€ììˆ˜ë§Œí¼ ì°¨ì´ë‚œë‹¤.
-	printf("\n");
+	//char* name[] = { "Aladin", "Jasmine", "Magic Carpet", "Genie" }; // Æ÷ÀÎÅÍÀÇ ¹è¿­
+	//const int n = sizeof(name) / sizeof(char*);
+	//for (int i = 0; i < n; ++i)
+	//	printf("%s at %u\n", name[i], (unsigned)name[i]); // use ull in x64, ±ÛÀÚ¼ö¸¸Å­ Â÷ÀÌ³­´Ù.
+	//printf("\n");
 
-	char aname[][15] = { "Aladin", "Jasmine", "Magic Carpet", "Genie" , "Jafar" }; // aname[]ì€ char[15]ì˜ ë°°ì—´
-	const int an = sizeof(aname) / sizeof(char[15]);
-	for (int i = 0; i < an; ++i)
-		printf("%s at %u\n", aname[i], (unsigned)aname[i]); // use ull in x64, 15ì”© ì£¼ì†Œê°€ ì°¨ì´ë‚œë‹¤.
-	printf("\n");
+	//char aname[][15] = { "Aladin", "Jasmine", "Magic Carpet", "Genie" , "Jafar" }; // aname[]Àº char[15]ÀÇ ¹è¿­
+	//const int an = sizeof(aname) / sizeof(char[15]);
+	//for (int i = 0; i < an; ++i)
+	//	printf("%s at %u\n", aname[i], (unsigned)aname[i]); // use ull in x64, 15¾¿ ÁÖ¼Ò°¡ Â÷ÀÌ³­´Ù.
+	//printf("\n");
 
 
-	// 10.14 2ì°¨ì› ë°°ì—´ê³¼ í¬ì¸í„°
-	float arr2d[2][4] = { {1.0f, 2.0f, 3.0f, 4.0f}, {5.0, 6.0f, 7.0f, 8.0f} };
-	printf("%u\n", (unsigned)arr2d);
-	printf("%u\n", (unsigned)arr2d[0]);
-	printf("\n");
+	// 10.14 2Â÷¿ø ¹è¿­°ú Æ÷ÀÎÅÍ
+	//float arr2d[2][4] = { {1.0f, 2.0f, 3.0f, 4.0f}, {5.0, 6.0f, 7.0f, 8.0f} };
+	//printf("%u\n", (unsigned)arr2d);
+	//printf("%u\n", (unsigned)arr2d[0]);
+	//printf("\n");
 
-	// arr2d points to arr2d[0] (not arr2d[0][0])
-	printf("%u\n", (unsigned)* arr2d);
-	printf("%u\n", (unsigned)&arr2d[0]);
-	printf("%u\n", (unsigned)&arr2d[0][0]);
-	printf("%f %f\n", arr2d[0][0], **arr2d);
-	printf("\n");
+	//// arr2d points to arr2d[0] (not arr2d[0][0])
+	//printf("%u\n", (unsigned)*arr2d);
+	//printf("%u\n", (unsigned)&arr2d[0]);
+	//printf("%u\n", (unsigned)&arr2d[0][0]);
+	//printf("%f %f\n", arr2d[0][0], **arr2d);
+	//printf("\n");
 
-	printf("%u\n", (unsigned)(arr2d + 1));
-	printf("%u\n", (unsigned)(&arr2d[1]));
-	printf("%u\n", (unsigned)(arr2d[1]));
-	printf("%u\n", (unsigned)(*(arr2d[0] + 1)));
-	printf("%u\n", (unsigned)(&arr2d[0] + 1));
-	printf("%u\n", (unsigned)(&arr2d[1][0]));
+	//printf("%u\n", (unsigned)(arr2d + 1));
+	//printf("%u\n", (unsigned)(&arr2d[1]));
+	//printf("%u\n", (unsigned)(arr2d[1]));
+	//printf("%u\n", (unsigned)(*(arr2d[0] + 1)));
+	//printf("%u\n", (unsigned)(&arr2d[0] + 1));
+	//printf("%u\n", (unsigned)(&arr2d[1][0]));
 
-	printf("%f\n", *(*(arr2d + 1) + 2));
-	printf("\n");
+	//printf("%f\n", *(*(arr2d + 1) + 2));
+	//printf("\n");
+
+	//// My Try
+	//int test[] = { 1, 2, 3 };
+	//printf("TEST\n");
+	//printf("%p %p %p\n", test, &test, &test[0]);
+	//printf("%p %p %p\n", test + 1, &test + 1, &test[0] + 1);
+
+	//int doubleArrayTest[2][3] = { {1, 2, 3}, {4, 5, 6} };
+	//printf("%p %p %p %p\n", doubleArrayTest, &doubleArrayTest[0], doubleArrayTest[0], &doubleArrayTest[0][0]);
+	//printf("%p %p %p %p\n", doubleArrayTest + 1, &doubleArrayTest[0] + 1, doubleArrayTest[0] + 1, &doubleArrayTest[0][0] + 1);
+	
+	//int arr[2][3] = { {1, 2, 3}, {4, 5, 6} };
+	//printf("%p %p %p\n", arr, arr[0] + 1, &arr[0] + 1); // ÁÖ¼ÒÀÇ Â÷ÀÌ¸¦ º»´Ù. 4, 12 Â÷ÀÌ
+	//printf("%d %d\n", *(arr[0] + 1), **(&arr[0] + 1));
+
+	//for (int j = 0; j < 2; ++j)
+	//{
+	//	printf("[%d] = %u, %u\n", j, (unsigned)(arr2d[j]), (unsigned)*(arr2d + j));
+	//	for (int i = 0; i < 4; ++i)
+	//	{
+	//		printf("[%d][%d] = %f, %f\n", j, i, arr2d[j][i], *(*(arr2d + j) + i));
+	//		*(*(arr2d + j) + i) += 1.0f;
+	//	}
+	//}
+	//printf("\n");
+
+	//float(*pa)[4]; // a single pointer to an array of 4 floats
+	//float* ap[2]; // an array of two pointers-to-float
+	//printf("%zd", sizeof(pa)); // 4
+	//printf("%zd", sizeof(ap)); // 8
+	//printf("\n");
+
+	//pa = arr2d;
+	////pa[0] = arr2d[0]; // Error pa´Â ¹è¿­ÀÌ ¾Æ´Ï¶ó Æ÷ÀÎÅÍÀÌ±â ¶§¹®¿¡
+	////pa[1] = arr2d[1];
+
+	////ap = arr2d; // Error ap´Â Æ÷ÀÎÅÍ°¡ ¾Æ´Ï¶ó ¹è¿­ÀÌ¹Ç·Î
+	//ap[0] = arr2d[0];
+	//ap[1] = arr2d[1];
+
+
+	// 10.15 Æ÷ÀÎÅÍÀÇ È£È¯¼º
+	//int n = 5;
+	//double x;
+	//x = n; // promotion
+
+	//int* p1 = &n;
+	//double* pd = &x;
+	////pd = p1; // warning, È£È¯ÀÌ ¾ÈµÇ´Â Å¸ÀÔ(incompatible)
+	//pd = (double*)p1; // Ä³½ºÆÃÀ» ÇÏ¸é warningÀÌ »ç¶óÁöÁö¸¸ ±ÇÀåÇÏÁö ¾Ê´Â´Ù.
+
+	//int* pt;
+	//int(*pa)[3]; 
+	//int ar1[2][3] = { 3, };
+	//int ar2[3][2] = { 7, };
+	//int** p2;
+
+	//pt = &ar1[0][0]; // pointer to int
+	//for (int i = 0; i < 6; ++i) // ´ÙÂ÷¿ø ¹è¿­ÀÇ ¿ø¼ÒµéÀ» ¸ğµÎ Á¢±ÙÇÒ ¼ö ÀÖ´Ù. (¸Ş¸ğ¸®°¡ ÀÏ·Ä·Î µÅ ÀÖÀ¸¹Ç·Î)
+	//	printf("%d ", pt[i]); // *(pt + i)
+
+	//pt = ar1[0];
+	////pt = ar1; // warning (error)
+
+	//pa = ar1; // pointer to int[3]
+	////pa = ar2; // warning (error)
+
+	//p2 = &pt; // pointer to int*
+	//*p2 = ar2[0]; // pointer to int
+	////p2 = ar2; // warning (error), ar2¸¦ ´ã±â À§ÇØ¼­´Â pointer to int[2]¸¦ °¡Á®¿Í¾ßÇÑ´Ù.
+	////int(*test)[2];
+	////test = ar2;
+
+	//int x = 20;
+	//const int y = 23;
+	//int* p1 = &x;
+	//const int* p2 = &y; // const¸¦ ¿ŞÂÊ¿¡ ºÙ¿©ÁÖ¸é indirectionÀ» ÇÏ¸é¼­ °ªÀ» ¸ø ¹Ù²ãÁØ´Ù.
+	//const int** pp2 = &p1;
+
+	////p1 = p2; // warning (Error), p2¸¦ const·Î ¼±¾ğÇÏ¸é¼­ indirectionÀ» ÅëÇØ °ªÀ» ¹Ù²ÙÁö ¸øÇÏ°Ô ÇÏ¿´´Âµ¥, p1À» ÅëÇØ °ªÀÌ ¹Ù²ğ ¼ö ÀÖ°Ô µÅ ¹ö¸°´Ù.
+	//p2 = p1; //const¸¦ ¿À¸¥ÂÊ¿¡ ºÙÀÌÁö ¾ÊÀ¸¸é ÀÌ°Ô °¡´ÉÇØÁø´Ù
+	////printf("%d\n", *p2);
+	////*p1 = 1;
+	////printf("%d\n",*p2);
+	////*p2 = 123; // Error 
+
+	//int x2 = 30;
+	//int* p3 = &x2;
+
+	////**pp2 = x2; // const¸¦ ¿ŞÂÊ¿¡ ºÙ¿´±â ¶§¹®¿¡ Error
+	//*pp2 = p3; // const¸¦ °¡¿îµ¥ ºÙÀÌ¸é ¿¡·¯ const int* const *pp2 = &p1;
+	//pp2 = &p1; // const¸¦ ¸¶Áö¸·¿¡ ºÙÀÌ¸é ¿¡·¯ const int** const pp2 = &p1;
+
+	//{
+	//	// Áö¾ç
+	//	const int** pp2;
+	//	int* p1;
+	//	const int n = 13;
+	//	pp2 = &p1;
+	//	*pp2 = &n; // *pp2 == p1, p1 = &n
+	//	*p1 = 10; // p1 == n, n = 10, change n
+	//}
+
+	//{
+	//	// Áö¾ç
+	//	const int y;
+	//	const int* p2 = &y;
+	//	int* p1;
+	//	//p1 = p2; // warning (Error in cpp)
+	//}
+
+
+	// 10.16 ´ÙÂ÷¿ø ¹è¿­À» ÇÔ¼ö¿¡°Ô Àü´ŞÇØÁÖ´Â ¹æ¹ı
+	//int data[ROWS][COLS] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 0, 1, 2} }; // ÄÄÆÄÀÏ ÇÒ ¶§ ¸Ş¸ğ¸®°¡ ÇÒ´çµÈ´Ù.
+	//printf("%d\n", data[2][3]);
+
+	//int* ptr = &data[0][0];
+	//printf("%d\n", *(ptr + 3 + COLS * 2)); // Æ÷ÀÎÅÍ·Î Á¢±ÙÇÏ´Â ¹æ¹ı
+
+	//printf("%d %d %d", sum2d_1(data), sum2d_2(data, ROWS), sum2d_3(data, ROWS, COLS));
+
+
+	// 10.17 º¯¼ö·Î ±æÀÌ¸¦ Á¤ÇÒ ¼ö ÀÖ´Â ¹è¿­(VLAs, Variable-Length Arrays)
+	//int n = 5;
+	//float my_arr[n]; // ÄÄÆÄÀÏ ¿À·ù, visual studio¿¡¼­´Â Áö¿øÇÏÁö ¾Ê´Â´Ù. https://repl.it
+	//printf("Input array length: ");
+	//scanf("%d", &n);
+
+	//float my_arr[n]; // ¹è¿­ÀÇ ±æÀÌ´Â symbolic constant³ª literal Ã³·³ ÄÄÆÄÀÏ Å¸ÀÓ¿¡¼­ ¾Ë ¼ö ÀÖ´Â °ª¸¸ ³ÖÀ» ¼ö ÀÖ´Ù.
+	// ÇÑ ¹ø ¼±¾ğµÇ¸é ¹è¿­ÀÇ ±æÀÌ¸¦ ¹Ù²Ü ¼ö´Â ¾ø´Ù.
+
+	//for (int i = 0; i < n; ++i)
+	//	my_arr[i] = (float)i;
+	//for (int i = 0; i < n; ++i)
+	//	printf("%f\n", my_arr[i]);
+
+	//int data[ROWS][COLS] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 0, 1, 2} };
+	//printf("%d\n", sum2d_4(ROWS, COLS, data));
+
+	// ±»ÀÌ ¸ÅÅ©·Î¸¦ »ç¿ëÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+	// visual studio¿Í ´Ş¸® #define _CRT_SECURE_NO_WARNINGSÀ» ÀûÀ» ÇÊ¿ä°¡ ¾ø´Ù.
+
+
+	// 10.18 º¹ÇÕ ¸®ÅÍ·²°ú ¹è¿­(Compound Literals)
+	//int a = 1;
+	//3; // Literals ars constans that aren't symbolic
+	//3.14f;
+	//int b[2] = { 3, 4 };
+	//(int[2]) { 3, 4 }; // Compound Literals °°Àº ÀÚ·áÇü»Ó¸¸ ¾Æ´Ï¶ó ´Ù¸¥ ÀÚ·áÇü³¢¸® ¹­Àº °Íµµ Compound LiteralÀÌ¶ó°í ÇÑ´Ù.
+
+	////int c[2] = (int[2]){ 3, 4 }; // Error
+
+	//int arr1[2] = { 1, 2 };
+	//int arr2[2][COLS] = { {1, 2, 3, 4}, {5, 6, 7, 8} };
+	//printf("%d\n", sum1d(arr1, 2));
+	//printf("%d\n", sum2d_3(arr2, 2, 4));
+
+	//printf("%d\n", sum1d((int[2]) { 1, 2 }, 2));
+	//printf("%d\n", sum2d_3((int[2][4]) { {1, 2, 3, 4}, { 5, 6, 7, 8 } }, 2, 4));
+
+	int* ptr1;
+	int(*ptr2)[COLS];
+	ptr1 = (int[2]){ 1, 2 };
+	ptr2 = (int[2][4]){ {1, 2, 3, 4}, { 5, 6, 7, 8 } };  // ptr2 pointer-to-int[4]...
+
+
+
+	printf("%d\n", sum1d(ptr1, 2));
+	printf("%d\n", sum2d(ptr2, 2));
+	printf("%d\n", sum2d_3(ptr2, 2, 4)); // *ptr2¸¦ Àü´ŞÇØ¾ß ¸Â´Â°Å °°Àºµ¥??
+
+	printf("TEST: %d\n", ptr2[0][0]);
+	printf("%d\n", **ptr2);
+	printf("%d\n", *(*ptr2 + 4));
 
 	return 0;
 }
@@ -413,9 +604,9 @@ int main()
 // 10.7
 double average(double arr[], int n)
 {
-	printf("Size = %zd in function average\n", sizeof(arr)); // í¬ì¸í„°ì˜ sizeê°€ ë‚˜ì™€ë²„ë¦°ë‹¤.
-	// í•¨ìˆ˜ì—ì„œ ë°°ì—´ì„ ì¸ìë¡œ ë°›ì„ ë•ŒëŠ” ë°°ì—´ì´ ì•„ë‹ˆë¼ í¬ì¸í„°ë¡œ ë°›ëŠ”ë‹¤.
-	// ë°°ì—´ì˜ í¬ê¸°ë¥¼ ë”°ë¡œ ì¸ìë¡œ ë°›ì•„ì¤˜ì•¼ í•œë‹¤.
+	printf("Size = %zd in function average\n", sizeof(arr)); // Æ÷ÀÎÅÍÀÇ size°¡ ³ª¿Í¹ö¸°´Ù.
+	// ÇÔ¼ö¿¡¼­ ¹è¿­À» ÀÎÀÚ·Î ¹ŞÀ» ¶§´Â ¹è¿­ÀÌ ¾Æ´Ï¶ó Æ÷ÀÎÅÍ·Î ¹Ş´Â´Ù.
+	// ¹è¿­ÀÇ Å©±â¸¦ µû·Î ÀÎÀÚ·Î ¹Ş¾ÆÁà¾ß ÇÑ´Ù.
 
 	double avg = 0.0;
 	for (int i = 0; i < n; ++i)
@@ -450,10 +641,66 @@ void add_value(int arr[], const int n, const int val)
 	for (int i = 0; i < n; ++i)
 		arr[i] += val;
 }
-int sum(const int ar[], const int n) // constë¥¼ ë¶™ì—¬ì¤€ë‹¤.
+int sum(const int ar[], const int n) // const¸¦ ºÙ¿©ÁØ´Ù.
 {
 	int total = 0;
 	for (int i = 0; i < n; ++i)
-		total += ar[i]; // ++ ì¼ë¶€ëŸ¬ ì˜¤íƒ€
+		total += ar[i]; // ++ ÀÏºÎ·¯ ¿ÀÅ¸
 	return total;
+}
+
+// 10.16
+int sum2d_1(int ar[ROWS][COLS])
+{
+	int r, c, tot = 0;
+	for (r = 0; r < ROWS; ++r)
+		for (c = 0; c < COLS; ++c)
+			tot += ar[r][c];
+	return tot;
+}
+
+int sum2d_2(int ar[][COLS], int row)
+{
+	int r, c, tot = 0;
+	for (r = 0; r < row; ++r)
+		for (c = 0; c < COLS; ++c)
+			tot += ar[r][c];
+	return tot;
+}
+
+int sum2d_3(int* ar, int row, int col)
+{
+	int r, c, tot = 0;
+	for (r = 0; r < row; ++r)
+		for (c = 0; c < col; ++c)
+			tot += *(ar + c + col * r);
+
+	return tot;
+}
+
+// 10.17
+//int sum2d_4(int row, int col, int ar[row][col])
+//{
+//	int r, c, tot = 0;
+//	for (r = 0; r < row; ++r)
+//		for (c = 0; c < COLS; ++c)
+//			tot += ar[r][c];
+//	return tot;
+//}
+
+// 10.18
+int sum1d(int arr[], int n)
+{
+	int tot = 0;
+	for (int i = 0; i < n; ++i)
+		tot += arr[i];
+	return tot;
+}
+int sum2d(int ar[][COLS], int row)
+{
+	int r, c, tot = 0;
+	for (r = 0; r < row; ++r)
+		for (c = 0; c < COLS; ++c)
+			tot += ar[r][c];
+	return tot;
 }
