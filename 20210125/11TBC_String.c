@@ -3,6 +3,7 @@
 
 #define MAXLENGTH 81
 #define MESSAGE "A Symbolic string constant"
+#define STRLEN 81
 
 int main()
 {
@@ -161,47 +162,114 @@ int main()
 
 
 	// 11.3 문자열의 배열
-	const char* mythings[5] = {
-		"Dancing in the rain",
-		"Couting apple",
-		"Watch movie with friends",
-		"Writting sad letters",
-		"Studying the C language"
-	}; // 포인터의 배열
+	//const char* mythings[5] = {
+	//	"Dancing in the rain",
+	//	"Couting apple",
+	//	"Watch movie with friends",
+	//	"Writting sad letters",
+	//	"Studying the C language"
+	//}; // 포인터의 배열
 
-	char yourthings[5][40] = {
-		"Stuyding the C++ language",
-		"Eating",
-		"Watching Netflix",
-		"Walking around till dark",
-		"Deleting spam emails"
-	}; // 배열의 배열
+	//char yourthings[5][40] = {
+	//	"Stuyding the C++ language",
+	//	"Eating",
+	//	"Watching Netflix",
+	//	"Walking around till dark",
+	//	"Deleting spam emails"
+	//}; // 배열의 배열
 
-	const char* temp1 = "Dancing in the rain";
-	const char* temp2 = "Studying the C++ language";
+	//const char* temp1 = "Dancing in the rain";
+	//const char* temp2 = "Studying the C++ language";
 
-	printf("%s %u %u\n", mythings[0], (unsigned)mythings[0], (unsigned)temp1); // 주소가 같다.
-	printf("%s %u %u\n", yourthings[0], (unsigned)yourthings[0], (unsigned)temp2); // 주소가 다르다.
-	printf("%u %u\n", (unsigned)&yourthings[0][0], (unsigned)temp2);
-	printf("\n");
+	//printf("%s %u %u\n", mythings[0], (unsigned)mythings[0], (unsigned)temp1); // 주소가 같다.
+	//printf("%s %u %u\n", yourthings[0], (unsigned)yourthings[0], (unsigned)temp2); // 주소가 다르다.
+	//printf("%u %u\n", (unsigned)&yourthings[0][0], (unsigned)temp2);
+	//printf("\n");
 
-	printf("%-30s %-30s\n", "My Things", "Your Things");
-	for (int i = 0; i < 5; ++i)
-		printf("%-30s %-30s\n", mythings[i], yourthings[i]);
+	//printf("%-30s %-30s\n", "My Things", "Your Things");
+	//for (int i = 0; i < 5; ++i)
+	//	printf("%-30s %-30s\n", mythings[i], yourthings[i]);
 
-	printf("\nsizeof mythings: %zd, sizeof yourthings: %zd\n", sizeof(mythings), sizeof(yourthings));
+	//printf("\nsizeof mythings: %zd, sizeof yourthings: %zd\n", sizeof(mythings), sizeof(yourthings));
 
-	for (int i = 0; i < 100; ++i)
-		printf("%c", mythings[0][i]);
-	printf("\n");
-	printf("\n");
-	for (int i = 0; i < 200; ++i)
-		printf("%d", (int)yourthings[0][i]);
-	printf("\n");
-	for (int i = 0; i < 200; ++i)
-		printf("%c", yourthings[0][i]);
-	printf("\n");
-	printf("\n");
+	//for (int i = 0; i < 100; ++i)
+	//	printf("%c", mythings[0][i]);
+	//printf("\n");
+	//printf("\n");
+	//for (int i = 0; i < 200; ++i)
+	//	printf("%d", (int)yourthings[0][i]);
+	//printf("\n");
+	//for (int i = 0; i < 200; ++i)
+	//	printf("%c", yourthings[0][i]);
+	//printf("\n");
+	//printf("\n");
+
+
+	// 11.4 문자열을 입력받는 다양한 방법들
+	//// 문자열을 입력받을 때 미리 저장공간을 확보해야한다.
+	////char* name = ""; // Error at Run-time
+	//char name[128];
+	//int result = scanf("%s", name);
+
+	////scanf() vs gets()
+	//// scanf() reads one word
+	//// gets() reads one line and remove \n and add \0
+
+	//char words[STRLEN] = "";
+	//gets(words); // pointer를 인자로 받는다. gets 함수 입장에서는 메모리의 끝을 모른다.(시작점만 받기 때문에)
+	////gets_s(words, sizeof(words)); // C11, 권장, 일부 컴파일러에서는 사용할 수 없다.
+	////int result = scanf("%s", words);
+
+	//printf("START\n");
+	//printf("%s", words); //no \n at the end
+	//puts(words); // puts add \n at the end
+	//puts("END");
+
+	//// gets, gets_s 모두 메모리 공간을 너무 작게 잡으면(STRLEN) 런타임 에러가 발생한다.
+
+	//char words[STRLEN] = "";
+	//fgets(words, STRLEN, stdin); // 파일을 입력 받을 때 쓰는 함수이지만 stdin(standard input)을 입력하면 콘솔 입력도 받을 수 있다. 
+	//// fgets 함수는 읽는 데이터의 크기가 더 클 것을 예상하고 작동하기 때문에 글자 수를 넘어도 런타임 에러가 발생하지 않는다.
+	//// fgets 함수는 \n을 지워주지 않는다.(입력하려고 할 때 엔터를 치면 엔터도 입력된다.)
+	//// fgets로 입력 받은 문자열에서 \n을 삭제해보자
+	//
+	//// MyTry
+	////int i = 0;
+	////while (words[i] != '\n')
+	////	i++;
+	////words[i] = '\0';
+
+	//int i = 0;
+	//while (words[i] != '\n' && words[i] != '\0')
+	//	i++;
+	//if (words[i] == '\n')
+	//	words[i] == '\0';
+
+	//fputs(words, stdout); // \n을 추가해주지 않는다.
+	//fputs("END", stdout); // stdout을 하면 콘솔 창에 출력해준다. 
+
+	//char small_array[5]; // \0을 포함까지 4글자를 입력받을 수 있다.
+	//puts("Enter long strings:");
+	////fgets(small_array, 5, stdin); // return 값이 char*이다. 정상적으로 입력 받았다면 입력 받은 포인터를 그대로 반환해준다. 잘못 입력 받았다면(End of File를 만나면) \0를 반환한다.
+	//printf("%p\n", small_array); 
+	//printf("%p\n", fgets(small_array, 5, stdin)); // ^Z를 입력하면 EOF이다. EOF를 만나면 NULL을 반환한다.
+	//
+	//fputs(small_array, stdout); // 입력받은게 더 크면 잘려서 출력된다.
+
+	//// 작은 걸 쪼개서 여러 번 받을 수 있다.
+	//char small_array[5];
+	//puts("Enter long strings:");
+	//while (fgets(small_array, 5, stdin) != NULL && small_array[0] != '\n')
+	//	fputs(small_array, stdout);
+	
+	// scanf로 입력 받을 때 글자 개수를 제한할 수 있다.
+	char str1[6], str2[6];
+	int count = scanf("%5s %5s", str1, str2);
+	//int count = scanf("%6s %6s", str1, str2); // run-time error 
+	//int count = scanf_s("%s %s", str1, 6, str2, 6); //  개수를 인자로 설정할 수 있다.
+	printf("%s|%s \n", str1, str2);
+
+	// custom_string_input 함수를 직접 만들어서 사용할 수도 있다.
 
 
 
