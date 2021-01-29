@@ -1,4 +1,4 @@
-ï»¿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,41 +36,41 @@ int PunctCount(const char*);
 
 int main()
 {
-	// 11.1 ë¬¸ìì—´ì„ ì •ì˜í•˜ëŠ” ë°©ë²•
-	//char words[MAXLENGTH] = "A string in an array"; // ë¬¸ìì—´ ìì²´ë¡œ ì„ ì–¸, ë§¤ë²ˆ ê¸€ì ìˆ˜ë¥¼ ì…€ ìˆ˜ ì—†ê¸° ë•Œë¬¸ì— ë„‰ë„‰í•˜ê²Œ ì¡ëŠ”ë‹¤.
-	//const char* pt1 = "A pointer to string"; // í¬ì¸í„°ë¡œ ì„ ì–¸
+	// 11.1 ¹®ÀÚ¿­À» Á¤ÀÇÇÏ´Â ¹æ¹ı
+	//char words[MAXLENGTH] = "A string in an array"; // ¹®ÀÚ¿­ ÀÚÃ¼·Î ¼±¾ğ, ¸Å¹ø ±ÛÀÚ ¼ö¸¦ ¼¿ ¼ö ¾ø±â ¶§¹®¿¡ ³Ë³ËÇÏ°Ô Àâ´Â´Ù.
+	//const char* pt1 = "A pointer to string"; // Æ÷ÀÎÅÍ·Î ¼±¾ğ
 
-	//puts("Puts() adds a new line at the end."); // putsí•¨ìˆ˜ëŠ” ë¬¸ìì—´ì„ ì¶œë ¥í•œë‹¤.(ë’¤ì— \nì„ ë„£ì–´ì¤Œ)
-	//puts(words); // ì´ˆê¸°í™”ê°€ ë˜ì§€ ì•Šì•˜ë‹¤ê³  warningì´ ë‚˜ì˜¨ë‹¤. MAXLENGTHë§Œí¼ ì „ë¶€ ì´ˆê¸°í™”í•œ ê²Œ ì•„ë‹ˆê¸° ë•Œë¬¸ì´ë‹¤.
+	//puts("Puts() adds a new line at the end."); // putsÇÔ¼ö´Â ¹®ÀÚ¿­À» Ãâ·ÂÇÑ´Ù.(µÚ¿¡ \nÀ» ³Ö¾îÁÜ)
+	//puts(words); // ÃÊ±âÈ­°¡ µÇÁö ¾Ê¾Ò´Ù°í warningÀÌ ³ª¿Â´Ù. MAXLENGTH¸¸Å­ ÀüºÎ ÃÊ±âÈ­ÇÑ °Ô ¾Æ´Ï±â ¶§¹®ÀÌ´Ù.
 	//puts(pt1);
 	//puts(MESSAGE);
 
-	//words[3] = 'p'; // êµì²´ê°€ ëœë‹¤.
+	//words[3] = 'p'; // ±³Ã¼°¡ µÈ´Ù.
 	//puts(words);
-	////pt1[8] = 'A'; // êµì²´ê°€ ì•ˆëœë‹¤. constë¥¼ ì—†ì• ë„ ëŸ°íƒ€ì„ ì—ëŸ¬ê°€ ë°œìƒí•œë‹¤. ë”°ë¼ì„œ í¬ì¸í„°ë¡œ ë¬¸ìì—´ì„ ì„ ì–¸í•  ë•ŒëŠ” constë¥¼ ë¶™ì—¬ì£¼ëŠ” ê²ƒì´ ì¢‹ë‹¤.
-	//// ì½ê¸° ì „ìš© ë©”ëª¨ë¦¬ì— ì €ì¥ëœ ë°ì´í„°ê°’ì„ ë°”ê¾¸ë ¤ê³  ì‹œë„í•˜ë©´ ìš´ì˜ì²´ì œê°€ ì¤‘ë‹¨ì‹œí‚¨ë‹¤.
-	//// ë°°ì—´ì€ ì½ê¸°/ì“°ê¸°ê°€ ëª¨ë‘ ê°€ëŠ¥í•œ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•˜ì§€ë§Œ, ë¬¸ìì—´ ë¦¬í„°ëŸ´ì€ í”„ë¡œê·¸ë¨ì˜ ì¼ë¶€ì´ê¸° ë•Œë¬¸ì— ì½ê¸° ì „ìš© ë©”ëª¨ë¦¬ì— ì €ì¥ë¼ ìˆë‹¤.
+	////pt1[8] = 'A'; // ±³Ã¼°¡ ¾ÈµÈ´Ù. const¸¦ ¾ø¾Öµµ ·±Å¸ÀÓ ¿¡·¯°¡ ¹ß»ıÇÑ´Ù. µû¶ó¼­ Æ÷ÀÎÅÍ·Î ¹®ÀÚ¿­À» ¼±¾ğÇÒ ¶§´Â const¸¦ ºÙ¿©ÁÖ´Â °ÍÀÌ ÁÁ´Ù.
+	//// ÀĞ±â Àü¿ë ¸Ş¸ğ¸®¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ°ªÀ» ¹Ù²Ù·Á°í ½ÃµµÇÏ¸é ¿î¿µÃ¼Á¦°¡ Áß´Ü½ÃÅ²´Ù.
+	//// ¹è¿­Àº ÀĞ±â/¾²±â°¡ ¸ğµÎ °¡´ÉÇÑ ¸Ş¸ğ¸®¸¦ »ç¿ëÇÏÁö¸¸, ¹®ÀÚ¿­ ¸®ÅÍ·²Àº ÇÁ·Î±×·¥ÀÇ ÀÏºÎÀÌ±â ¶§¹®¿¡ ÀĞ±â Àü¿ë ¸Ş¸ğ¸®¿¡ ÀúÀåµÅ ÀÖ´Ù.
 
-	//char greeting[50] = "Hello, and""How are" " you" " today!"; // ë”°ì˜´í‘œê°€ ì¤‘ê°„ì— ìˆì–´ë„, ì‚¬ì´ì— ë¹ˆì¹¸ì´ ìˆì–´ë„ ì»´íŒŒì¼ì´ ëœë‹¤.
+	//char greeting[50] = "Hello, and""How are" " you" " today!"; // µû¿ÈÇ¥°¡ Áß°£¿¡ ÀÖ¾îµµ, »çÀÌ¿¡ ºóÄ­ÀÌ ÀÖ¾îµµ ÄÄÆÄÀÏÀÌ µÈ´Ù.
 	////char greeting[50] = "Hello, and How are you today!";
 	//puts(greeting);
 
-	//// ê²¹ë”°ì˜´í‘œ escape sequence: \"
+	//// °ãµû¿ÈÇ¥ escape sequence: \"
 	//printf("\" To be, or not to be\" Hamlet said.\n");
 	//printf("%s, %p, %c\n", "We", "are", *"excellent programmers");
-	//// %s: ë¬¸ìì—´ í˜•ì‹ì§€ì •ì, %p: ë¬¸ìì—´ë„ ë°°ì—´ì´ë¯€ë¡œ ì²« ê¸€ìê°€ ì €ì¥ëœ ì£¼ì†Œë¥¼ ì¶œë ¥í•´ì¤€ë‹¤.
-	//// %c: "excellent..."ì˜ ì£¼ì†ŒëŠ” ì²« ê¸€ìê°€ ì €ì¥ëœ ì£¼ì†Œì´ë‹¤. ê·¸ê²ƒì˜ indirectionì€ eì´ë‹¤.
+	//// %s: ¹®ÀÚ¿­ Çü½ÄÁöÁ¤ÀÚ, %p: ¹®ÀÚ¿­µµ ¹è¿­ÀÌ¹Ç·Î Ã¹ ±ÛÀÚ°¡ ÀúÀåµÈ ÁÖ¼Ò¸¦ Ãâ·ÂÇØÁØ´Ù.
+	//// %c: "excellent..."ÀÇ ÁÖ¼Ò´Â Ã¹ ±ÛÀÚ°¡ ÀúÀåµÈ ÁÖ¼ÒÀÌ´Ù. ±×°ÍÀÇ indirectionÀº eÀÌ´Ù.
 
 	//const char m1[15] = "Love you!";
 	//for (int i = 0; i < 15; ++i)
-	//	printf("%d ", (int)m1[i]); // Note the null character. ë‚¨ëŠ” ê³µê°„ë„ ì „ë¶€ 0ìœ¼ë¡œ ë‚˜ì˜¤ê³  ìˆë‹¤.
+	//	printf("%d ", (int)m1[i]); // Note the null character. ³²´Â °ø°£µµ ÀüºÎ 0À¸·Î ³ª¿À°í ÀÖ´Ù.
 	//printf("\n");
 
 	//const char m2[15] = { 'L', 'o', 'v', 'e', ' ', 'y', 'o', 'u', '!', '\0' };
 	//const char m3[] = "Love you, too!";
 
 	//for (int i = 0; i < 15; ++i)
-	//	printf("%d ", (int)m2[i]); // \0ì„ ë¹¼ë„ ì•Œì•„ì„œ 0ì„ ë„£ì–´ì¤€ë‹¤.
+	//	printf("%d ", (int)m2[i]); // \0À» »©µµ ¾Ë¾Æ¼­ 0À» ³Ö¾îÁØ´Ù.
 	//printf("\n");
 
 	//for (int i = 0; i < 15; ++i)
@@ -90,31 +90,31 @@ int main()
 	//if (*(truth + 1) == 'r') puts("true!");
 
 
-	// 11.2 ë©”ëª¨ë¦¬ ë ˆì´ì•„ì›ƒê³¼ ë¬¸ìì—´
-	//char arr[] = "Hello, World!"; // ë°°ì—´, ê·¸ ìì²´ë¡œ ë©”ëª¨ë¦¬ë¥¼ ê°–ê³  ìˆë‹¤.
-	//char* str = "Hello, World!"; // í¬ì¸í„°, ë¬¸ìì—´ì˜ ì²« ë²ˆì§¸ ê¸€ìì˜ ì£¼ì†Œë¥¼ ê°€ë¦¬í‚¤ê³  ìˆë‹¤.
-	// str[0] = 'M'; // ëŸ°íƒ€ì„ ì—ëŸ¬ why??? -> ë©”ëª¨ë¦¬ ë ˆì´ì•„ì›ƒê³¼ ê´€ë ¨ë¼ ìˆë‹¤.
+	// 11.2 ¸Ş¸ğ¸® ·¹ÀÌ¾Æ¿ô°ú ¹®ÀÚ¿­
+	//char arr[] = "Hello, World!"; // ¹è¿­, ±× ÀÚÃ¼·Î ¸Ş¸ğ¸®¸¦ °®°í ÀÖ´Ù.
+	//char* str = "Hello, World!"; // Æ÷ÀÎÅÍ, ¹®ÀÚ¿­ÀÇ Ã¹ ¹øÂ° ±ÛÀÚÀÇ ÁÖ¼Ò¸¦ °¡¸®Å°°í ÀÖ´Ù.
+	// str[0] = 'M'; // ·±Å¸ÀÓ ¿¡·¯ why??? -> ¸Ş¸ğ¸® ·¹ÀÌ¾Æ¿ô°ú °ü·ÃµÅ ÀÖ´Ù.
 
-	// ë¦¬ëˆ…ìŠ¤ gcc ê¸°ì¤€
-	// ì£¼ì†Œê°€ ë†’ì€ ìª½
-	// ëª…ë ¹ì¤„ ì¸ìˆ˜ì™€ í™˜ê²½ë³€ìˆ˜ë“¤ 
-	// ìŠ¤íƒ (ì§€ì—­ë³€ìˆ˜ë“¤): ì»´íŒŒì¼ëŸ¬ê°€ ë©”ëª¨ë¦¬ í¬ê¸°ë¥¼ ë¯¸ë¦¬ ì˜ˆì¸¡í•  ìˆ˜ ìˆëŠ” ê²½ìš°ì— ìŠ¤íƒ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•œë‹¤.(ìŠ¤íƒì„ ì‚¬ìš©í•˜ëŠ” ë©”ëª¨ë¦¬ëŠ” ì†ë„ê°€ ë¹ ë¥´ë‹¤.)
-	// ììœ ê³µê°„: ìŠ¤íƒì´ë‚˜ í™ì„ ë” ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ê³µê°„
-	// í™: ë©”ëª¨ë¦¬ í¬ê¸°ë¥¼ ë¯¸ë¦¬ ì•Œ ìˆ˜ ì—†ì„ ê²½ìš°ì— í™ ë©”ëª¨ë¦¬ë¥¼ ì‚¬ìš©í•œë‹¤.
-	// ì´ˆê¸°í™”ë˜ì§€ ì•Šì€ ì „ì—­/ì •ì  ë³€ìˆ˜ë“¤ (Block Started by Symbol segment)
-	// ì´ˆê¸°í™”ëœ ì „ì—­/ì •ì  ë³€ìˆ˜ë“¤ (Data segment) // ë‘ ê°€ì§€ë¡œ ë‚˜ë‰œë‹¤. Read Write Data segment / Read only data segment
-	// í”„ë¡œê·¸ë¨ ì½”ë“œ (Text segment) ì½ê¸°ì „ìš©
-	// ì£¼ì†Œê°€ ë‚®ì€ ìª½
-	 
-	// í•˜ë“œë””ìŠ¤í¬ì— ì €ì¥ëœ í”„ë¡œê·¸ë¨ì„ ì‹¤í–‰í•˜ë ¤ë©´ ë©”ëª¨ë¦¬ë¡œ ì˜®ê²¨ì¤˜ì•¼í•œë‹¤.
-	// ì»´íŒŒì¼ê¹Œì§€ ëë‚œ í”„ë¡œê·¸ë¨ì€ í¬ê¸°ê°€ ê³ ì •ë¼ ìˆì„ ê²ƒì´ë‹¤.
-	// í”„ë¡œê·¸ë¨ ì½”ë“œê°€ ë©”ëª¨ë¦¬ì— ì˜¬ë¼ì™€ ìˆëŠ” ìƒíƒœì—ì„œ ìš´ì˜ì²´ì œê°€ í”„ë¡œê·¸ë¨ì„ ì‹¤í–‰ì‹œí‚¬ ë•Œ, í”„ë¡œê·¸ë¨ ì½”ë“œ ë©”ëª¨ë¦¬ë¥¼ ìˆ˜ì •í•˜ê¸° ì–´ë µë‹¤. ìš´ì˜ì²´ì œê°€ ì½ê¸° ì „ìš©ìœ¼ë¡œ ë°”ê¿”ë†“ëŠ”ë‹¤.
-	// ì´ˆê¸°í™”ëœ ì „ì—­/ì •ì ë³€ìˆ˜ë“¤ë„ ì»´íŒŒì¼ í•  ë•Œ ì´ë¯¸ ì •í•´ì ¸ ìˆê³ (í”„ë¡œê·¸ë˜ë¨¸ê°€ ì›í•˜ëŠ” ê°’ìœ¼ë¡œ), ì´ˆê¸°í™”ë˜ì§€ ì•Šì€ ì „ì—­/ì •ì ë³€ìˆ˜ë“¤ì€ 0ìœ¼ë¡œ ì´ˆê¸°í™”í•œë‹¤.
-	
-	//char arr[] = "Hello, World!"; // arrìì²´ê°€ ë©”ëª¨ë¦¬ë¥¼ ê°–ê³  ìˆê¸° ë•Œë¬¸ì— ë¬¸ìì—´ì„ ë°”ê¿€ ìˆ˜ ìˆë‹¤. 
-	//char* str = "Hello, World!"; // í¬ì¸í„°ëŠ” string literalì´ ì €ì¥ë¼ ìˆëŠ” ë©”ëª¨ë¦¬ ê³µê°„ì— ìˆ˜ì •í•  ê¶Œí•œì´ ì—†ë‹¤. ë¬¸ìì—´ ë¦¬í„°ëŸ´ì€ Read only data segmentë¡œ ë“¤ì–´ê°„ë‹¤.
+	// ¸®´ª½º gcc ±âÁØ
+	// ÁÖ¼Ò°¡ ³ôÀº ÂÊ
+	// ¸í·ÉÁÙ ÀÎ¼ö¿Í È¯°æº¯¼öµé 
+	// ½ºÅÃ (Áö¿ªº¯¼öµé): ÄÄÆÄÀÏ·¯°¡ ¸Ş¸ğ¸® Å©±â¸¦ ¹Ì¸® ¿¹ÃøÇÒ ¼ö ÀÖ´Â °æ¿ì¿¡ ½ºÅÃ ¸Ş¸ğ¸®¸¦ »ç¿ëÇÑ´Ù.(½ºÅÃÀ» »ç¿ëÇÏ´Â ¸Ş¸ğ¸®´Â ¼Óµµ°¡ ºü¸£´Ù.)
+	// ÀÚÀ¯°ø°£: ½ºÅÃÀÌ³ª ÈüÀ» ´õ »ç¿ëÇÒ ¼ö ÀÖ´Â °ø°£
+	// Èü: ¸Ş¸ğ¸® Å©±â¸¦ ¹Ì¸® ¾Ë ¼ö ¾øÀ» °æ¿ì¿¡ Èü ¸Ş¸ğ¸®¸¦ »ç¿ëÇÑ´Ù.
+	// ÃÊ±âÈ­µÇÁö ¾ÊÀº Àü¿ª/Á¤Àû º¯¼öµé (Block Started by Symbol segment)
+	// ÃÊ±âÈ­µÈ Àü¿ª/Á¤Àû º¯¼öµé (Data segment) // µÎ °¡Áö·Î ³ª´¶´Ù. Read Write Data segment / Read only data segment
+	// ÇÁ·Î±×·¥ ÄÚµå (Text segment) ÀĞ±âÀü¿ë
+	// ÁÖ¼Ò°¡ ³·Àº ÂÊ
 
-	//gcc -S main.c // -S ì˜µì…˜ì„ ì£¼ë©´ ì–´ì…ˆë¸”ë¦¬ ì½”ë“œë¥¼ ë³¼ ìˆ˜ ìˆë‹¤.
+	// ÇÏµåµğ½ºÅ©¿¡ ÀúÀåµÈ ÇÁ·Î±×·¥À» ½ÇÇàÇÏ·Á¸é ¸Ş¸ğ¸®·Î ¿Å°ÜÁà¾ßÇÑ´Ù.
+	// ÄÄÆÄÀÏ±îÁö ³¡³­ ÇÁ·Î±×·¥Àº Å©±â°¡ °íÁ¤µÅ ÀÖÀ» °ÍÀÌ´Ù.
+	// ÇÁ·Î±×·¥ ÄÚµå°¡ ¸Ş¸ğ¸®¿¡ ¿Ã¶ó¿Í ÀÖ´Â »óÅÂ¿¡¼­ ¿î¿µÃ¼Á¦°¡ ÇÁ·Î±×·¥À» ½ÇÇà½ÃÅ³ ¶§, ÇÁ·Î±×·¥ ÄÚµå ¸Ş¸ğ¸®¸¦ ¼öÁ¤ÇÏ±â ¾î·Æ´Ù. ¿î¿µÃ¼Á¦°¡ ÀĞ±â Àü¿ëÀ¸·Î ¹Ù²ã³õ´Â´Ù.
+	// ÃÊ±âÈ­µÈ Àü¿ª/Á¤Àûº¯¼öµéµµ ÄÄÆÄÀÏ ÇÒ ¶§ ÀÌ¹Ì Á¤ÇØÁ® ÀÖ°í(ÇÁ·Î±×·¡¸Ó°¡ ¿øÇÏ´Â °ªÀ¸·Î), ÃÊ±âÈ­µÇÁö ¾ÊÀº Àü¿ª/Á¤Àûº¯¼öµéÀº 0À¸·Î ÃÊ±âÈ­ÇÑ´Ù.
+
+	//char arr[] = "Hello, World!"; // arrÀÚÃ¼°¡ ¸Ş¸ğ¸®¸¦ °®°í ÀÖ±â ¶§¹®¿¡ ¹®ÀÚ¿­À» ¹Ù²Ü ¼ö ÀÖ´Ù. 
+	//char* str = "Hello, World!"; // Æ÷ÀÎÅÍ´Â string literalÀÌ ÀúÀåµÅ ÀÖ´Â ¸Ş¸ğ¸® °ø°£¿¡ ¼öÁ¤ÇÒ ±ÇÇÑÀÌ ¾ø´Ù. ¹®ÀÚ¿­ ¸®ÅÍ·²Àº Read only data segment·Î µé¾î°£´Ù.
+
+	//gcc -S main.c // -S ¿É¼ÇÀ» ÁÖ¸é ¾î¼Àºí¸® ÄÚµå¸¦ º¼ ¼ö ÀÖ´Ù.
 
 	//const char* pt2 = "I am a string!.";
 	//const char* pt3 = "I am a string!.";
@@ -124,14 +124,14 @@ int main()
 	//const char arr2[] = "I am a string!.";
 	//const char arr3[] = "I am a string!!!!!!"; // different
 
-	//// osì— ë”°ë¼ ì£¼ì†Œê°€ ë‹¤ë¥´ë‹¤.
+	//// os¿¡ µû¶ó ÁÖ¼Ò°¡ ´Ù¸£´Ù.
 	//printf("rodata low \t%llu %llu %llu %llu\n", (unsigned long long)pt2, (unsigned long long)pt3, (unsigned long long)pt4, (unsigned long long)"I am a string!.");
-	//	// pt2 pt3, ë¦¬í„°ëŸ´ì˜ ì£¼ì†Œê°€ ê°™ë‹¤. pt4ë§Œ ë‹¤ë¥´ë‹¤. ì»´íŒŒì¼ëŸ¬ê°€ ê°™ì€ ë¬¸ì ë¦¬í„°ëŸ´ì„ í•œ ê³³ì— ì €ì¥í•´ë‘ê³  ì—¬ëŸ¬ ë²ˆ ì‚¬ìš©í•œë‹¤.
-	//	// í¬ì¸í„°ë¥¼ ì´ìš©í•´ì„œ ë¦¬í„°ëŸ´ì˜ ì£¼ì†Œë¥¼ ë°”ê¿€ ìˆ˜ ìˆê²Œ í—ˆìš©í•œë‹¤ë©´ ëª¨ë‘ ë°”ë€Œê²Œ ë˜ë¯€ë¡œ ë¬¸ì œê°€ ìƒê¸´ë‹¤.
+	//	// pt2 pt3, ¸®ÅÍ·²ÀÇ ÁÖ¼Ò°¡ °°´Ù. pt4¸¸ ´Ù¸£´Ù. ÄÄÆÄÀÏ·¯°¡ °°Àº ¹®ÀÚ ¸®ÅÍ·²À» ÇÑ °÷¿¡ ÀúÀåÇØµÎ°í ¿©·¯ ¹ø »ç¿ëÇÑ´Ù.
+	//	// Æ÷ÀÎÅÍ¸¦ ÀÌ¿ëÇØ¼­ ¸®ÅÍ·²ÀÇ ÁÖ¼Ò¸¦ ¹Ù²Ü ¼ö ÀÖ°Ô Çã¿ëÇÑ´Ù¸é ¸ğµÎ ¹Ù²î°Ô µÇ¹Ç·Î ¹®Á¦°¡ »ı±ä´Ù.
 	//printf("stack high \t%llu %llu %llu\n", (unsigned long long)arr1, (unsigned long long)arr2, (unsigned long long)arr3);
-	//	// ë°°ì—´ì´ ê°ê° ë©”ëª¨ë¦¬ë¥¼ ê°–ê³  ìˆê¸° ë•Œë¬¸ì— ëª¨ë‘ ì£¼ì†Œê°€ ë‹¤ë¥´ë‹¤
+	//	// ¹è¿­ÀÌ °¢°¢ ¸Ş¸ğ¸®¸¦ °®°í ÀÖ±â ¶§¹®¿¡ ¸ğµÎ ÁÖ¼Ò°¡ ´Ù¸£´Ù
 	//printf("stack high \t%llu %llu %llu\n", (unsigned long long)&pt2, (unsigned long long)&pt3, (unsigned long long)&pt4);
-	//	// í¬ì¸í„° ë³€ìˆ˜ì˜ ì£¼ì†Œì´ê¸° ë•Œë¬¸ì— ëª¨ë‘ ì£¼ì†Œê°€ ë‹¤ë¥´ë‹¤.
+	//	// Æ÷ÀÎÅÍ º¯¼öÀÇ ÁÖ¼ÒÀÌ±â ¶§¹®¿¡ ¸ğµÎ ÁÖ¼Ò°¡ ´Ù¸£´Ù.
 
 	//int i;
 	//printf("stack high \t%llu\n", (unsigned long long) & i);
@@ -144,7 +144,7 @@ int main()
 
 	////arr++; // Error
 	//pt2++;
-	//puts(pt2); // ë§¨ ì•ê¸€ìê°€ ì‚¬ë¼ì¡Œë‹¤.
+	//puts(pt2); // ¸Ç ¾Õ±ÛÀÚ°¡ »ç¶óÁ³´Ù.
 
 	//char heart[] = "I Love Kelly!";
 	//const char* head = "I Love Helly!";
@@ -175,29 +175,29 @@ int main()
 	//heart[7] = 'H';
 	////head[7] = 'K'; // Error
 
-	//char* word = "Google"; // const  ë¶™ì´ëŠ”ê²Œ ì¢‹ë‹¤.
+	//char* word = "Google"; // const  ºÙÀÌ´Â°Ô ÁÁ´Ù.
 	////word[2] = 'o'; // Runtime Error
 	//puts(word);
 
 	//const char* str1 = "When all the lights arw low, ...";
 	//const char* copy;
 
-	//copy = str1; // ì£¼ì†Œ ë³µì‚¬
+	//copy = str1; // ÁÖ¼Ò º¹»ç
 
-	//printf("%s %p %p\n", str1, str1, &str1); // str1 í¬ì¸í„° ë³€ìˆ˜ ìì²´ëŠ” ìŠ¤íƒ ë©”ëª¨ë¦¬ì— ìˆê³  ë¬¸ìì—´ì€ text segmentì— ìˆë‹¤.
+	//printf("%s %p %p\n", str1, str1, &str1); // str1 Æ÷ÀÎÅÍ º¯¼ö ÀÚÃ¼´Â ½ºÅÃ ¸Ş¸ğ¸®¿¡ ÀÖ°í ¹®ÀÚ¿­Àº text segment¿¡ ÀÖ´Ù.
 	//printf("%s %p %p\n", copy, copy, &copy);
 
-	////Note: strcopy(), strncopy() ê¹Šì€ ë³µì‚¬
+	////Note: strcopy(), strncopy() ±íÀº º¹»ç
 
 
-	// 11.3 ë¬¸ìì—´ì˜ ë°°ì—´
+	// 11.3 ¹®ÀÚ¿­ÀÇ ¹è¿­
 	//const char* mythings[5] = {
 	//	"Dancing in the rain",
 	//	"Couting apple",
 	//	"Watch movie with friends",
 	//	"Writting sad letters",
 	//	"Studying the C language"
-	//}; // í¬ì¸í„°ì˜ ë°°ì—´
+	//}; // Æ÷ÀÎÅÍÀÇ ¹è¿­
 
 	//char yourthings[5][40] = {
 	//	"Stuyding the C++ language",
@@ -205,13 +205,13 @@ int main()
 	//	"Watching Netflix",
 	//	"Walking around till dark",
 	//	"Deleting spam emails"
-	//}; // ë°°ì—´ì˜ ë°°ì—´
+	//}; // ¹è¿­ÀÇ ¹è¿­
 
 	//const char* temp1 = "Dancing in the rain";
 	//const char* temp2 = "Studying the C++ language";
 
-	//printf("%s %u %u\n", mythings[0], (unsigned)mythings[0], (unsigned)temp1); // ì£¼ì†Œê°€ ê°™ë‹¤.
-	//printf("%s %u %u\n", yourthings[0], (unsigned)yourthings[0], (unsigned)temp2); // ì£¼ì†Œê°€ ë‹¤ë¥´ë‹¤.
+	//printf("%s %u %u\n", mythings[0], (unsigned)mythings[0], (unsigned)temp1); // ÁÖ¼Ò°¡ °°´Ù.
+	//printf("%s %u %u\n", yourthings[0], (unsigned)yourthings[0], (unsigned)temp2); // ÁÖ¼Ò°¡ ´Ù¸£´Ù.
 	//printf("%u %u\n", (unsigned)&yourthings[0][0], (unsigned)temp2);
 	//printf("\n");
 
@@ -234,8 +234,8 @@ int main()
 	//printf("\n");
 
 
-	// 11.4 ë¬¸ìì—´ì„ ì…ë ¥ë°›ëŠ” ë‹¤ì–‘í•œ ë°©ë²•ë“¤
-	//// ë¬¸ìì—´ì„ ì…ë ¥ë°›ì„ ë•Œ ë¯¸ë¦¬ ì €ì¥ê³µê°„ì„ í™•ë³´í•´ì•¼í•œë‹¤.
+	// 11.4 ¹®ÀÚ¿­À» ÀÔ·Â¹Ş´Â ´Ù¾çÇÑ ¹æ¹ıµé
+	//// ¹®ÀÚ¿­À» ÀÔ·Â¹ŞÀ» ¶§ ¹Ì¸® ÀúÀå°ø°£À» È®º¸ÇØ¾ßÇÑ´Ù.
 	////char* name = ""; // Error at Run-time
 	//char name[128];
 	//int result = scanf("%s", name);
@@ -245,8 +245,8 @@ int main()
 	//// gets() reads one line and remove \n and add \0
 
 	//char words[STRLEN] = "";
-	//gets(words); // pointerë¥¼ ì¸ìë¡œ ë°›ëŠ”ë‹¤. gets í•¨ìˆ˜ ì…ì¥ì—ì„œëŠ” ë©”ëª¨ë¦¬ì˜ ëì„ ëª¨ë¥¸ë‹¤.(ì‹œì‘ì ë§Œ ë°›ê¸° ë•Œë¬¸ì—)
-	////gets_s(words, sizeof(words)); // C11, ê¶Œì¥, ì¼ë¶€ ì»´íŒŒì¼ëŸ¬ì—ì„œëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.
+	//gets(words); // pointer¸¦ ÀÎÀÚ·Î ¹Ş´Â´Ù. gets ÇÔ¼ö ÀÔÀå¿¡¼­´Â ¸Ş¸ğ¸®ÀÇ ³¡À» ¸ğ¸¥´Ù.(½ÃÀÛÁ¡¸¸ ¹Ş±â ¶§¹®¿¡)
+	////gets_s(words, sizeof(words)); // C11, ±ÇÀå, ÀÏºÎ ÄÄÆÄÀÏ·¯¿¡¼­´Â »ç¿ëÇÒ ¼ö ¾ø´Ù.
 	////int result = scanf("%s", words);
 
 	//printf("START\n");
@@ -254,13 +254,13 @@ int main()
 	//puts(words); // puts add \n at the end
 	//puts("END");
 
-	//// gets, gets_s ëª¨ë‘ ë©”ëª¨ë¦¬ ê³µê°„ì„ ë„ˆë¬´ ì‘ê²Œ ì¡ìœ¼ë©´(STRLEN) ëŸ°íƒ€ì„ ì—ëŸ¬ê°€ ë°œìƒí•œë‹¤.
+	//// gets, gets_s ¸ğµÎ ¸Ş¸ğ¸® °ø°£À» ³Ê¹« ÀÛ°Ô ÀâÀ¸¸é(STRLEN) ·±Å¸ÀÓ ¿¡·¯°¡ ¹ß»ıÇÑ´Ù.
 
 	//char words[STRLEN] = "";
-	//fgets(words, STRLEN, stdin); // íŒŒì¼ì„ ì…ë ¥ ë°›ì„ ë•Œ ì“°ëŠ” í•¨ìˆ˜ì´ì§€ë§Œ stdin(standard input)ì„ ì…ë ¥í•˜ë©´ ì½˜ì†” ì…ë ¥ë„ ë°›ì„ ìˆ˜ ìˆë‹¤. 
-	//// fgets í•¨ìˆ˜ëŠ” ì½ëŠ” ë°ì´í„°ì˜ í¬ê¸°ê°€ ë” í´ ê²ƒì„ ì˜ˆìƒí•˜ê³  ì‘ë™í•˜ê¸° ë•Œë¬¸ì— ê¸€ì ìˆ˜ë¥¼ ë„˜ì–´ë„ ëŸ°íƒ€ì„ ì—ëŸ¬ê°€ ë°œìƒí•˜ì§€ ì•ŠëŠ”ë‹¤.
-	//// fgets í•¨ìˆ˜ëŠ” \nì„ ì§€ì›Œì£¼ì§€ ì•ŠëŠ”ë‹¤.(ì…ë ¥í•˜ë ¤ê³  í•  ë•Œ ì—”í„°ë¥¼ ì¹˜ë©´ ì—”í„°ë„ ì…ë ¥ëœë‹¤.)
-	//// fgetsë¡œ ì…ë ¥ ë°›ì€ ë¬¸ìì—´ì—ì„œ \nì„ ì‚­ì œí•´ë³´ì
+	//fgets(words, STRLEN, stdin); // ÆÄÀÏÀ» ÀÔ·Â ¹ŞÀ» ¶§ ¾²´Â ÇÔ¼öÀÌÁö¸¸ stdin(standard input)À» ÀÔ·ÂÇÏ¸é ÄÜ¼Ö ÀÔ·Âµµ ¹ŞÀ» ¼ö ÀÖ´Ù. 
+	//// fgets ÇÔ¼ö´Â ÀĞ´Â µ¥ÀÌÅÍÀÇ Å©±â°¡ ´õ Å¬ °ÍÀ» ¿¹»óÇÏ°í ÀÛµ¿ÇÏ±â ¶§¹®¿¡ ±ÛÀÚ ¼ö¸¦ ³Ñ¾îµµ ·±Å¸ÀÓ ¿¡·¯°¡ ¹ß»ıÇÏÁö ¾Ê´Â´Ù.
+	//// fgets ÇÔ¼ö´Â \nÀ» Áö¿öÁÖÁö ¾Ê´Â´Ù.(ÀÔ·ÂÇÏ·Á°í ÇÒ ¶§ ¿£ÅÍ¸¦ Ä¡¸é ¿£ÅÍµµ ÀÔ·ÂµÈ´Ù.)
+	//// fgets·Î ÀÔ·Â ¹ŞÀº ¹®ÀÚ¿­¿¡¼­ \nÀ» »èÁ¦ÇØº¸ÀÚ
 	//
 	//// MyTry
 	////int i = 0;
@@ -274,34 +274,34 @@ int main()
 	//if (words[i] == '\n')
 	//	words[i] == '\0';
 
-	//fputs(words, stdout); // \nì„ ì¶”ê°€í•´ì£¼ì§€ ì•ŠëŠ”ë‹¤.
-	//fputs("END", stdout); // stdoutì„ í•˜ë©´ ì½˜ì†” ì°½ì— ì¶œë ¥í•´ì¤€ë‹¤. 
+	//fputs(words, stdout); // \nÀ» Ãß°¡ÇØÁÖÁö ¾Ê´Â´Ù.
+	//fputs("END", stdout); // stdoutÀ» ÇÏ¸é ÄÜ¼Ö Ã¢¿¡ Ãâ·ÂÇØÁØ´Ù. 
 
-	//char small_array[5]; // \0ì„ í¬í•¨ê¹Œì§€ 4ê¸€ìë¥¼ ì…ë ¥ë°›ì„ ìˆ˜ ìˆë‹¤.
+	//char small_array[5]; // \0À» Æ÷ÇÔ±îÁö 4±ÛÀÚ¸¦ ÀÔ·Â¹ŞÀ» ¼ö ÀÖ´Ù.
 	//puts("Enter long strings:");
-	////fgets(small_array, 5, stdin); // return ê°’ì´ char*ì´ë‹¤. ì •ìƒì ìœ¼ë¡œ ì…ë ¥ ë°›ì•˜ë‹¤ë©´ ì…ë ¥ ë°›ì€ í¬ì¸í„°ë¥¼ ê·¸ëŒ€ë¡œ ë°˜í™˜í•´ì¤€ë‹¤. ì˜ëª» ì…ë ¥ ë°›ì•˜ë‹¤ë©´(End of Fileë¥¼ ë§Œë‚˜ë©´) \0ë¥¼ ë°˜í™˜í•œë‹¤.
+	////fgets(small_array, 5, stdin); // return °ªÀÌ char*ÀÌ´Ù. Á¤»óÀûÀ¸·Î ÀÔ·Â ¹Ş¾Ò´Ù¸é ÀÔ·Â ¹ŞÀº Æ÷ÀÎÅÍ¸¦ ±×´ë·Î ¹İÈ¯ÇØÁØ´Ù. Àß¸ø ÀÔ·Â ¹Ş¾Ò´Ù¸é(End of File¸¦ ¸¸³ª¸é) \0¸¦ ¹İÈ¯ÇÑ´Ù.
 	//printf("%p\n", small_array); 
-	//printf("%p\n", fgets(small_array, 5, stdin)); // ^Zë¥¼ ì…ë ¥í•˜ë©´ EOFì´ë‹¤. EOFë¥¼ ë§Œë‚˜ë©´ NULLì„ ë°˜í™˜í•œë‹¤.
+	//printf("%p\n", fgets(small_array, 5, stdin)); // ^Z¸¦ ÀÔ·ÂÇÏ¸é EOFÀÌ´Ù. EOF¸¦ ¸¸³ª¸é NULLÀ» ¹İÈ¯ÇÑ´Ù.
 	//
-	//fputs(small_array, stdout); // ì…ë ¥ë°›ì€ê²Œ ë” í¬ë©´ ì˜ë ¤ì„œ ì¶œë ¥ëœë‹¤.
+	//fputs(small_array, stdout); // ÀÔ·Â¹ŞÀº°Ô ´õ Å©¸é Àß·Á¼­ Ãâ·ÂµÈ´Ù.
 
-	//// ì‘ì€ ê±¸ ìª¼ê°œì„œ ì—¬ëŸ¬ ë²ˆ ë°›ì„ ìˆ˜ ìˆë‹¤.
+	//// ÀÛÀº °É ÂÉ°³¼­ ¿©·¯ ¹ø ¹ŞÀ» ¼ö ÀÖ´Ù.
 	//char small_array[5];
 	//puts("Enter long strings:");
 	//while (fgets(small_array, 5, stdin) != NULL && small_array[0] != '\n')
 	//	fputs(small_array, stdout);
-	
-	//// scanfë¡œ ì…ë ¥ ë°›ì„ ë•Œ ê¸€ì ê°œìˆ˜ë¥¼ ì œí•œí•  ìˆ˜ ìˆë‹¤.
+
+	//// scanf·Î ÀÔ·Â ¹ŞÀ» ¶§ ±ÛÀÚ °³¼ö¸¦ Á¦ÇÑÇÒ ¼ö ÀÖ´Ù.
 	//char str1[6], str2[6];
 	//int count = scanf("%5s %5s", str1, str2);
 	////int count = scanf("%6s %6s", str1, str2); // run-time error 
-	////int count = scanf_s("%s %s", str1, 6, str2, 6); //  ê°œìˆ˜ë¥¼ ì¸ìë¡œ ì„¤ì •í•  ìˆ˜ ìˆë‹¤.
+	////int count = scanf_s("%s %s", str1, 6, str2, 6); //  °³¼ö¸¦ ÀÎÀÚ·Î ¼³Á¤ÇÒ ¼ö ÀÖ´Ù.
 	//printf("%s|%s \n", str1, str2);
 
-	//// custom_string_input í•¨ìˆ˜ë¥¼ ì§ì ‘ ë§Œë“¤ì–´ì„œ ì‚¬ìš©í•  ìˆ˜ë„ ìˆë‹¤.
+	//// custom_string_input ÇÔ¼ö¸¦ Á÷Á¢ ¸¸µé¾î¼­ »ç¿ëÇÒ ¼öµµ ÀÖ´Ù.
 
 
-	// 11.5 ë¬¸ìì—´ì„ ì¶œë ¥í•˜ëŠ” ë‹¤ì–‘í•œ ë°©ë²•ë“¤
+	// 11.5 ¹®ÀÚ¿­À» Ãâ·ÂÇÏ´Â ´Ù¾çÇÑ ¹æ¹ıµé
 	//char str[60] = "String array initialized";
 	//const char* ptr = "A pointer initialized";
 
@@ -313,8 +313,8 @@ int main()
 	////puts(str[3]); // Error
 	//puts(ptr + 3);
 
-	// ë¬¸ìì—´ ëì— \0ê°€ ì—†ë‹¤ë©´?
-	//char str[] = { 'H', 'I', '!' }; // \0ì„ ë„£ì–´ì£¼ì§€ ì•Šìœ¼ë©´
+	// ¹®ÀÚ¿­ ³¡¿¡ \0°¡ ¾ø´Ù¸é?
+	//char str[] = { 'H', 'I', '!' }; // \0À» ³Ö¾îÁÖÁö ¾ÊÀ¸¸é
 	//puts(str); // warning
 
 	// puts() and fputs()
@@ -331,18 +331,18 @@ int main()
 	//puts(str);
 
 	//char input[100] = "";
-	//int ret = scanf("%10s", input); // Input: "Just do it, do it!\n" 10ê¸€ìê¹Œì§€ ë°›ëŠ”ë‹¤. ë²„í¼ì— ë‚¨ì€ ê¸€ìê°€ ë‚¨ì•„ìˆë‹¤.
-	//printf("%s\n", input); // Output: "Just" scanfëŠ” ë¹ˆì¹¸ì„ ë§Œë‚˜ë©´ ë” ì½ì§€ ì•Šê¸° ë•Œë¬¸ì— Justë§Œ ì¶œë ¥ëœë‹¤.
+	//int ret = scanf("%10s", input); // Input: "Just do it, do it!\n" 10±ÛÀÚ±îÁö ¹Ş´Â´Ù. ¹öÆÛ¿¡ ³²Àº ±ÛÀÚ°¡ ³²¾ÆÀÖ´Ù.
+	//printf("%s\n", input); // Output: "Just" scanf´Â ºóÄ­À» ¸¸³ª¸é ´õ ÀĞÁö ¾Ê±â ¶§¹®¿¡ Just¸¸ Ãâ·ÂµÈ´Ù.
 
-	//ret = scanf("%10s", input); // ë²„í¼ì— ë‚¨ì•„ìˆëŠ” ê²ƒë¶€í„° ì…ë ¥ ë°›ê¸° ë•Œë¬¸ì— "do"ê°€ ë“¤ì–´ê°„ë‹¤.
+	//ret = scanf("%10s", input); // ¹öÆÛ¿¡ ³²¾ÆÀÖ´Â °ÍºÎÅÍ ÀÔ·Â ¹Ş±â ¶§¹®¿¡ "do"°¡ µé¾î°£´Ù.
 	//printf("%s\n", input); // Output: "do"
 
 	//custom_put("Hello");
 	//printf("%d", custom_put2("Hi"));
 
 
-	// 11.6 ë‹¤ì–‘í•œ ë¬¸ìì—´ í•¨ìˆ˜ë“¤
-	//// strlen: ë¬¸ìì—´ì˜ ê¸¸ì´ ë°˜í™˜
+	// 11.6 ´Ù¾çÇÑ ¹®ÀÚ¿­ ÇÔ¼öµé
+	//// strlen: ¹®ÀÚ¿­ÀÇ ±æÀÌ ¹İÈ¯
 	//char msg[] = "Just,"" do it!";
 	//puts(msg);
 	//printf("Length %d\n", strlen(msg));
@@ -351,22 +351,35 @@ int main()
 	//printf("Length %d\n", strlen(msg));
 
 	//// strcat() and strncat(): concatenation
-	//char str1[100] = "First string"; // ì²« ë²ˆì§¸ ë¬¸ìì—´ì— ë‘ ë²ˆì¨° ë¬¸ìì—´ì„ ì¶”ê°€í•´ì£¼ëŠ” ê²ƒì´ê¸° ë•Œë¬¸ì— ê³µê°„ì´ ë„‰ë„‰íˆ ìˆì–´ì•¼ í•œë‹¤.
+	//char str1[100] = "First string"; // Ã¹ ¹øÂ° ¹®ÀÚ¿­¿¡ µÎ ¹ø¤Š ¹®ÀÚ¿­À» Ãß°¡ÇØÁÖ´Â °ÍÀÌ±â ¶§¹®¿¡ °ø°£ÀÌ ³Ë³ËÈ÷ ÀÖ¾î¾ß ÇÑ´Ù.
 	//char str2[] = "Second string";
 
 	//strcat(str1, ", ");
 	//strcat(str1, str2);
-	//// strncat(str, str2, 2); // nê¸€ì + '\n'ë¥¼ ì¶”ê°€í•´ì¤€ë‹¤.
+	//// strncat(str, str2, 2); // n±ÛÀÚ + '\n'¸¦ Ãß°¡ÇØÁØ´Ù.
 	//puts(str1);
 
+	//char my_str1[100] = "First My string_concat";
+	//char my_str2[] = "test My String_concat";
+	//my_strcat(my_str1, my_str2);
+	//puts(my_str1);
+
 	//// strcmp() and strncmp(): compare (not characters)
-	//printf("%d\n", strcmp("A", "A")); // ê°™ìœ¼ë©´ 0 ë°˜í™˜
-	//printf("%d\n", strcmp("A", "B")); // ì™¼ìª½ì´ ì‘ìœ¼ë©´ -1 ë°˜í™˜
-	//printf("%d\n", strcmp("B", "A")); // ì˜¤ë¥¸ìª½ì´ ì‘ìœ¼ë©´ 1 ë°˜í™˜
+	//printf("%d\n", strcmp("A", "A")); // °°À¸¸é 0 ¹İÈ¯
+	//printf("%d\n", strcmp("A", "B")); // ¿ŞÂÊÀÌ ÀÛÀ¸¸é -1 ¹İÈ¯
+	//printf("%d\n", strcmp("B", "A")); // ¿À¸¥ÂÊÀÌ ÀÛÀ¸¸é 1 ¹İÈ¯
 	//printf("%d\n", strcmp("Hello", "Hello")); // 0
 	//printf("%d\n", strcmp("Banana", "Bananas")); // -1
 	//printf("%d\n", strcmp("Bananas", "Banana")); // 1
-	//printf("%d\n", strncmp("Bananas", "Banana", 6)); // 0, 6ê¸€ìê¹Œì§€ë§Œ ë¹„êµ
+	//printf("%d\n", strncmp("Bananas", "Banana", 6)); // 0, 6±ÛÀÚ±îÁö¸¸ ºñ±³
+
+	//printf("%d\n", my_strcmp("A", "A")); // °°À¸¸é 0 ¹İÈ¯
+	//printf("%d\n", my_strcmp("A", "B")); // ¿ŞÂÊÀÌ ÀÛÀ¸¸é -1 ¹İÈ¯
+	//printf("%d\n", my_strcmp("B", "A")); // ¿À¸¥ÂÊÀÌ ÀÛÀ¸¸é 1 ¹İÈ¯
+	//printf("%d\n", my_strcmp("Hello", "Hello")); // 0
+	//printf("%d\n", my_strcmp("Banana", "Bananas")); // -1
+	//printf("%d\n", my_strcmp("Bananas", "Banana")); // 1
+
 
 	//// strcpy() and strncpy(): copy
 	//char dest[100] = "123456789";
@@ -384,21 +397,21 @@ int main()
 	//char str[100] = "";
 	//int i = 123;
 	//double d = 3.14;
-	//sprintf(str, "%05d.png %f", i, d); // printfë¥¼ ë¬¸ìì—´ì— í•´ì¤€ë‹¤.
+	//sprintf(str, "%05d.png %f", i, d); // printf¸¦ ¹®ÀÚ¿­¿¡ ÇØÁØ´Ù.
 	//puts(str);
 
-	//printf("%s\n", strchr("Hello, World", 'W')); // ë‘ ë²ˆì§¸ ì¸ìì˜ ìœ„ì¹˜ë¥¼ ì°¾ì•„ í¬ì¸í„°ë¡œ ë¦¬í„´í•´ì¤€ë‹¤.
+	//printf("%s\n", strchr("Hello, World", 'W')); // µÎ ¹øÂ° ÀÎÀÚÀÇ À§Ä¡¸¦ Ã£¾Æ Æ÷ÀÎÅÍ·Î ¸®ÅÏÇØÁØ´Ù.
 	//
-	//printf("%s\n", strpbrk("Hello, World", "ABCDE")); // "ABCDE" ì¤‘ í•˜ë‚˜ë¡œ ì‹œì‘í•˜ëŠ” ìœ„ì¹˜ë¥¼ ì°¾ì•„ í¬ì¸í„° ë¦¬í„´
+	//printf("%s\n", strpbrk("Hello, World", "ABCDE")); // "ABCDE" Áß ÇÏ³ª·Î ½ÃÀÛÇÏ´Â À§Ä¡¸¦ Ã£¾Æ Æ÷ÀÎÅÍ ¸®ÅÏ
 	//printf("%s\n", strpbrk("Hello, World", "abcde"));
 
-	//printf("%s\n", strrchr("Hello, World, Hello, World", 'l')); // 'l'ë¡œ ì‹œì‘í•˜ëŠ” ê°€ì¥ ë§ˆì§€ë§‰ í¬ì¸í„°ë¥¼ ì°¾ì•„ ë¦¬í„´
+	//printf("%s\n", strrchr("Hello, World, Hello, World", 'l')); // 'l'·Î ½ÃÀÛÇÏ´Â °¡Àå ¸¶Áö¸· Æ÷ÀÎÅÍ¸¦ Ã£¾Æ ¸®ÅÏ
 
-	//printf("%s\n", strstr("Hello, World", "wor")); // "wor"ê°€ ë“¤ì–´ê°€ëŠ” í¬ì¸í„°ë¥¼ ì°¾ì•„ ë¦¬í„´
+	//printf("%s\n", strstr("Hello, World", "wor")); // "wor"°¡ µé¾î°¡´Â Æ÷ÀÎÅÍ¸¦ Ã£¾Æ ¸®ÅÏ
 	//printf("%s\n", strstr("Hello, World", "Wor"));
 
 
-	// 11.7 ì„ íƒ ì •ë ¬ ë¬¸ì œ í’€ì´
+	// 11.7 ¼±ÅÃ Á¤·Ä ¹®Á¦ Ç®ÀÌ
 	//int arr[5] = { 64, 25, 12, 22, 11 };
 	//int n = sizeof(arr) / sizeof(arr[0]);
 	//printArray(arr, n);
@@ -406,7 +419,7 @@ int main()
 	//printArray(arr, n);
 
 
-	// 11.8 ë¬¸ìì—´ì˜ í¬ì¸í„°ë¥¼ ì •ë ¬í•˜ê¸°
+	// 11.8 ¹®ÀÚ¿­ÀÇ Æ÷ÀÎÅÍ¸¦ Á¤·ÄÇÏ±â
 	//char* arr[] = { "Cherry", "AppleBee", "Pineapple", "Apple", "Orange" };
 	//int n = sizeof(arr) / sizeof(arr[0]);
 
@@ -415,16 +428,16 @@ int main()
 	//printStringArray(arr, n);
 
 
-	// 11.9 ë¬¸ì í•¨ìˆ˜ë¥¼ ë¬¸ìì—´ì— ì‚¬ìš©í•˜ê¸°
-	char line[NUM_LIMIT];
-	char* new_line = NULL;
-	fgets(line, NUM_LIMIT, stdin);
-	new_line = strchr(line, '\n'); // find first new line
-	if (new_line)
-		*new_line = '\0';
-	ToUpper(line);
-	puts(line);
-	printf("%d\n", PunctCount(line));
+	// 11.9 ¹®ÀÚ ÇÔ¼ö¸¦ ¹®ÀÚ¿­¿¡ »ç¿ëÇÏ±â
+	//char line[NUM_LIMIT];
+	//char* new_line = NULL;
+	//fgets(line, NUM_LIMIT, stdin);
+	//new_line = strchr(line, '\n'); // find first new line
+	//if (new_line)
+	//	*new_line = '\0';
+	//ToUpper(line);
+	//puts(line);
+	//printf("%d\n", PunctCount(line));
 
 
 	return 0;
@@ -432,15 +445,15 @@ int main()
 // 11.5
 void custom_put(const char* str)
 {
-	// \nì„ ë¶™ì´ì§€ ì•ŠëŠ”ë‹¤.
-	// í¬ì¸í„° ì¦ê°€ì—°ì‚°ê³¼ putchar()ë¥¼ ì´ìš©í•œë‹¤.
+	// \nÀ» ºÙÀÌÁö ¾Ê´Â´Ù.
+	// Æ÷ÀÎÅÍ Áõ°¡¿¬»ê°ú putchar()¸¦ ÀÌ¿ëÇÑ´Ù.
 	while (*str)
 		putchar(*str++);
 }
 int custom_put2(const char* str)
 {
-	// \n ì¶”ê°€
-	// ë°˜í™˜ê°’ìœ¼ë¡œ ëª‡ ê¸€ìì¸ì§€
+	// \n Ãß°¡
+	// ¹İÈ¯°ªÀ¸·Î ¸î ±ÛÀÚÀÎÁö
 	int count = 0;
 	while (*str)
 	{
@@ -459,11 +472,48 @@ void fit_str(char* str, unsigned int num)
 }
 char* my_strcat(char* str1, char* str2)
 {
+	int count = 0;
+	char* temp = str1;
+	
+	// ±ÛÀÚ¼ö¸¦ ¼¾´Ù.
+	while (*temp)
+	{
+		temp++;
+		count++;
+	}
+	temp = str2;
+	while (*temp)
+	{
+		*(str1 + count) = *temp; // str1¿¡¼­ \0ÀÌ ³ª¿À¸é ÀÌ¾î¼­ str2¸¦ µ¤¾î¾´´Ù.
+		count++;
+		temp++;
+	}
 	return str1;
+
 }
 int my_strcmp(char* str1, char* str2)
 {
-	return 0;
+	while (*str1 && *str2)
+	{
+		if (*str1 == *str2)
+		{
+			str1++;
+			str2++;
+			continue;
+		}
+		else if (*str1 < *str2)
+			return -1;
+		else
+			return 1;
+	}
+	if (*str1 == '\0' && *str2 == '\0')
+		return 0;
+	else if (*str1 == '\0')
+		return -1;
+	else if (*str2 == '\0')
+		return 1;
+	else
+		printf("Error");
 }
 
 // 11.7
