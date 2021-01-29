@@ -1,9 +1,38 @@
-﻿#include <stdio.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 #define MAXLENGTH 81
 #define MESSAGE "A Symbolic string constant"
 #define STRLEN 81
+#define TEST "A string from #define"
+#define NUM_LIMIT 1024
+
+// 11.5
+void custom_put(const char* str); // Only two lines
+int custom_put2(const char* str); // Add \n, return # of characters
+
+// 11.6
+void fit_str(char*, unsigned int);
+char* my_strcat(char* str1, char* str2);
+int my_strcmp(char* str1, char* str2);
+
+// 11.7
+void swap(int* xp, int* yp);
+void printArray(int arr[], int size);
+void selectionSort(int arr[], int n);
+
+// 11.8
+void swapString(char** xp, char** yp);
+void printStringArray(char* arr[], int size);
+void selectionSortString(char* arr[], int n);
+
+// 11.9
+void ToUpper(char*);
+int PunctCount(const char*);
 
 int main()
 {
@@ -262,20 +291,259 @@ int main()
 	//while (fgets(small_array, 5, stdin) != NULL && small_array[0] != '\n')
 	//	fputs(small_array, stdout);
 	
-	// scanf로 입력 받을 때 글자 개수를 제한할 수 있다.
-	char str1[6], str2[6];
-	int count = scanf("%5s %5s", str1, str2);
-	//int count = scanf("%6s %6s", str1, str2); // run-time error 
-	//int count = scanf_s("%s %s", str1, 6, str2, 6); //  개수를 인자로 설정할 수 있다.
-	printf("%s|%s \n", str1, str2);
+	//// scanf로 입력 받을 때 글자 개수를 제한할 수 있다.
+	//char str1[6], str2[6];
+	//int count = scanf("%5s %5s", str1, str2);
+	////int count = scanf("%6s %6s", str1, str2); // run-time error 
+	////int count = scanf_s("%s %s", str1, 6, str2, 6); //  개수를 인자로 설정할 수 있다.
+	//printf("%s|%s \n", str1, str2);
 
-	// custom_string_input 함수를 직접 만들어서 사용할 수도 있다.
-
-
+	//// custom_string_input 함수를 직접 만들어서 사용할 수도 있다.
 
 
+	// 11.5 문자열을 출력하는 다양한 방법들
+	//char str[60] = "String array initialized";
+	//const char* ptr = "A pointer initialized";
 
+	//puts("String with out \\n");
+	//puts("END");
+	//puts(TEST);
+	//puts(TEST + 5);
+	//puts(&str[3]);
+	////puts(str[3]); // Error
+	//puts(ptr + 3);
+
+	// 문자열 끝에 \0가 없다면?
+	//char str[] = { 'H', 'I', '!' }; // \0을 넣어주지 않으면
+	//puts(str); // warning
+
+	// puts() and fputs()
+	//char line[100];
+	//while (gets(line)) // while(gets(line) != NULL)
+	//	puts(line);
+
+	//char line[100];
+	//while (fgets(line, 100, stdin))
+	//	fputs(line, stdout);
+
+	//char str[] = "Just do it, do it!";
+	//printf("%s\n", str);
+	//puts(str);
+
+	//char input[100] = "";
+	//int ret = scanf("%10s", input); // Input: "Just do it, do it!\n" 10글자까지 받는다. 버퍼에 남은 글자가 남아있다.
+	//printf("%s\n", input); // Output: "Just" scanf는 빈칸을 만나면 더 읽지 않기 때문에 Just만 출력된다.
+
+	//ret = scanf("%10s", input); // 버퍼에 남아있는 것부터 입력 받기 때문에 "do"가 들어간다.
+	//printf("%s\n", input); // Output: "do"
+
+	//custom_put("Hello");
+	//printf("%d", custom_put2("Hi"));
+
+
+	// 11.6 다양한 문자열 함수들
+	//// strlen: 문자열의 길이 반환
+	//char msg[] = "Just,"" do it!";
+	//puts(msg);
+	//printf("Length %d\n", strlen(msg));
+	//fit_str(msg, 4);
+	//puts(msg);
+	//printf("Length %d\n", strlen(msg));
+
+	//// strcat() and strncat(): concatenation
+	//char str1[100] = "First string"; // 첫 번째 문자열에 두 번쨰 문자열을 추가해주는 것이기 때문에 공간이 넉넉히 있어야 한다.
+	//char str2[] = "Second string";
+
+	//strcat(str1, ", ");
+	//strcat(str1, str2);
+	//// strncat(str, str2, 2); // n글자 + '\n'를 추가해준다.
+	//puts(str1);
+
+	//// strcmp() and strncmp(): compare (not characters)
+	//printf("%d\n", strcmp("A", "A")); // 같으면 0 반환
+	//printf("%d\n", strcmp("A", "B")); // 왼쪽이 작으면 -1 반환
+	//printf("%d\n", strcmp("B", "A")); // 오른쪽이 작으면 1 반환
+	//printf("%d\n", strcmp("Hello", "Hello")); // 0
+	//printf("%d\n", strcmp("Banana", "Bananas")); // -1
+	//printf("%d\n", strcmp("Bananas", "Banana")); // 1
+	//printf("%d\n", strncmp("Bananas", "Banana", 6)); // 0, 6글자까지만 비교
+
+	//// strcpy() and strncpy(): copy
+	//char dest[100] = "123456789";
+	//char source[] = "Start programming!";
+	////dest = source; // Error
+	////dest = "Start something!"; // Error
+	//strcpy(dest, source);
+	//strncpy(dest, source, 5); // '\0' is NOT added
+	//strcpy(dest, source + 6);
+	//strcpy(dest, source);
+	//strcpy(dest + 6, "coding!");
+	//puts(dest);
+
+	//// sprintf
+	//char str[100] = "";
+	//int i = 123;
+	//double d = 3.14;
+	//sprintf(str, "%05d.png %f", i, d); // printf를 문자열에 해준다.
+	//puts(str);
+
+	//printf("%s\n", strchr("Hello, World", 'W')); // 두 번째 인자의 위치를 찾아 포인터로 리턴해준다.
+	//
+	//printf("%s\n", strpbrk("Hello, World", "ABCDE")); // "ABCDE" 중 하나로 시작하는 위치를 찾아 포인터 리턴
+	//printf("%s\n", strpbrk("Hello, World", "abcde"));
+
+	//printf("%s\n", strrchr("Hello, World, Hello, World", 'l')); // 'l'로 시작하는 가장 마지막 포인터를 찾아 리턴
+
+	//printf("%s\n", strstr("Hello, World", "wor")); // "wor"가 들어가는 포인터를 찾아 리턴
+	//printf("%s\n", strstr("Hello, World", "Wor"));
+
+
+	// 11.7 선택 정렬 문제 풀이
+	//int arr[5] = { 64, 25, 12, 22, 11 };
+	//int n = sizeof(arr) / sizeof(arr[0]);
+	//printArray(arr, n);
+	//selectionSort(arr, n);
+	//printArray(arr, n);
+
+
+	// 11.8 문자열의 포인터를 정렬하기
+	//char* arr[] = { "Cherry", "AppleBee", "Pineapple", "Apple", "Orange" };
+	//int n = sizeof(arr) / sizeof(arr[0]);
+
+	//printStringArray(arr, n);
+	//selectionSortString(arr, n);
+	//printStringArray(arr, n);
+
+
+	// 11.9 문자 함수를 문자열에 사용하기
+	char line[NUM_LIMIT];
+	char* new_line = NULL;
+	fgets(line, NUM_LIMIT, stdin);
+	new_line = strchr(line, '\n'); // find first new line
+	if (new_line)
+		*new_line = '\0';
+	ToUpper(line);
+	puts(line);
+	printf("%d\n", PunctCount(line));
 
 
 	return 0;
+}
+// 11.5
+void custom_put(const char* str)
+{
+	// \n을 붙이지 않는다.
+	// 포인터 증가연산과 putchar()를 이용한다.
+	while (*str)
+		putchar(*str++);
+}
+int custom_put2(const char* str)
+{
+	// \n 추가
+	// 반환값으로 몇 글자인지
+	int count = 0;
+	while (*str)
+	{
+		putchar(*str++);
+		count++;
+	}
+	putchar('\n');
+	return count;
+}
+
+// 11.6
+void fit_str(char* str, unsigned int num)
+{
+	if (num < strlen(str))
+		str[num] = '\0';
+}
+char* my_strcat(char* str1, char* str2)
+{
+	return str1;
+}
+int my_strcmp(char* str1, char* str2)
+{
+	return 0;
+}
+
+// 11.7
+void swap(int* xp, int* yp)
+{
+	int temp;
+	temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+
+}
+void printArray(int arr[], int size)
+{
+	for (int i = 0; i < size; ++i)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+void selectionSort(int arr[], int n)
+{
+	for (int i = 0; i < n - 1; ++i)
+	{
+		int min_idx = i;
+		for (int j = i + 1; j < n; ++j)
+		{
+			if (arr[j] < arr[min_idx])
+				min_idx = j;
+		}
+		swap(&arr[i], &arr[min_idx]);
+		//printArray(arr, n);
+	}
+}
+
+// 11.8
+void swapString(char** xp, char** yp)
+{
+	char* temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+void printStringArray(char* arr[], int size)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		char* ptr = arr[i];
+		while (*ptr)
+			printf("%c", *ptr++);
+		printf(" ");
+	}
+	printf("\n");
+}
+void selectionSortString(char* arr[], int n)
+{
+	for (int i = 0; i < n - 1; ++i)
+	{
+		int min_idx = i;
+		for (int j = i + 1; j < n; ++j)
+		{
+			if (strcmp(arr[j], arr[min_idx]) < 0)
+				min_idx = j;
+		}
+		swapString(&arr[i], &arr[min_idx]);
+		//printStringArray(arr, n);
+	}
+}
+
+// 11.9
+void ToUpper(char* str)
+{
+	while (*str)
+	{
+		*str = toupper(*str);
+		str++;
+	}
+}
+int PunctCount(const char* str)
+{
+	int count = 0;
+	while (*str)
+		if (ispunct(*str++))
+			count++;
+
+	return count;
 }
