@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <stdlib.h> // srand()
+#include <stdlib.h> // srand(), malloc(), free()
 #include <time.h> // time()
 #include "my_rand.h"
 
@@ -323,25 +323,243 @@ int main()
 	//	printf("%d\n", rand()); // 완전한 난수를 만들 수 없다.
 	//}
 
-	unsigned int next = (unsigned int)time(0);
-	for (int i = 0; i < 10; ++i)
-	{
-		next = next * 1103515245 + 1234; // 유사난수
-		next = (unsigned int)(next / 65536) % 32768;
-		printf("%d\n", (int)next);
-	}
+	//unsigned int next = (unsigned int)time(0);
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	next = next * 1103515245 + 1234; // 유사난수
+	//	next = (unsigned int)(next / 65536) % 32768;
+	//	printf("%d\n", (int)next);
+	//}
 
-	printf("\n*** My Try ***\n");
-	my_srand(next);
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d\n", my_rand());
-	}
+	//printf("\n*** My Try ***\n");
+	//my_srand(next);
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	printf("%d\n", my_rand());
+	//}
 
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d\n", my_rand() % 6 + 1);
-	}
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	printf("%d\n", my_rand() % 6 + 1);
+	//}
+
+
+	// 12.13 메모리 동적 할당 Dynamic Storage Allocation
+	// 동적할당 = 컴파일 타임에서 메모리 할당이 정해지는 것이 아닌, 런타임에서 결정되는 것
+	// 동적 할당 메모리는 인식자가 없다.(포인터만 가져오고 변수의 이름이 없다.)
+	// 따라서 Storage Classes에 포함되지 않는다. (힙 메모리에 들어간다.)
+	// 프로그래머가 운영체제에게 요청한다.
+	// 한 번 할당 받으면 힙 메모리에 계속 존재한다.
+	// 프로그래머가 메모리를 반납하거나 프로그램이 끝나야 메모리가 반환된다.
+
+	// 필요한 메모리의 크기를 미리 알 수 없을 경우(컴파일 타임에 알 수 없고, 런타임에 알 수 있는 경우)
+	// 운영체제가 가상 주소공간을 이용하여 컴퓨터의 메모리를 충분히 사용할 수 있도록 해준다.
+	// malloc()을 통해 메모리를 할당 받고 free()를 통해 반납해야 한다.
+
+	//// 스택에 저장되는 것들
+	//float x;
+	//char str[] = "Dancing with a Star";
+	//int arr[100];
+
+	//double* ptr = NULL;
+	//ptr = (double*)malloc(30 * sizeof(double)); // 몇 바이트 메모리를 요청할지, 힙에 저장된다. 포인터는 스택(auto)에 저장된다.
+	//// 포인터 변수를 잃어버리면(scope에서 나가거나..) 힙 메모리에는 할당 받은 메모리가 존재하지만, 접근하지 못하는 상황이 생긴다.
+	//// 계속 동적할당을 받다가 힙이 꽉차면 문제가 생긴다.
+
+	//// malloc()함수는 void 타입 포인터를 리턴한다.(요청한 바이트 만큼의 메모리, 그것의 첫 주소)
+	//// 어떤 타입을 갖는 것이 아니라, 그냥 순수하게 주소를 반환한다는 의미
+	//// void 타입 포인터를 리턴하기 때문에 사용자가 타입 캐스팅(위에서의 (double*))을 해줘야한다.
+	//// void*: generic pointer라고 하기도 한다.
+	//// free(): deallocates the memory
+	//// 형변환을 해서 특정한 자료형의 배열인 것처럼 사용할 수 있다.
+
+	//if (ptr == NULL)
+	//{
+	//	// 운영체제가 할당해줄 메모리가 없을 경우에는 NULL 포인터를 리턴해준다.
+	//	puts("Memory allcation failed.");
+
+	//	//exit(EXIT_FAILURE); // is similar to return 1 in main()
+	//	//exit(EXIT_SUCCESS); // is similar to return 0 in main()
+	//	// exit을 이용하면 어떤 함수에서도 강제로 프로그램을 종료할 수 있다.
+
+	//	exit(EXIT_FAILURE); // 메모리 할당이 안된다는 것은 매우 심각해서 프로그램 진행이 어렵다는 의미이다. 종료하는 것이 좋다.
+	//	// 웹서버처럼 종료되면 안되는 것들은 따로 에러처리를 해줘야한다.
+	//	
+	//	// 너무 큰 공간을 요청했을 때 오류가 발생할 수 있다.
+	//	// 여러 프로그램을 실행하고 있어서(메모리를 사용하고 있어서) 연속된 메모리 공간을 할당해줄 수 없을 때 오류가 발생한다.
+	//}
+
+	//printf("Before free %p\n", ptr);
+	//free(ptr); // ptr이 NULL 포인터라면 free를 해도 아무 일도 일어나지 않는다.
+	//printf("After free %p\n", ptr);
+
+	//ptr = NULL; // optional, 권장한다.
+	//printf("Null %p\n", ptr);
+
+	//// 배열처럼 사용할 수 있다.
+	//int n = 5;
+	//ptr = (double*)malloc(n * sizeof(double));
+
+	//if (ptr != NULL)
+	//{
+	//	for (int i = 0; i < n; ++i)
+	//		printf("%f", ptr[i]); // 0으로 초기화해주지 않는다.
+	//	printf("\n");
+	//	
+	//	for (int i = 0; i < n; ++i)
+	//		*(ptr + i) = (double)i;
+
+	//	for (int i = 0; i < n; ++i)
+	//		printf("%2.1f ", ptr[i]);
+	//	printf("\n");
+	//}
+
+	//free(ptr);
+	//ptr = NULL;
+
+	// VLA와의 비교
+	// visual studio 컴파일러에서는 VLA를 지원하지 않는다.
+	// 동적할당 메모리는 사이즈를 바꿀 수 있기 때문에 VLA보다 선호된다.(다른 사이즈를 새로 받아온다는 느낌)
+	// VLA는 automatic duration(스택에 올라간다.)
+	// 동적할당 메모리는 free()를 할 떄 까지 힙에 계속 머물고 있다.
+	// VLA는 스택 사이즈의 제한을 받는다. 힙은 크기가 큰 편이다.(대신 찾기가 힘들다.)
+
+
+	// 12.14 메모리 누수(leak)와 free()의 중요성 - 비쥬얼 스튜디오 진단도구 사용법
+	// debug -> windows -> show diagnostic tools
+	//int* ptr_backup = NULL;
+	//printf("Dummy output.\n");
+
+	////for(int k = 0; k < 1000000; ++k) // 메모리 누수
+	//{
+	//	int n = 100000000;
+	//	int* ptr = (int*)malloc(n * sizeof(int)); // 381mb.. ptr은 block scope
+
+	//	if (!ptr)
+	//	{	// 메모리를 과도하게 사용하면
+	//		printf("malloc() failed\n");
+	//		exit(EXIT_FAILURE);
+	//	}
+
+	//	for (int i = 0; i < n; ++i)
+	//		ptr[i] = i + 1;
+
+	//	printf("%d %d\n", ptr[0], ptr[1]);
+	//	ptr_backup = ptr;
+	//	//free(ptr);
+	//	//ptr = NULL;
+	//}
+	//// block scope를 지나면서 ptr 포인터 변수는 사라졌지만, 동적할당 malloc으로 할당받은 힙 메모리는 그대로 남아있다.
+	//printf("Dummy output.\n");
+
+	//printf("%d %d\n", ptr_backup[0], ptr_backup[1]); // free(ptr)을 하고 실행하면 런타임에러가 난다.
+
+
+	// 12.15 동적 할당 메모리를 배열처럼 사용하기
+	//int* ptr = NULL;
+	//ptr = (int*)malloc(sizeof(int) * 1);
+	//if (!ptr) exit(1);
+	//*ptr = 1024 * 3;
+	//printf("%d\n", *ptr);
+	//free(ptr);
+	//ptr = NULL;
+
+	//int n = 3;
+	//int* ptr = (int*)malloc(sizeof(int) * n);
+	//if(!ptr) exit(1);
+
+	//ptr[0] = 123;
+	//*(ptr + 1) = 456;
+	//*(ptr + 2) = 789;
+
+	//free(ptr);
+	//ptr = NULL;
+
+	//int row = 3, col = 2;
+	//int(*ptr2d)[2] = (int(*) [2])malloc(sizeof(int) * row * col);
+	////int(*ptr2d)[col] = (int(*)[col])malloc(sizeof(int) * row * col); // VLA
+	//// 이렇게 2차원 배열을 만들기 보다 1차원 배열을 2차원 배열처럼 사용하는 것이 좋다.
+	//if (!ptr2d) exit(1);
+
+	//for (int r = 0; r < row; r++)
+	//	for (int c = 0; c < col; c++)
+	//		ptr2d[r][c] = c + col * r;
+	
+	//int row = 3, col = 2;
+	//int* ptr = (int*)malloc(sizeof(int) * row * col);
+
+	//if (!ptr) exit(1);
+
+	//for (int r = 0; r < row; r++)
+	//	for (int c = 0; c < col; c++)
+	//		ptr[c + col * r] = c + col * r;
+
+	//for (int r = 0; r < row; r++)
+	//{
+	//	for (int c = 0; c < col; c++)
+	//		printf("%d ", *(ptr + c + col * r));
+	//	printf("\n");
+	//}
+	
+	//int row = 3, col = 2, depth = 2;
+	//int* ptr = (int*)malloc(sizeof(int) * row * col * depth);
+	//if (!ptr) exit(1);
+	//for (int d = 0; d < depth; d++)
+	//	for (int r = 0; r < row; r++)
+	//		for (int c = 0; c < col; c++)
+	//			ptr[c + col * r + (row * col) * d] = c + col * r + (row * col) * d;
+
+	//for (int d = 0; d < depth; d++)
+	//	for (int r = 0; r < row; r++)
+	//		for (int c = 0; c < col; c++)
+	//		{
+	//			int idx = c + col * r + (row * col) * d; // 직접 써넣으면 warning?
+	//			printf("%d ", *(ptr + idx));
+	//		}
+
+
+	// 12.16 calloc(), realloc()
+	// calloc: contiguous allocation
+	int n = 10;
+	int* ptr = NULL;
+
+	//ptr = (int*)malloc(sizeof(int) * n); // malloc은 메모리를 할당만 해주고 초기화를 해주지 않는다.
+	ptr = (int*)calloc(n, sizeof(int)); // malloc 과 거의 차이가 없다. calloc함수는 0으로 초기화를 해준다.
+
+	if (!ptr) exit(1);
+	
+	for (int i = 0; i < n; ++i)
+		printf("%d ", ptr[i]);
+	printf("\n");
+
+	// realloc: reallocation 사이즈가 변경돼 다시 할당을 받고 싶을 때 사용하는 함수
+	// 원래 갖고 있던 메모리보다 더 큰 메모리를 할당한다면 기존의 메모리를 복사해준다. 새로 추가된 메모리에 대해서는 초기화해주진 않는다.
+	// 메모리를 추가로 할당해 줄 수 없다면 NULL을 리턴한다.
+	// argument로 포인터, 새로 할당받고 싶은 메모리를 받는다.
+	// 첫 번째 argument가 NULL이라면 malloc과 똑같다.
+	// 두 번째 argument가 0이라면 free(첫 번째 인자)와 같다.
+
+	for (int i = 0; i < n; i++)
+		ptr[i] = i + 1;
+
+	n = 20;
+
+	int* ptr2 = NULL;
+	ptr2 = (int*)realloc(ptr, n * sizeof(int));
+	// ptr2 = (int*)realloc(ptr, n * sizeof(int));
+
+	printf("%p %p\n", ptr, ptr2);
+
+	if (!ptr2) exit(1);
+	else ptr = NULL;
+
+	for (int i = 0; i < n; ++i)
+		printf("%d ", ptr2[i]); // 기존의 데이터를 복사해주지만 새로 받은 메모리를 초기화해주진 않는다.
+	printf("\n");
+
+	free(ptr2);
+
+
 
 
 	return 0;
