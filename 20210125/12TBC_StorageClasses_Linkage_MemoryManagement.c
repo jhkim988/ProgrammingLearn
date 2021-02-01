@@ -5,6 +5,7 @@
 #include <time.h> // time()
 #include "my_rand.h"
 #include "my_constant.h"
+#include <Windows.h>
 
 // 12.3
 void testLinkage();
@@ -82,6 +83,16 @@ void func_sec(); // 선언을 해준다.
 // 12.9
 //static int g_static = 123; // 파일 내에서만 사용할 수 있는 전역변수
 
+// 12.19
+DWORD WINAPI ThreadFunc(void* data)
+{
+	int n = 1;
+	Sleep(1000);
+
+	// acnt += n;
+	printf("Printing from Thread \n");
+	return 0;
+}
 int main()
 {
 	// 12.1 메모리 레이아웃
@@ -565,66 +576,126 @@ int main()
 	// 동적 할당 메모리 - 힙 메모리 - free() 할 때까지 메모리에 올라가 있다.
 
 	// 12.18 자료형 한정자들 (Type Qualifiers) - const, volatile, restrict, _Atomic
-	// const
-	// C99 ideompotent
-	//const const const int n = 6; // 여러 번 써도 된다. const int n = 6; 그러나 warning
-	typedef const int zip; // zip이라는 이름의 const int 타입을 만든 것이다. const zip = const const int 인데 오류가 생기면 안되기 때문에..
-	//const int i; // 초기화를 반드시 해야한다.
+	//// const
+	//// C99 ideompotent
+	////const const const int n = 6; // 여러 번 써도 된다. const int n = 6; 그러나 warning
+	//typedef const int zip; // zip이라는 이름의 const int 타입을 만든 것이다. const zip = const const int 인데 오류가 생기면 안되기 때문에..
+	////const int i; // 초기화를 반드시 해야한다.
 
-	const int j = 123;
-	const int arr[] = { 1, 2, 3 };
+	//const int j = 123;
+	//const int arr[] = { 1, 2, 3 };
 
-	float f1 = 3.14f, f2 = 1.2f;
+	//float f1 = 3.14f, f2 = 1.2f;
 
-	const float* pf1 = &f1;
-	//*pf1 = 5.0f; // Error
-	pf1 = &f2; // Allowed
+	//const float* pf1 = &f1;
+	////*pf1 = 5.0f; // Error
+	//pf1 = &f2; // Allowed
 
-	float* const pf2 = &f2;
-	*pf2 = 6.0f;
-	//pf2 = &f1; // Error
+	//float* const pf2 = &f2;
+	//*pf2 = 6.0f;
+	////pf2 = &f1; // Error
 
-	const float* const pf3 = &f1;
-	//*pf3 = 7.0f; // Error
-	//pf3 = &f2; // Error
+	//const float* const pf3 = &f1;
+	////*pf3 = 7.0f; // Error
+	////pf3 = &f2; // Error
 
-	// 사용할 주요 상수들을 const 전역변수로 만들지 말고, 헤더파일에 static const 변수로 만든다.
-	double area_circle = PI * 2.0f * 2.0f;
-	
-	// volatile - 휘발성
-	volatile int vi = 1; // 컴파일러가 모르는 곳에서 변수가 바뀔 수 있다는 의미, 컴파일러가 최적화 하지 말라는 의미
-	volatile int* pvi = &vi; // 다른 모듈이나 운영체제가 바꿀 수 있다. 예를 들면 시간..
-	
-	int il = vi;
-	// ... something
-	int i2 = vi;
-	// 컴파일러가 vi 값이 바뀌지 않았을 것이라고 판단하고 임시저장공간에 저장(캐싱)하여 최적화를 할 수 있다.
-	// 컴파일러가 모르는 상황에서 바뀌었다면 문제가 생긴다.
+	//// 사용할 주요 상수들을 const 전역변수로 만들지 말고, 헤더파일에 static const 변수로 만든다.
+	//double area_circle = PI * 2.0f * 2.0f;
+	//
+	//// volatile - 휘발성
+	//volatile int vi = 1; // 컴파일러가 모르는 곳에서 변수가 바뀔 수 있다는 의미, 컴파일러가 최적화 하지 말라는 의미
+	//volatile int* pvi = &vi; // 다른 모듈이나 운영체제가 바꿀 수 있다. 예를 들면 시간..
+	//
+	//int il = vi;
+	//// ... something
+	//int i2 = vi;
+	//// 컴파일러가 vi 값이 바뀌지 않았을 것이라고 판단하고 임시저장공간에 저장(캐싱)하여 최적화를 할 수 있다.
+	//// 컴파일러가 모르는 상황에서 바뀌었다면 문제가 생긴다.
 
-	// restrict
-	// 데이터 오브젝트에 접근하는게 해당 변수 하나 뿐이라는 의미
-	
-	int ar[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	int* par = ar;
+	//// restrict
+	//// 데이터 오브젝트에 접근하는게 해당 변수 하나 뿐이라는 의미
+	//
+	//int ar[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	//int* par = ar;
 
-	int* __restrict restar = (int*)malloc(10 * sizeof(int)); // restar 변수를 통해서만 접근하겠다는 의미
-	if (!restar) exit(1);
+	//int* __restrict restar = (int*)malloc(10 * sizeof(int)); // restar 변수를 통해서만 접근하겠다는 의미
+	//if (!restar) exit(1);
 
-	// ar 배열은, 배열이름과 포인터 두 가지 방법으로 접근할 수 있다.
-	ar[0] += 3;
-	par[0] += 5;
-	// par[0] += 8; 배열이름과 포인터 두 가지가 다르기 때문에 컴파일러가 최적화 +8로 해주지 못한다.
+	//// ar 배열은, 배열이름과 포인터 두 가지 방법으로 접근할 수 있다.
+	//ar[0] += 3;
+	//par[0] += 5;
+	//// par[0] += 8; 배열이름과 포인터 두 가지가 다르기 때문에 컴파일러가 최적화 +8로 해주지 못한다.
 
-	restar[0] += 3;
-	restar[0] += 5;
-	//restar[0] +=8; // Equivalent, 컴파일러가 최적화를 해줄 수도 있다.
-	// 컴파일러 입장에서는 실제로 restar를 통해서만 접근하는지 체크해줄 수 없다.
+	//restar[0] += 3;
+	//restar[0] += 5;
+	////restar[0] +=8; // Equivalent, 컴파일러가 최적화를 해줄 수도 있다.
+	//// 컴파일러 입장에서는 실제로 restar를 통해서만 접근하는지 체크해줄 수 없다.
 
 
 	// 12.19 멀티 쓰레딩
+	// 프로그램이 "프로세스"에서 실행된다.
+	// 메인 쓰레드가 다른 쓰레드를 만들어서 띄울 수 있다.
+	// 멀티 코어 CPU -> 여러 쓰레드를 실행시킬 수 있다.
 
+	// 같은 함수를 여러 쓰레드가 동시에 실행시킬 경우
+	// 함수 내부의 지역변수는 어떠한 storage classes를 갖는가?
 
+	// 하나의 전역변수를 여러 개의 쓰레드가 접근하면? 경쟁이 생긴다.
+	// 메모리와 CPU 사이를 왔다갔다 하는 사이에 문제가 생길 수 있다.
+
+	// C언어 표준에서는 멀티 쓰레딩을 지원해주지 않아서, 대부분 운영체제에서 지원해주는 것을 사용한다.
+	// <Windows.h>
+
+	HANDLE thread = CreateThread(NULL, 0, ThreadFunc, NULL, 0, NULL);
+	if (thread)
+		WaitForSingleObject(thread, INFINITE);
+
+	// 일반적으로 사용되는 것 gcc컴파일러
+	// www.onlinegdb.com/online_c_compiler
 
 
 	return 0;
 }
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <unistd.h> // sleep()
+//#include <pthread.h> // pthread는 윈도우에서도 사용할 수 있다.
+//#include <stdatomic.h>
+//
+//_Atomic int acnt = 0; // atomic type qualifier
+//// _Atomic
+//// 여러 쓰레드에서 동일한 전역변수에 접근할 때 CPU와 메모리가 분리돼 있는 구조에 의해 일관성이 깨질 수도 있다.
+//// 그런 상황을 방지하기 위해 _Atomic qualifier를 사용한다.
+//// _Atomic 변수의 연산은 일반적으로 느리다.
+//
+//void* myThreadFunc(void* vargp)
+//{
+//	int n = 1; // thread storage duration
+//	// 지역변수, 함수가 끝나면 메모리를 반환한다.
+//	// thread_id1, thread_id2 각각 두 카피가 생긴다.
+//	for (int j = 0; j < 10; ++j)
+//	{
+//		sleep(1);
+//		acnt += n;
+//		printf("Printing from Thread %d %llu\n", acnt, (unsigned long long) & n);
+//	}
+//	return NULL;
+//}
+//
+//int main()
+//{
+//	pthread_t thread_id1, thread_id2; // 쓰레드 식별
+//	printf("Before Thread\n");
+//
+//	pthread_create(&thread_id1, NULL, myThreadFunc, NULL); // myThreadFunc 함수를 실행시키는 쓰레드를 만들어서 thread_id1로 식별할 수 있게 한다.
+//	pthread_create(&thread_id2, NULL, myThreadFunc, NULL); // myThreadFunc 함수가 메모리와 CPU에 두 copy가 작동하게 된다.
+//
+//	pthread_join(thread_id1, NULL); // 쓰레드가 끝날 때까지 기다려줘야한다.
+//	pthread_join(thread_id2, NULL);
+//
+//	printf("After Thread\n");
+//	printf("Atomic %d\n", acnt);
+//
+//	return 0;
+//}
