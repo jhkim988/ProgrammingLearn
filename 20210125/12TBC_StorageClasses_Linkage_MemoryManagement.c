@@ -4,6 +4,7 @@
 #include <stdlib.h> // srand(), malloc(), free()
 #include <time.h> // time()
 #include "my_rand.h"
+#include "my_constant.h"
 
 // 12.3
 void testLinkage();
@@ -519,45 +520,108 @@ int main()
 
 
 	// 12.16 calloc(), realloc()
-	// calloc: contiguous allocation
-	int n = 10;
-	int* ptr = NULL;
+	//// calloc: contiguous allocation
+	//int n = 10;
+	//int* ptr = NULL;
 
-	//ptr = (int*)malloc(sizeof(int) * n); // malloc은 메모리를 할당만 해주고 초기화를 해주지 않는다.
-	ptr = (int*)calloc(n, sizeof(int)); // malloc 과 거의 차이가 없다. calloc함수는 0으로 초기화를 해준다.
+	////ptr = (int*)malloc(sizeof(int) * n); // malloc은 메모리를 할당만 해주고 초기화를 해주지 않는다.
+	//ptr = (int*)calloc(n, sizeof(int)); // malloc 과 거의 차이가 없다. calloc함수는 0으로 초기화를 해준다.
 
-	if (!ptr) exit(1);
+	//if (!ptr) exit(1);
+	//
+	//for (int i = 0; i < n; ++i)
+	//	printf("%d ", ptr[i]);
+	//printf("\n");
+
+	//// realloc: reallocation 사이즈가 변경돼 다시 할당을 받고 싶을 때 사용하는 함수
+	//// 원래 갖고 있던 메모리보다 더 큰 메모리를 할당한다면 기존의 메모리를 복사해준다. 새로 추가된 메모리에 대해서는 초기화해주진 않는다.
+	//// 메모리를 추가로 할당해 줄 수 없다면 NULL을 리턴한다.
+	//// argument로 포인터, 새로 할당받고 싶은 메모리를 받는다.
+	//// 첫 번째 argument가 NULL이라면 malloc과 똑같다.
+	//// 두 번째 argument가 0이라면 free(첫 번째 인자)와 같다.
+
+	//for (int i = 0; i < n; i++)
+	//	ptr[i] = i + 1;
+
+	//n = 20;
+
+	//int* ptr2 = NULL;
+	//ptr2 = (int*)realloc(ptr, n * sizeof(int));
+	//// ptr2 = (int*)realloc(ptr, n * sizeof(int));
+
+	//printf("%p %p\n", ptr, ptr2);
+
+	//if (!ptr2) exit(1);
+	//else ptr = NULL;
+
+	//for (int i = 0; i < n; ++i)
+	//	printf("%d ", ptr2[i]); // 기존의 데이터를 복사해주지만 새로 받은 메모리를 초기화해주진 않는다.
+	//printf("\n");
+
+	//free(ptr2);
+
+
+	// 12.17 동적 할당 메모리와 저장 공간 분류
+	// 동적 할당 메모리 - 힙 메모리 - free() 할 때까지 메모리에 올라가 있다.
+
+	// 12.18 자료형 한정자들 (Type Qualifiers) - const, volatile, restrict, _Atomic
+	// const
+	// C99 ideompotent
+	//const const const int n = 6; // 여러 번 써도 된다. const int n = 6; 그러나 warning
+	typedef const int zip; // zip이라는 이름의 const int 타입을 만든 것이다. const zip = const const int 인데 오류가 생기면 안되기 때문에..
+	//const int i; // 초기화를 반드시 해야한다.
+
+	const int j = 123;
+	const int arr[] = { 1, 2, 3 };
+
+	float f1 = 3.14f, f2 = 1.2f;
+
+	const float* pf1 = &f1;
+	//*pf1 = 5.0f; // Error
+	pf1 = &f2; // Allowed
+
+	float* const pf2 = &f2;
+	*pf2 = 6.0f;
+	//pf2 = &f1; // Error
+
+	const float* const pf3 = &f1;
+	//*pf3 = 7.0f; // Error
+	//pf3 = &f2; // Error
+
+	// 사용할 주요 상수들을 const 전역변수로 만들지 말고, 헤더파일에 static const 변수로 만든다.
+	double area_circle = PI * 2.0f * 2.0f;
 	
-	for (int i = 0; i < n; ++i)
-		printf("%d ", ptr[i]);
-	printf("\n");
+	// volatile - 휘발성
+	volatile int vi = 1; // 컴파일러가 모르는 곳에서 변수가 바뀔 수 있다는 의미, 컴파일러가 최적화 하지 말라는 의미
+	volatile int* pvi = &vi; // 다른 모듈이나 운영체제가 바꿀 수 있다. 예를 들면 시간..
+	
+	int il = vi;
+	// ... something
+	int i2 = vi;
+	// 컴파일러가 vi 값이 바뀌지 않았을 것이라고 판단하고 임시저장공간에 저장(캐싱)하여 최적화를 할 수 있다.
+	// 컴파일러가 모르는 상황에서 바뀌었다면 문제가 생긴다.
 
-	// realloc: reallocation 사이즈가 변경돼 다시 할당을 받고 싶을 때 사용하는 함수
-	// 원래 갖고 있던 메모리보다 더 큰 메모리를 할당한다면 기존의 메모리를 복사해준다. 새로 추가된 메모리에 대해서는 초기화해주진 않는다.
-	// 메모리를 추가로 할당해 줄 수 없다면 NULL을 리턴한다.
-	// argument로 포인터, 새로 할당받고 싶은 메모리를 받는다.
-	// 첫 번째 argument가 NULL이라면 malloc과 똑같다.
-	// 두 번째 argument가 0이라면 free(첫 번째 인자)와 같다.
+	// restrict
+	// 데이터 오브젝트에 접근하는게 해당 변수 하나 뿐이라는 의미
+	
+	int ar[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int* par = ar;
 
-	for (int i = 0; i < n; i++)
-		ptr[i] = i + 1;
+	int* __restrict restar = (int*)malloc(10 * sizeof(int)); // restar 변수를 통해서만 접근하겠다는 의미
+	if (!restar) exit(1);
 
-	n = 20;
+	// ar 배열은, 배열이름과 포인터 두 가지 방법으로 접근할 수 있다.
+	ar[0] += 3;
+	par[0] += 5;
+	// par[0] += 8; 배열이름과 포인터 두 가지가 다르기 때문에 컴파일러가 최적화 +8로 해주지 못한다.
 
-	int* ptr2 = NULL;
-	ptr2 = (int*)realloc(ptr, n * sizeof(int));
-	// ptr2 = (int*)realloc(ptr, n * sizeof(int));
+	restar[0] += 3;
+	restar[0] += 5;
+	//restar[0] +=8; // Equivalent, 컴파일러가 최적화를 해줄 수도 있다.
+	// 컴파일러 입장에서는 실제로 restar를 통해서만 접근하는지 체크해줄 수 없다.
 
-	printf("%p %p\n", ptr, ptr2);
 
-	if (!ptr2) exit(1);
-	else ptr = NULL;
-
-	for (int i = 0; i < n; ++i)
-		printf("%d ", ptr2[i]); // 기존의 데이터를 복사해주지만 새로 받은 메모리를 초기화해주진 않는다.
-	printf("\n");
-
-	free(ptr2);
+	// 12.19 멀티 쓰레딩
 
 
 
