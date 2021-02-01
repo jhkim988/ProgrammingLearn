@@ -1,4 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
+#include <stdlib.h> // srand()
+#include <time.h> // time()
+#include "my_rand.h"
 
 // 12.3
 void testLinkage();
@@ -8,18 +13,73 @@ static int il; // static: 변수의 범위가 현재 스코프로 제한된다는 의미, 다른 파일
 void count()
 {
 	int ct = 0; // 함수가 끝나면 메모리가 사라진다.
-	printf("count = %d\n", ct);
+	printf("count = %d %p\n", ct, &ct);
 	ct++;
 }
 void static_count()
 {
-	static int ct = 0; // 프로그램이 시작돼서 끝날 때까지 메모리에 유지가 된다.
-	printf("static count = %d\n", ct);
+	static int ct = 0; // 프로그램이 시작돼서 끝날 때까지 메모리에 유지가 된다. 초기화가 한 번만 이루어진다.
+	// 스택에 저장되지 않고 데이터/BSS에 저장된다.
+
+	// static 변수에서 - 선언하면서 초기화 vs 선언 후에 값 할당은 차이가 있다.
+	// 선언 후 값 할당을 하게 되면 함수가 다시 실행될 때 다시 0을 할당해버리기 때문이다.
+	//static int cp;
+	//cp = 0;
+
+	printf("static count = %d %p\n", ct, &ct);
 	ct++;
 }
 
 // 12.5
+void func_auto(int k)
+{
+	int i = k * 2;
+	printf("i %lld\n", (long long)&i);
+}
 
+// 12.7
+void count_caller()
+{
+	count();
+}
+void static_count_caller()
+{
+	static_count();
+}
+
+// 12.8
+int g_int = 0; // static 변수들은 초기화를 안하면 0으로 해주지만 직접 하는 것이 좋다.
+double g_arr[1000];
+// constant expression
+int x = 5; 
+int y = 1 + 2;
+size_t z = sizeof(int);
+//int x2 = 2 * x;// Error, x is not constant variable.
+void func_sec(); // 선언을 해준다.
+
+//int func_static(static int i) // warning (Error in GCC)
+//{
+//
+//}
+//int* count_pointer()
+//{
+//	int ct = 0; // 함수가 끝나면 메모리가 사라진다.
+//	printf("count = %d %p\n", ct, &ct);
+//	ct++;
+//	return &ct;
+//	// 포인터를 리턴한다는 것은 받는 쪽에서 포인터를 이용해 작업을 하고 싶다는 의미, 그러나 함수가 끝나면서 메모리를 반환하여 사용할 수 없기 때문에 warning
+//}
+//int* static_count_pointer()
+//{
+//	static int ct = 0;
+//	printf("static count = %d %p\n", ct, &ct);
+//	ct++;
+//	return &ct; // 권장하지는 않는다.
+//}
+
+
+// 12.9
+//static int g_static = 123; // 파일 내에서만 사용할 수 있는 전역변수
 
 int main()
 {
@@ -123,13 +183,165 @@ int main()
 	// Automatic storage duration, Block scope, No linkage
 	// Any vaiable declared in a block or function header
 
-	auto int a; // 자동변수를 선언할 때 auto를 붙인다. auto를 안 붙여도 똑같지만 지역변수인 것을 강조.. C++에서는 완전히 다른 키워드이다.
+	//auto int a; // 자동변수를 선언할 때 auto를 붙인다. auto를 안 붙여도 똑같지만 지역변수인 것을 강조.. C++에서는 완전히 다른 키워드이다.
 	//a = 1024; // 초기화를 꼭 해줘야한다. BSS에 있는 전역변수들은 컴파일러가 0으로 초기화 해준다. 자동변수들은 스택에 들어갔다 나왔다 빈번하게 사용하기 때문에 컴파일러가 자동으로 초기화해주지 않는다.
+	//printf("%d\n", a);
+	//auto int b = a * 3;
+
+	//int i = 1;
+	//int j = 2;
+	//printf("i %lld\n", (long long)&i);
+
+	//{
+	//	// 영역이 바뀌면 같은 이름의 변수가 생길 수 있다.
+	//	// 가장 안쪽에서 선언된 것을 의미한다.
+	//	int i = 3; // name hiding
+	//	printf("i %lld\n", (long long)&i);
+
+	//	// j is visible here
+	//	printf("j = %d\n", j);
+
+	//	// 영역이 끝나면 영역 안에서 선언된 i가 사라진다. 스택(메모리)에서 빠져나간다.
+	//}
+	//printf("i %lld\n", (long long)&i); // which i ?
+
+	//// stack frame: 함수 전체에서 필요한 메모리
+
+	//for (int m = 1; m < 2; ++m)
+	//	printf("m %lld\n", (long long)&m); // 블럭이 없어도 m의 scope는 한 문장까지
+
+	//func_auto(5); // 함수에 진입하면 스택 프레임 자체가 바뀌어버린다. 함수 내에서 main함수의 변수를 사용할 수 없다.
+	//// 함수가 끝나면 함수 안에서 사용한 메모리를 모두 반환하기 위해서
+
+	//for (int m = 3; m < 4; ++m)
+	//{
+	//	printf("m %lld\n", (long long)&m);
+	//}
 
 
+	// 12.6 레지스터 변수
+	// 레지스터란? CPU가 갖고 있는 임시 작업공간
+	// CPU와 메모리는 다른 부품, 메인보드의 버스를 통해서 정보를 주고 받는다.
+	// 레지스터는 메모리처럼 데이터를 갖고 있을 수 있다. CPU의 일부이기 때문에 빠르게 작동한다.
+
+	// 지속기간, 영역이 자동변수와 같다.
+	// 메모리 저장을 레지스터(또는 스택)에 한다.
+	// 컴파일러가 꼭 레지스터에 위치시켜주진 않는다.
+	//register int r;
+	//r = 123;
+
+	// register 변수는 address operator &를 사용할 수 없다.
+	//printf("%p\n", &r);
+	//int* ptr = &r;
 
 
+	// 12.7 블록 영역의 정적변수
+	// 프로그램이 시작하고 끝날 때까지 메모리에 계속 올라가 있다.
+	// 블록 안에서만 사용할 수 있다.(visible)
+	// Linkage가 없다. 포인터 등을 통해 간접적으로 접근할 수 있다.
 
+	//count(); // main함수에서 직접호출
+	//count();
+	//count_caller(); // count_caller()함수를 통해 호출
+
+	//static_count();
+	//static_count();
+	//static_count_caller();
+
+	// 함수의 파라미터에 static 변수를 넣는다면
+	// visual studio - warning: Bad storage class
+	// gcc - Error
+	// 함수가 실행될 떄는 새로운 스택 프레임이 생성된다.
+	// 함수의 파라미터는 함수가 호출될 때 메모리를 배정받는다.
+	// 파라미터를 static한 메모리 공간에 넣는 것은 이상하다.
+
+	// 함수에서 포인터를 리턴할 때...
+	// count_pointer(), static_count_pointer();
+
+
+	// 12.8 정적 변수의 외부연결 external linkage
+	// 메모리 위치: 데이터/BSS
+	// 지속기간: static(프로그램 시작부터 끝까지)
+	// 영역: 파일 안
+	// 연결 상태: 번역 단위(파일)의 외부로도 연결 가능
+	// 선언 방법: 모든 함수들 밖에 선언
+	// 컴파일러가 각각의 파일(c파일, 헤더파일)을 따로 컴파일한 후 링커가 연결한 후에 실행파일을 만든다.
+	// 변수뿐만 아니라 함수도 연결해준다.
+
+	// File scope, External linkage
+	// External storage class
+	// External variables
+
+	// file scope 변수는
+	// 이 파일 안에서 어느 함수에서나 사용할 수 있다.
+
+	// 이름이 같은 지역변수를 만든다면
+	//int g_int = 123; // 이 scope에서는 static 변수 g_int가 name hiding이 된다.
+
+	// referencing declaration
+	//extern int g_int; // 이 scope의 바깥에 있는 g_int를 연결시켜달라는 의미. 같은 파일이므로 굳이 링커가 연결해줄 필요가 없다.
+
+	//fun_sec();
+
+
+	// 12.9 정적 변수의 내부 연결 static variables with internal linkage
+	// 번역 단위(파일) 내부에서만 사용
+	// 모든 함수 밖에서 static 키워드 사용
+
+
+	// 12.10 변수의 저장 공간 분류 요약 정리
+	// Automatic - 블럭에서, 지역변수
+	// Register - 블럭에서, regester 키워드, & 연산자 사용 불가
+	// Static internal linkage - 모든 함수 밖에서, static 키워드
+	// Static external linkage - 모든 함수 밖에서, 외부에서 extern 키워드
+	// Static no linkage - 블럭 안에서, static 키워드
+
+
+	// 12.11 함수의 저장 공간 분류
+	// Storage Classes and Functions
+	// - Functions exteranl(by default) or static
+	// - A function declaration is assumed to be externs
+
+	// 함수는 프로그램이 시작되면 로딩되고, 메모리에 계속 머무른다.
+	// 함수 포인터로 그 주소를 찍어볼 수 있다.
+	// 함수의 선언은 기본적으로 extern이다.
+
+	// static 키워드를 붙이면 어떻게 되는지?
+	// LNK ERROR, static을 붙이면 해당 파일 안에서만 사용할 수 있다.
+	// 프로토타입에만 static을 붙여줘도 해당 파일 안에서만 사용할 수 있다.
+
+
+	// 12.12 난수 생성기 모듈 만들기 예제
+	//rand();
+	// 0 ~ RAND_MAX (typically INT_MAX)
+	// defined in stdlib.h
+
+	//srand(2); // random seed setting
+	//srand((unsigned int)time(0));
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	printf("%d\n", rand()); // 완전한 난수를 만들 수 없다.
+	//}
+
+	unsigned int next = (unsigned int)time(0);
+	for (int i = 0; i < 10; ++i)
+	{
+		next = next * 1103515245 + 1234; // 유사난수
+		next = (unsigned int)(next / 65536) % 32768;
+		printf("%d\n", (int)next);
+	}
+
+	printf("\n*** My Try ***\n");
+	my_srand(next);
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d\n", my_rand());
+	}
+
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d\n", my_rand() % 6 + 1);
+	}
 
 
 	return 0;
