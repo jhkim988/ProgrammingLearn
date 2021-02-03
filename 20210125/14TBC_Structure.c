@@ -9,7 +9,9 @@
 #define MAX_AUTHOR 40
 #define MAX_BOOKS 3
 #define LEN 20
-
+#define FUNDLEN 50
+#define NLEN 30
+#define SLEN 30
 // 14.2
 struct person // Person is a tage of structure
 {
@@ -39,6 +41,192 @@ char* s_gets(char* st, int n)
 	}
 
 	return ret_val;
+}
+
+// 14.7
+struct fortune {
+	char bank_name[FUNDLEN];
+	double bank_saving;
+	char fund_name[FUNDLEN];
+	double fund_invest;
+};
+double sum(const struct fortune* mf)
+{
+	return mf->bank_saving + mf->fund_invest;
+}
+
+// 14.8
+struct name_count
+{
+	char first[NLEN];
+	char last[NLEN];
+	int num;
+};
+void receive_input(struct name_count* nc)
+{
+	int flag;
+	printf("Input your first name:\n>> ");
+	//s_gets(nc->first, NLEN);
+	flag = scanf("%[^\n]%*c", nc->first); // [^\n]: \n이 나올 때까지 받으라는 의미, %*c: c를 하나 무시하라는 의미(여기서는 \n)
+	if (flag != 1) printf("Wrong input\n");
+
+	printf("Input your last name:\n>> ");
+	//s_gets(nc->last, NLEN);
+	flag = scanf("%[^\n]%*c", nc->last);
+	if (flag != 1) printf("Wrong input\n");
+}
+void count_characters(struct name_count* nc)
+{
+	int count = 0;
+	char* first_ptr = nc->first;
+	char* last_ptr = nc->last;
+	while (*(first_ptr)++ != '\0')
+		count++;
+	while (*(last_ptr)++ != '\0')
+		count++;
+
+	nc->num = count;
+}
+void show_result(const struct name_count* nc)
+{
+	printf("Hi, %s %s. Your name has %d characters.\n",
+		nc->first, nc->last, nc->num);
+}
+
+struct name_count receive_input_v2()
+{
+	int flag;
+	struct name_count nc;
+
+	printf("Input your first name:\n>> ");
+	flag = scanf("%[^\n]%*c", nc.first);
+	if (flag != 1) printf("Wrong input\n");
+
+	printf("Input your last name:\n>> ");
+	flag = scanf("%[^\n]%*c", nc.last);
+	if (flag != 1) printf("Wrong input\n");
+
+	return nc;
+}
+struct name_count count_characters_v2(struct name_count nc)
+{
+	int count = 0;
+	char* first = nc.first, * last = nc.last;
+
+	while (*first++ != '\0')
+		count++;
+	while (*last++ != '\0')
+		count++;
+
+	nc.num = count;
+
+	return nc;
+}
+void show_result_v2(struct name_count nc)
+{
+	printf("Hi, %s %s. Your name has %d characters.\n",
+		nc.first, nc.last, nc.num);
+}
+
+// 14.9
+struct namect {
+	char* fname; // use malloc
+	char* lname; // use malloc
+	int letters;
+};
+void getinfo(struct namect* nct) // malloc()
+{
+	int flag;
+	char buffer[SLEN] = { 0, };
+
+	printf("Please Enter Your First Name.\n>> ");
+
+	flag = scanf("%[^\n]%*c", buffer);
+	if (flag != 1)
+	{
+		printf("Wrong input\n");
+		getinfo(nct);
+		return;
+	}
+	else
+	{
+		nct->fname = (char*)malloc(sizeof(char) * (strlen(buffer) + 1));
+		if (nct->fname != NULL)
+			strcpy(nct->fname, buffer);
+		else
+		{
+			printf("malloc() failed.\n");
+			return;
+		}
+		printf("Please Enter Your Last Name.\n>> ");
+
+		flag = scanf("%[^\n]%*c", buffer);
+		if (flag != 1)
+		{
+			printf("Wrong input\n");
+			getinfo(nct);
+			return;
+		}
+		else
+		{
+			nct->lname = (char*)malloc(sizeof(char) * (strlen(buffer) + 1));
+			if (nct->lname != NULL)
+				strcpy(nct->lname, buffer);
+			else
+			{
+				printf("malloc() failed.\n");
+				return;
+			}
+		}
+	}
+}
+void makeinfo(struct namect* nct) 
+{
+	nct->letters = strlen(nct->fname) + strlen(nct->lname);
+}
+void showinfo(const struct namect* nct)
+{
+	printf("%s %s, Your Name Contains %d Letters.\n", nct->fname, nct->lname, nct->letters);
+}
+void cleanup(struct namect* nct) // free()
+{
+	free(nct->fname);
+	free(nct->lname);
+}
+
+// 14.10
+struct book
+{
+	char title[MAX_TITLE];
+	char author[MAX_AUTHOR];
+	float price;
+};
+struct rectangle
+{
+	double width;
+	double height;
+};
+double rect_area(struct rectangle r)
+{
+	return r.width * r.height;
+}
+double rect_area_ptr(struct rectangle* r)
+{
+	return r->width * r->height;
+}
+
+// 14.13
+void print_books(const struct book books[], int n)
+{
+	for (int i = 0; i < n; ++i)
+		printf("Book %d : \"%s\" written by \"%s\"\n", i + 1, books[i].title, books[i].author);
+	printf("\n");
+}
+void printf_books_malloc(const struct book* books_malloc, int n)
+{
+	for (int i = 0; i < n; ++i)
+		printf("Book %d : \"%s\" written by \"%s\"\n", i + 1, books_malloc[i].title, books_malloc[i].author);
+	printf("\n");
 }
 
 int main()
@@ -378,31 +566,224 @@ int main()
 	//printf("%f %f\n", d2.arr[0], d2.arr[1]);
 	//printf("%lld %lld\n\n", (long long)&d2.arr[0], (long long)&d2.arr[1]);
 
-	// 동적할당으로 한다면?
-	struct my_data
-	{
-		int a;
-		char c;
-		float* arr;
-	};
+	//// 동적할당으로 한다면?
+	//struct my_data
+	//{
+	//	int a;
+	//	char c;
+	//	float* arr;
+	//};
 
-	struct my_data d1 = { 1234, 'A', NULL };
-	d1.arr = (float*)malloc(sizeof(float) * 2);
-	d1.arr[0] = 1.1f;
-	d1.arr[1] = 2.2f;
+	//struct my_data d1 = { 1234, 'A', NULL };
+	//d1.arr = (float*)malloc(sizeof(float) * 2);
+	//d1.arr[0] = 1.1f;
+	//d1.arr[1] = 2.2f;
 
-	printf("%d %c %lld\n", d1.a, d1.c, (long long)d1.arr);
-	printf("%f %f\n", d1.arr[0], d1.arr[1]);
-	printf("%lld %lld\n\n", (long long)&d1.arr[0], (long long)&d1.arr[1]);
+	//printf("%d %c %lld\n", d1.a, d1.c, (long long)d1.arr);
+	//printf("%f %f\n", d1.arr[0], d1.arr[1]);
+	//printf("%lld %lld\n\n", (long long)&d1.arr[0], (long long)&d1.arr[1]);
 
-	struct my_data d2 = d1; // 내부적으로 주소값을 복사한다. d1.arr과 d2.arr의 주소가 같기 때문에, 같은 메모리를 공유하고 있다.
+	//struct my_data d2 = d1; // 내부적으로 주소값을 복사한다. d1.arr과 d2.arr의 주소가 같기 때문에, 같은 메모리를 공유하고 있다.
 
-	printf("%d %c %lld\n", d2.a, d2.c, (long long)d2.arr);
-	printf("%f %f\n", d2.arr[0], d2.arr[1]);
-	printf("%lld %lld\n\n", (long long)&d2.arr[0], (long long)&d2.arr[1]);
+	//printf("%d %c %lld\n", d2.a, d2.c, (long long)d2.arr);
+	//printf("%f %f\n", d2.arr[0], d2.arr[1]);
+	//printf("%lld %lld\n\n", (long long)&d2.arr[0], (long long)&d2.arr[1]);
 
 
 	// 14.7 구조체를 함수로 전달하는 방법
+	//struct fortune my_fortune = {
+	//	"Wells-Fargo",
+	//	4032.27,
+	//	"JPMorgan Chase",
+	//	8543.94
+	//};
+
+	////printf("Total : $%.2f\n", sum(&my_fortune.bank_saving, &my_fortune.fund_invest));
+	//printf("Total : $%.2f\n", sum(&my_fortune));
+
+	//struct fortune my_fortune2;
+	//my_fortune2 = my_fortune; // 값 복사
+	//// 함수에 넣어 struct variable을 인자로 넘겨주면 member의 값이 모두 복사돼 함수를 실행한다.
+	//// my_fortune과 함수 안에서의 my_fortune의 주소는 다르다.
+	//// 값을 복사하기 때문에 일시적으로 메모리를 더 사용한다. 느려질 수도 있다. 해당 구조체 안의 member 값이 많으면 문제가 된다.
+	//// member value로 동적할당 메모리를 받아오면 주소만 복사된다.
+	//// 따라서 구조체를 함수 인자로 넣어줄 때는 """포인터"""로 넣어주는 것이 좋다.
+
+
+	// 14.8 구조체와 함수 연습문제
+	//struct name_count user_name;
+
+	////receive_input(&user_name);
+	////count_characters(&user_name);
+	////show_result(&user_name);
+
+	//user_name = receive_input_v2();
+	//user_name = count_characters_v2(user_name);
+	//show_result_v2(user_name);
+
+
+	// 14.9 구조체와 할당 메모리
+	// Dangerous usage
+	//struct namect p = { "Jeong-Mo", "Hong" }; 
+	//printf("%s %s\n", p.fname, p.lname); // p.fname은 "Jeong-Mo"의 첫 주소를 가리키고, "Jeong-Mo"는 TextSegment(ReadOnly)에 저장돼 있다.
+
+	//int f1 = scanf("%[^\n]%*c", p.lname); // 값을 바꾸지 못한다.
+	//printf("%s %s\n", p.fname, p.lname);
+
+	// Recommended usage
+	//struct namect p = { "Jeong-Mo", "Hong" };
+	//char buffer[SLEN] = { 0, };
+	//int f2 = scanf("%[^\n]%*c", buffer);
+	//p.fname = (char*)malloc(strlen(buffer) + 1);
+	//if (p.fname != NULL)
+	//	strcpy(p.fname, buffer);
+	//printf("%s %s\n", p.fname, p.lname);
+
+	// My Try
+	//struct namect person;
+	//getinfo(&person);
+	//makeinfo(&person);
+	//showinfo(&person);
+	//cleanup(&person);
+
+
+	// 14.10 복합 리터럴 Compound Literal
+	//struct book book_to_read = { "Crime and Punishment", "Fyodor Dostoyevsky", 11.25f }; // 값을 수정할 수 없다.
+
+	//// 값을 수정할 수 있는 방법 1
+	//strcpy(book_to_read.title, "Alice in Wonderland");
+	//strcpy(book_to_read.author, "Lewis Carroll");
+	//book_to_read.price = 20.3f;
+
+	//// 값을 수정할 수 있는 방법 2
+	//struct book book2 = { "Alice in Wonderland", "Lewis Carroll", 20.3f };
+	//book_to_read = book2;
+
+	//// 방법 2를 간략화한 방법 3
+	//book_to_read = (struct book){ "Alice in Wonderland", "Lewis Carroll", 20.3f }; // 복합 리터럴 Compound Literal, L-value이다. (R-value가 아니다.)
+
+	//printf("%s %s\n", book_to_read.title, book_to_read.author);
+
+	//struct rectangle rec1 = { 1.0, 2.0 };
+	//double area = rect_area(rec1);
+
+	//area = rect_area((struct rectangle) { 1.0, 2.0 }); // rec1을 선언하지 않고 바로 계산한다.
+
+	//area = rect_area_ptr(&(struct rectangle) { 1.0, 2.0 }); // L-value 이기 때문에 주소 연산자 &를 사용하여 주소를 가져올 수 있다.
+	//printf("%f\n", area);
+
+
+	// 14.11 신축성 있는 배열 멤버(Flexible Array Members)
+	// Flexible Array Members (struct hack in GCC) 편법 -> 표준
+	//struct flex
+	//{
+	//	size_t count;
+	//	double average;
+	//	double values[]; // flexible array member (last member)
+	//};
+
+	//// 구조체 크기 + 추가로 받고 싶은 배열 크기만큼 동적 할당을 받아야한다.
+	//const size_t n = 3;
+	//struct flex* pf = (struct flext*)malloc(sizeof(struct flex) + n * sizeof(double)); // 동적할당 배열처럼 사용할 수 있다.
+
+	//if (pf == NULL) exit(1);
+
+	//printf("\nFlexible array member\n");
+	////printf("Sizeof size_t %zd\n", sizeof(size_t)); // 4
+	//printf("Sizeof struct flex %zd\n", sizeof(struct flex)); // 4(+4) + 8  = 16, padding
+	//printf("Sizeof *pf %zd\n", sizeof(*pf)); // 16
+	//printf("Sizeof malloc %zd\n", sizeof(struct flex) + n * sizeof(double)); // 4(+4) + 8 + 3 * 8 = 40
+	//
+	//printf("%lld\n", (long long)pf); // 구조체 pf의 주소
+	//printf("%lld\n", (long long)&pf->count); // 구조체 pf의 첫 번째 member의 주소
+	//printf("%zd\n", sizeof(pf->count)); // 4
+	//printf("%lld\n", (long long)&pf->average); // &pf->count와 8 차이 난다.
+	//printf("Address of pf->values %lld\n", (long long)&pf->values); // &pf->average 와 8차이 난다. address of array-name
+	//printf("Value of pf->values %lld\n", (long long)pf->values); // array-name, 위와 같다.
+ //	printf("Sizeof pf->values %zd\n", sizeof(pf->values)); // 0, values의 크기를 알 수 없다.
+
+	//pf->count = n; // 동적 할당을 받았기 때문에 사이즈를 측정할 수 없다.
+	//pf->values[0] = 1.1;
+	//pf->values[1] = 2.1;
+	//pf->values[2] = 3.1;
+
+	//pf->average = 0.0;
+	//for (unsigned i = 0; i < pf->count; ++i)
+	//	pf->average += pf->values[i];
+	//pf->average /= (double)pf->count;
+
+	//printf("Average = %f\n", pf->average);
+
+	//// flexible 배열을 사용하지 않고, 마지막 원소를 double*로 받아, malloc을 이용해서 연결해준다면?
+	//struct nonflex
+	//{
+	//	size_t count;
+	//	double average;
+	//	double* values; // use malloc()
+	//}; // 20 ~ 24byte(padding..), double*는 포인터 자체의 메모리를 갖고 있다.
+
+	//struct nonflex nf;
+	//nf.values = (double*)malloc(sizeof(double) * n); // 동적할당 배열은 (힙)메모리 어디에 위치할지 알 수가 없다. (Flexible array는 구조체 뒤에 바로 온다.)
+
+	//struct flex* pf2 = (struct flex*)malloc(sizeof(struct flex) + n * sizeof(double));
+	//if (pf2 == NULL) exit(1);
+
+	////*pf2 = *pf; // Don't copy flexible members, use memcpy() instead 
+	//// 동적할당을 받은 건 40이었지만, 구조체의 크기는 16이었다. 컴파일러 입장에선, 대입을 시도했을 때 16바이트만 복사를 해준다.
+
+
+	// 14.12 익명 구조체
+	//struct names
+	//{
+	//	char first[20];
+	//	char last[20];
+	//};
+	//struct person
+	//{
+	//	int id;
+	//	struct names name; // nested structure member (Dot operator 두 번 사용..)
+	//};
+	//struct person2
+	//{
+	//	int id;
+	//	struct { char first[20]; char last[20]; }; // anonymous structure
+	//};
+
+	//struct person ted = { 123, {"Bill", "Gates"} };
+	//struct person ted3 = { 125, {"Robert", "Hand"} };
+
+	//puts(ted.name.first);
+	//puts(ted3.name.first);
+
+	//struct person2 ted2 = { 124, {"Steve", "wozniak"} };
+	//// struct person2 ted2 = { 124, "Steve", "wozniak" }; // also works
+	//puts(ted2.first); // Dot operator를 한 번만 하고 바로 first로 접근할 수 있다.
+
+
+	// 14.13 구조체의 배열을 사용하는 함수
+	struct book my_books[3]; // = {{"The Great Gatsby", "F. Scott Fitzgerald"}, ...};
+	my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	my_books[2] = (struct book){ "The Odyssey", "Homer" };
+	
+	print_books(my_books, 3);
+	
+	// 동적할당으로 바꿔보면?
+	int n = 3;
+	struct book* my_books_malloc = (struct book*)malloc(sizeof(struct book) * n);
+	if (my_books_malloc == NULL)
+	{
+		printf("malloc() Failed");
+		exit(1);
+	}
+	my_books_malloc[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	my_books_malloc[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	my_books_malloc[2] = (struct book){ "The Odyssey", "Homer" };
+	
+	printf_books_malloc(my_books_malloc, 3);
+
+
+	// 14.14 구조체의 배열을 사용하는 함수
 
 
 	return 0;
