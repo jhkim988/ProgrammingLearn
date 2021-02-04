@@ -761,30 +761,26 @@ int main()
 
 
 	// 14.13 구조체의 배열을 사용하는 함수
-	struct book my_books[3]; // = {{"The Great Gatsby", "F. Scott Fitzgerald"}, ...};
-	my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
-	my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
-	my_books[2] = (struct book){ "The Odyssey", "Homer" };
-	
-	print_books(my_books, 3);
-	
-	// 동적할당으로 바꿔보면?
-	int n = 3;
-	struct book* my_books_malloc = (struct book*)malloc(sizeof(struct book) * n);
-	if (my_books_malloc == NULL)
-	{
-		printf("malloc() Failed");
-		exit(1);
-	}
-	my_books_malloc[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
-	my_books_malloc[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
-	my_books_malloc[2] = (struct book){ "The Odyssey", "Homer" };
-	
-	printf_books_malloc(my_books_malloc, 3);
-
-
-	// 14.14 구조체의 배열을 사용하는 함수
-
+	//struct book my_books[3]; // = {{"The Great Gatsby", "F. Scott Fitzgerald"}, ...};
+	//my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	//my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	//my_books[2] = (struct book){ "The Odyssey", "Homer" };
+	//
+	//print_books(my_books, 3);
+	//
+	//// 동적할당으로 바꿔보면?
+	//int n = 3;
+	//struct book* my_books_malloc = (struct book*)malloc(sizeof(struct book) * n);
+	//if (my_books_malloc == NULL)
+	//{
+	//	printf("malloc() Failed");
+	//	exit(1);
+	//}
+	//my_books_malloc[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	//my_books_malloc[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	//my_books_malloc[2] = (struct book){ "The Odyssey", "Homer" };
+	//
+	//printf_books_malloc(my_books_malloc, 3);
 
 	return 0;
 }
