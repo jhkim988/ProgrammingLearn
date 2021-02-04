@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 
 #define MAX 41
 #define MAX_TITLE 40
@@ -11,8 +12,10 @@
 #define LEN 20
 #define FUNDLEN 50
 #define NLEN 30
-#define SLEN 30
+#define SLEN 101
+
 // 14.2
+/*
 struct person // Person is a tage of structure
 {
 	// members
@@ -22,8 +25,9 @@ struct person // Person is a tage of structure
 	int age;
 	float height;
 };
-
+*/
 // 14.4
+/*
 char* s_gets(char* st, int n)
 {
 	char* ret_val;
@@ -42,8 +46,9 @@ char* s_gets(char* st, int n)
 
 	return ret_val;
 }
-
+*/
 // 14.7
+/*
 struct fortune {
 	char bank_name[FUNDLEN];
 	double bank_saving;
@@ -54,8 +59,9 @@ double sum(const struct fortune* mf)
 {
 	return mf->bank_saving + mf->fund_invest;
 }
-
+*/
 // 14.8
+/*
 struct name_count
 {
 	char first[NLEN];
@@ -127,8 +133,9 @@ void show_result_v2(struct name_count nc)
 	printf("Hi, %s %s. Your name has %d characters.\n",
 		nc.first, nc.last, nc.num);
 }
-
+*/
 // 14.9
+/*
 struct namect {
 	char* fname; // use malloc
 	char* lname; // use malloc
@@ -193,8 +200,9 @@ void cleanup(struct namect* nct) // free()
 	free(nct->fname);
 	free(nct->lname);
 }
-
+*/
 // 14.10
+/*
 struct book
 {
 	char title[MAX_TITLE];
@@ -214,8 +222,9 @@ double rect_area_ptr(struct rectangle* r)
 {
 	return r->width * r->height;
 }
-
+*/
 // 14.13
+/*
 void print_books(const struct book books[], int n)
 {
 	for (int i = 0; i < n; ++i)
@@ -227,6 +236,73 @@ void printf_books_malloc(const struct book* books_malloc, int n)
 	for (int i = 0; i < n; ++i)
 		printf("Book %d : \"%s\" written by \"%s\"\n", i + 1, books_malloc[i].title, books_malloc[i].author);
 	printf("\n");
+}
+*/
+
+// 14.14
+struct book
+{
+	char name[SLEN];
+	char author[SLEN];
+};
+void print_books(const struct book* books, int n)
+{
+	for (int i = 0; i < n; ++i)
+		printf("Book %d : \"%s\" written by \"%s\"\n", i + 1, books[i].name, books[i].author);
+}
+void write_books(const char* filename, const struct book* books, int n)
+{
+	FILE* books_txt = fopen(filename, "w");
+
+	fprintf(books_txt, "%d", n);
+	fputc('\n', books_txt);
+
+	for (int i = 0; i < n; ++i)
+	{
+		fwrite(books[i].name, 1, strlen(books[i].name), books_txt);
+		fputc('\n', books_txt);
+		fwrite(books[i].author, 1, strlen(books[i].author), books_txt);
+		fputc('\n', books_txt);
+	}
+	fclose(books_txt);
+}
+struct book* read_books(const char* filename, int* n) // n: 몇 개를 읽었는지
+{
+	FILE* books_txt = fopen(filename, "r");
+	char buffer[SLEN] = { '\0' };
+
+	int num;
+	if (fscanf(books_txt, "%d", &num) != 1)
+	{
+		printf("fscanf() Failed");
+	}
+	*n = num;
+
+	while (fgetc(books_txt) != '\n');
+
+	struct book* books = (struct book*)malloc(sizeof(struct book) * num);
+	if (!books)
+	{
+		printf("malloc() failed.\n");
+		exit(1);
+	}
+	
+	strcpy(books[0].name, buffer);
+
+	for (int i = 0; i < num; ++i)
+	{
+		if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+		strcpy(books[i].name, buffer);
+		printf("\nSizeof %zd %zd\n", sizeof(books[i].name), sizeof(buffer));
+		if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+		strcpy(books[i].author, buffer);
+	}
+	fclose(books_txt);
+	return books;
+}
+void read_books2(const char* filename, struct book** books_dptr, int* n)
+{
+
 }
 
 int main()
@@ -781,6 +857,39 @@ int main()
 	//my_books_malloc[2] = (struct book){ "The Odyssey", "Homer" };
 	//
 	//printf_books_malloc(my_books_malloc, 3);
+
+	
+	// 14.14 구조체 파일 입출력 연습문제
+	int temp;
+	int n = 3;
+
+	struct book* my_books = (struct book*)malloc(sizeof(struct book) * n);
+	if (!my_books)
+	{
+		printf("malloc() failed.\n");
+		exit(1);
+	}
+
+	my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	my_books[2] = (struct book){ "The Odyssey", "Homer" };
+	
+	print_books(my_books, n);
+
+	printf("\nWriting to a file.\n");
+	write_books("books.txt", my_books, n);
+	free(my_books);
+	n = 0;
+	printf("Done.\n");
+
+	printf("\nPress any key to read data from a file.\n\n");
+	temp = _getch(); // 아무 키나 입력 받기 위해
+
+	my_books = read_books("books.txt", &n);
+	//read_books2("books.txt", &my_books, &n);
+	print_books(my_books, n);
+	free(my_books);
+	n = 0;
 
 	return 0;
 }
