@@ -252,57 +252,162 @@ void print_books(const struct book* books, int n)
 }
 void write_books(const char* filename, const struct book* books, int n)
 {
+	// 주의 Debug 폴더에 생성된다.
 	FILE* books_txt = fopen(filename, "w");
+
+	if (books_txt == NULL) { // 파일을 열지 못했을 때
+		fputs("Can't open file.", stderr);
+		exit(1);
+	}
 
 	fprintf(books_txt, "%d", n);
 	fputc('\n', books_txt);
 
+	// My Try
+	//for (int i = 0; i < n; ++i)
+	//{
+	//	fwrite(books[i].name, 1, strlen(books[i].name), books_txt);
+	//	fputc('\n', books_txt);
+	//	fwrite(books[i].author, 1, strlen(books[i].author), books_txt);
+	//	fputc('\n', books_txt);
+	//}
+
 	for (int i = 0; i < n; ++i)
-	{
-		fwrite(books[i].name, 1, strlen(books[i].name), books_txt);
-		fputc('\n', books_txt);
-		fwrite(books[i].author, 1, strlen(books[i].author), books_txt);
-		fputc('\n', books_txt);
-	}
+		fprintf(books_txt, "%s\n%s\n", books[i].name, books[i].author);
+
 	fclose(books_txt);
+}
+void write_books_binary(const char* filename, const struct book* books, int n)
+{
+	FILE* file = fopen(filename, "wb");
+
+	if (file == NULL)
+	{
+		fputs("Can' open file.", stderr);
+		exit(1);
+	}
+
+	fwrite(&n, sizeof(n), 1, file);
+	fwrite(books, sizeof(struct book), n, file); // 한 줄 씩 작성할 필요 없이 데이터 통째로 넣어버린다.
+
+	fclose(file);
 }
 struct book* read_books(const char* filename, int* n) // n: 몇 개를 읽었는지
 {
+	// 주의 Debug 폴더에서의 txt 파일을 읽는다.
 	FILE* books_txt = fopen(filename, "r");
-	char buffer[SLEN] = { '\0' };
 
-	int num;
-	if (fscanf(books_txt, "%d", &num) != 1)
+	if (books_txt == NULL) {
+		fputs("Can't open file.", stderr);
+		exit(1);
+	}
+
+	//char buffer[SLEN] = { '\0' }; // 버퍼 사용하지 않고 바로 넣는다.
+
+	if (fscanf(books_txt, "%d%*c", n) != 1) // %*c, \n 제거
 	{
 		printf("fscanf() Failed");
+		exit(1);
 	}
-	*n = num;
 
-	while (fgetc(books_txt) != '\n');
+	// \n을 제거하면 아래 while이 필요 없다.
+	//while (fgetc(books_txt) != '\n');
 
-	struct book* books = (struct book*)malloc(sizeof(struct book) * num);
+	struct book* books = (struct book*)malloc(sizeof(struct book) * (*n)); // calloc 사용해도 된다.
 	if (!books)
 	{
 		printf("malloc() failed.\n");
 		exit(1);
 	}
-	
-	strcpy(books[0].name, buffer);
 
-	for (int i = 0; i < num; ++i)
+	// My Try
+	//for (int i = 0; i < *n; ++i)
+	//{
+	//	if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+	//	strcpy(books[i].name, buffer);
+	//	if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+	//	strcpy(books[i].author, buffer);
+	//}
+
+	for (int i = 0; i < *n; ++i)
 	{
-		if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
-		strcpy(books[i].name, buffer);
-		printf("\nSizeof %zd %zd\n", sizeof(books[i].name), sizeof(buffer));
-		if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
-		strcpy(books[i].author, buffer);
+		if (fscanf(books_txt, "%[^\n]%*c%[^\n]%*c", books[i].name, books[i].author) != 2)
+		{
+			printf("File read failed");
+			exit(1);
+		}
 	}
+
 	fclose(books_txt);
 	return books;
 }
 void read_books2(const char* filename, struct book** books_dptr, int* n)
 {
+	FILE* books_txt = fopen(filename, "r");
 
+	if (books_txt == NULL) {
+		fputs("Can't open file.", stderr);
+		exit(1);
+	}
+
+	//char buffer[SLEN] = { '\0' };
+
+	int num;
+	if (fscanf(books_txt, "%d%*c", &num) != 1)
+	{
+		printf("fscanf() Failed");
+	}
+	*n = num;
+
+	//while (fgetc(books_txt) != '\n');
+
+	*books_dptr = (struct book*)malloc(sizeof(struct book) * num);
+
+	if (!*books_dptr)
+	{
+		printf("malloc() failed.\n");
+		exit(1);
+	}
+
+	//for (int i = 0; i < num; ++i)
+	//{
+	//	if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+	//	strcpy((*books_dptr)[i].name, buffer);
+	//	if (fscanf(books_txt, "%[^\n]%*c", buffer) != 1) printf("fscanf() Failed");
+	//	strcpy((*books_dptr)[i].author, buffer);
+	//}
+
+	for (int i = 0; i < *n; ++i)
+	{
+		if (fscanf(books_txt, "%[^\n]%*c%[^\n]%*c", (*books_dptr)[i].name, (*books_dptr)[i].author) != 2)
+		{
+			printf("File read failed");
+			exit(1);
+		}
+	}
+
+	fclose(books_txt);
+}
+void read_books2_binary(const char* filename, struct book** books_dptr, int* n)
+{
+	// 입출력 속도/많은 데이터 등을 고려해야할 떄는 binary 포맷이 좋다.
+	FILE* file = fopen(filename, "wb");
+	if (file == NULL)
+	{
+		fputs("Can't open file.", stderr);
+		exit(1);
+	}
+
+	fread(n, sizeof(*n), 1, file);
+	struct book* books = (struct book*)calloc(sizeof(struct book), *n);
+	if (!books)
+	{
+		printf("malloc() failed.");
+		exit(1);
+	}
+
+	fread(books, sizeof(struct book), *n, file);
+	fclose(file);
 }
 
 int main()
