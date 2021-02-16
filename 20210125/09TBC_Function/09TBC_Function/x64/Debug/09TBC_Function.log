@@ -1,7 +1,0 @@
-﻿  09TBC_Function.c
-C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\09TBC_Function\09TBC_Function.c(329,53): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\09TBC_Function\09TBC_Function.c(350,60): warning C4311: 'type cast': pointer truncation from 'int *' to 'int'
-C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\09TBC_Function\09TBC_Function.c(354,60): warning C4311: 'type cast': pointer truncation from 'int *' to 'int'
-  my_print_functions.c
-  Generating Code...
-  09TBC_Function.vcxproj -> C:\Users\pc4\Desktop\김진한\Programming\TBC\09TBC_Function\x64\Debug\09TBC_Function.exe

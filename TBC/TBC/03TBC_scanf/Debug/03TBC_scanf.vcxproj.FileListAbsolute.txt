@@ -1,2 +1,0 @@
-C:\Users\Kim_Jin_Han\Desktop\Programming\CLanguage\TBC\TBC\03TBC_scanf\Debug\03TBC_scanf.exe
-C:\Users\Kim_Jin_Han\Desktop\Programming\CLanguage\TBC\TBC\03TBC_scanf\Debug\03TBC_scanf.pdb
