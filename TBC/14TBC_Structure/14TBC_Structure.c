@@ -1716,16 +1716,8 @@ int main()
 			break;
 		}
 		else
-			printf("Wrong input, try again\n");
-
-		
+			printf("Wrong input, try again\n");		
 	}
-
-
-
-
-
-	
 
 	return 0;
 }
