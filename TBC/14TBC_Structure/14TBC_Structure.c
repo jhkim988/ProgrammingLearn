@@ -554,12 +554,92 @@ c3* complicated_function2()
 */
 
 // 14.24
+/*
 int temp(int a)
 {
 	return 0;
 }
 int (*g(int a))(int) {
 	return temp;
+}
+*/
+
+// 14.25
+/*
+int compare(const void* first, const void* second)
+{
+	if (*(int*)first > *(int*)second)
+		return 1;
+	else if (*(int*)first < *(int*)second)
+		return -1;
+	else
+		return 0;
+}
+
+struct kid
+{
+	char name[100];
+	int height;
+};
+
+int compareKid(const void* first, const void* second)
+{
+	// MyTry
+	//if (((*(struct kid*)first).height) > ((*(struct kid*)second).height))
+	//	return 1;
+	//else if (((*(struct kid*)first).height) < ((*(struct kid*)second).height))
+	//	return -1;
+	//else
+	//	return 0;
+
+	if (((struct kid*)first)->height > ((struct kid*)second)->height)
+		return 1;
+	else if (((struct kid*)first)->height < ((struct kid*)second)->height)
+		return -1;
+	else
+		return 0;
+}	
+*/
+
+// 14.26
+void update_string(char* str, int(*pf)(int))
+{
+	while (*str)
+	{
+		*str = (*pf)(*str);
+		str++;
+	}
+	return;
+}
+void ToUpper(char* str)
+{
+	while (*str)
+	{
+		*str = toupper(*str);
+		str++;
+	}
+	return;
+}
+void ToLower(char* str)
+{
+	while (*str)
+	{
+		*str = tolower(*str);
+		str++;
+	}
+	return;
+}
+void Transpose(char* str)
+{
+	while (*str)
+	{
+		if (isupper(*str))
+			*str = tolower(*str);
+		else
+			*str = toupper(*str);
+		str++;
+	}
+	return;
 }
 
 int main()
@@ -1485,75 +1565,167 @@ int main()
 	// printf("%c %c %c\n", (*my_c3)[0], (*my_c3)[1], (*my_c3)[2]);
 
 	// 14.24 복잡한 선언을 해석하는 요령
-	// 복잡해지는 이유 - *, (), [] (함수의 매개변수가 들어가는 공간, 배열의 index가 들어가는 공간)
-	// 1. 안쪽에서부터 바깥쪽으로 읽어라.
-	// 2. *보다 (), []가 우선순위가 높다.
+	//// 복잡해지는 이유 - *, (), [] (함수의 매개변수가 들어가는 공간, 배열의 index가 들어가는 공간)
+	//// 1. 안쪽에서부터 바깥쪽으로 읽어라.
+	//// 2. *보다 (), []가 우선순위가 높다.
 
-	// 식별자(이름)을 먼저 찾는다. (ap)
-	// 우선순위가 높은 []를 확인한다. 즉 ap는 배열이다.
-	// int*을 마지막으로 해석한다. 즉 ap는 int* 10개 배열이다.
-	int* ap[10]; 
+	//// 식별자(이름)을 먼저 찾는다. (ap)
+	//// 우선순위가 높은 []를 확인한다. 즉 ap는 배열이다.
+	//// int*을 마지막으로 해석한다. 즉 ap는 int* 10개 배열이다.
+	//int* ap[10]; 
 
-	// typedef를 이용해서 생각하면 쉬워진다.
-	typedef int* pint;
-	pint ap[10]; // pint의 10개짜리 배열
+	//// typedef를 이용해서 생각하면 쉬워진다.
+	//typedef int* pint;
+	//pint ap1[10]; // pint의 10개짜리 배열
 
-	// 1. 이름 찾기 - fp
-	// 2. 우선순위가 높은 ()를 인식 - fp는 함수다. 매개변수로 float가 들어간다.
-	// 3. float*을 리턴하는 함수라는 것을 알 수 있다.
-	float* fp(float);
+	//// 1. 이름 찾기 - fp
+	//// 2. 우선순위가 높은 ()를 인식 - fp는 함수다. 매개변수로 float가 들어간다.
+	//// 3. float*을 리턴하는 함수라는 것을 알 수 있다.
+	//float* fp(float);
 
-	// typedef를 이용해서 생각하면
-	typedef float* pfloat;
-	pfloat fp(float); // pfloat 타입을 반환하는 함수
+	//// typedef를 이용해서 생각하면
+	//typedef float* pfloat;
+	//pfloat fp(float); // pfloat 타입을 반환하는 함수
 
-	// 1. 일단 포인터다. *pf
-	// 2. (int)를 보면 함수다. 즉 함수 포인터다.
-	// 3. void를 보면, 아무것도 리턴하지 않는 함수 포인터다.
-	void (*pf)(int);
+	//// 1. 일단 포인터다. *pf
+	//// 2. (int)를 보면 함수다. 즉 함수 포인터다.
+	//// 3. void를 보면, 아무것도 리턴하지 않는 함수 포인터다.
+	//void (*pf)(int);
 
-	// 1. x는 배열이다. []가 *보다 우선순위가 높다.
-	// 2. x는 포인터에 대한 배열이다. *
-	// 3. 이 포인터는 함수에 대한 포인터다. (void)
-	// 4. 이 함수는 int*(정수 포인터)를 리턴하는 함수이다.
-	int* (*x[10])(void);
+	//// 1. x는 배열이다. []가 *보다 우선순위가 높다.
+	//// 2. x는 포인터에 대한 배열이다. *
+	//// 3. 이 포인터는 함수에 대한 포인터다. (void)
+	//// 4. 이 함수는 int*(정수 포인터)를 리턴하는 함수이다.
+	//int* (*x[10])(void);
 
-	// 안되는 것들이 있다.
-	// 1. 함수는 배열을 반환할 수 없다.
-	// int f(int)[];
-	int(*f(int))[]; // 배열에 대한 포인터를 반환할 수는 있다.
+	//// 안되는 것들이 있다.
+	//// 1. 함수는 배열을 반환할 수 없다.
+	//// int f(int)[];
+	//int(*f(int))[]; // 배열에 대한 포인터를 반환할 수는 있다.
 
-	// 2. 함수를 반환할 수는 없다.
-	// int g(int)(int);
-	int(*g(int))(int); // 함수에 대한 포인터를 반환할 수는 있다.
+	//// 2. 함수를 반환할 수는 없다.
+	//// int g(int)(int);
+	//int(*g(int))(int); // 함수에 대한 포인터를 반환할 수는 있다.
 
-	// 3. 함수의 배열은 불가능하다.
-	// int(x2[10])(int); 
-	int(*x2[10])(int); // 함수 포인터의 배열은 가능하다.
+	//// 3. 함수의 배열은 불가능하다.
+	//// int(x2[10])(int); 
+	//int(*x2[10])(int); // 함수 포인터의 배열은 가능하다.
 
-	typedef int FCN(int); // 함수타입
-	typedef FCN* FCN_PTR; // 함수의 포인터
-	typedef FCN_PTR FCN_PTR_ARRAY[10]; // 함수 포인터의 배열
-	FCN_PTR_ARRAY x3;
+	//typedef int FCN(int); // 함수타입
+	//typedef FCN* FCN_PTR; // 함수의 포인터
+	//typedef FCN_PTR FCN_PTR_ARRAY[10]; // 함수 포인터의 배열
+	//FCN_PTR_ARRAY x3;
 
-	// More Example
-	int board[6][4]; // board[6]의 배열
-	int** ptr; // *ptr의 포인터
+	//// More Example
+	//int board[6][4]; // board[6]의 배열
+	//int** ptr; // *ptr의 포인터
 
-	int* risks[10]; // 정수 포인터 10개의 배열
-	int(*rusk)[10]; // 정수 배열의 포인터
+	//int* risks[10]; // 정수 포인터 10개의 배열
+	//int(*rusk)[10]; // 정수 배열의 포인터
 
-	int* off[3][4]; // 정수 포인터의 이중배열
-	int(*uff)[3][4]; // 정수의 이중배열의 포인터
-	int(*uof[3])[4]; // (int[4] 배열의 포인터)의 배열
+	//int* off[3][4]; // 정수 포인터의 이중배열
+	//int(*uff)[3][4]; // 정수의 이중배열의 포인터
+	//int(*uof[3])[4]; // (int[4] 배열의 포인터)의 배열
 
-	char* fump(int); // char*를 리턴하는 함수
-	char (*frump)(int); // char를 리턴하는 함수의 포인터
-	char (*flump[3])(int); // 함수 포인터의 배열
+	//char* fump(int); // char*를 리턴하는 함수
+	//char (*frump)(int); // char를 리턴하는 함수의 포인터
+	//char (*flump[3])(int); // 함수 포인터의 배열
 
-	typedef int arr5[5]; // int[5]를 arr5로
-	typedef arr5* p_arr5; // arr5의 포인터를 p_arr5로
-	typedef p_arr5 arrp10[10]; // p_arr5의 10개 배열을 arrp10으로
+	//typedef int arr5[5]; // int[5]를 arr5로
+	//typedef arr5* p_arr5; // arr5의 포인터를 p_arr5로
+	//typedef p_arr5 arrp10[10]; // p_arr5의 10개 배열을 arrp10으로
 	
+	// 14.25 qsort
+	//int arr[] = { 8, 2, 5, 3, 6, 11 };
+	//int n = sizeof(arr) / sizeof(arr[0]);
+
+	//qsort(arr, n, sizeof(int), compare); // <stdlib.h>, compare 함수를 구현해줘야한다.
+
+	//for (int i = 0; i < n; ++i)
+	//	printf("%d ", arr[i]);
+
+	//float arrf[] = { 8.1f, 2.4f, 5.6f, 3.2f, 6.1f, 11.0f };
+	//int n = sizeof(arrf) / sizeof(arrf[0]);
+
+	//qsort(arrf, n, sizeof(float), compare); 
+
+	//for (int i = 0; i < n; ++i)
+	//	printf("%.2f ", arrf[i]);
+
+	//struct kid my_friends[] = { "Jack Jack", 40, "Geenie", 300, "Aladdin", 170, "Piona", 150 };
+	//const int n = sizeof(my_friends) / sizeof(struct kid);
+
+	//qsort(my_friends, n, sizeof(struct kid), compareKid);
+
+	//for (int i = 0; i < n; ++i)
+	//	printf("%s            \t%d\n", my_friends[i].name, my_friends[i].height);
+
+	// 14.26 함수 포인터의 배열
+	char options[] = { 'u', 'l', 't' };
+	int n = sizeof(options) / sizeof(char);
+
+	typedef void (*FUNC_TYPE)(char*); // char*를 인자로 받고 리턴하지 않는 함수의 포인터
+	FUNC_TYPE operations[] = { ToUpper, ToLower, Transpose }; // TODO: add a new menu
+	printf("Enter a string\n>> ");
+
+	char input[100];
+	while (scanf("%[^\n]%*c", input) != 1)
+		printf("Please try again.\n>> ");
+
+	while (true)
+	{
+		printf("Choose an option:\n");
+		printf("u) To Upper\n");
+		printf("l) To Lower\n");
+		printf("t) Transpose\n");
+
+		char option;
+		while (scanf("%c%*[^\n]%*c", &option) != 1)
+			printf("Please try again");
+
+		bool found = false;
+
+		// MyTry
+		//switch (option)
+		//{
+		//case 'u':
+		//	operations[0](input);
+		//	found = true;
+		//	break;
+		//case 'l':
+		//	operations[1](input);
+		//	found = true;
+		//	break;
+		//case't':
+		//	operations[2](input);
+		//	found = true;
+		//	break;
+		//}
+
+		for (int i = 0; i < n; ++i)
+			if (options[i] == option)
+			{
+				(*(operations[i]))(input);
+				found = true;
+				break;
+			}
+
+		if (found)
+		{
+			printf("%s", input);
+			break;
+		}
+		else
+			printf("Wrong input, try again\n");
+
+		
+	}
+
+
+
+
+
+	
+
 	return 0;
 }
