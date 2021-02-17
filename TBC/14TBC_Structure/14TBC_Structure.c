@@ -240,6 +240,7 @@ void printf_books_malloc(const struct book* books_malloc, int n)
 */
 
 // 14.14
+/*
 struct book
 {
 	char name[SLEN];
@@ -409,6 +410,7 @@ void read_books2_binary(const char* filename, struct book** books_dptr, int* n)
 	fread(books, sizeof(struct book), *n, file);
 	fclose(file);
 }
+*/
 
 int main()
 {
@@ -425,7 +427,6 @@ int main()
 
 	// Dot(.) is structure member operator
 	// template - 틀
-
 
 	// 14.2 구조체의 기본적인 사용법
 	//int flag;
@@ -505,7 +506,6 @@ int main()
 
 	//friend f4;
 
-
 	// 14.3 구조체의 메모리 할당
 	// Well Aligned structure
 	//struct Aligned
@@ -570,7 +570,7 @@ int main()
 	//};
 	//// 24 바이트.. 비효율적이다.
 	//// 컴파일러가 double을 한 word에 보내기 위해서 float과 char에 padding을 넣기 때문이다.
-	//struct Padded2 p2; 
+	//struct Padded2 p2;
 	//printf("Struct Padded2 p2\n");
 	//printf("Sizeof %zd\n", sizeof(struct Padded2));
 	//printf("%lld\n", (long long)&p2);
@@ -582,7 +582,6 @@ int main()
 	//// 구조체의 배열..
 
 	//// Properties -> C/C++ -> struct member alignment 설정을 할 수 있다.
-
 
 	// 14.4 구조체의 배열 연습문제
 	//struct book
@@ -664,7 +663,6 @@ int main()
 	//		printf("\"%s\" written by %s: $%.1f\n", library[i].title, library[i].author, library[i].price);
 	//}
 
-
 	// 14.5 구조체를 다른 구조체의 멤버로 사용하기 - 중첩 구조체 Nested Structure
 	//struct names {
 	//	char given[LEN]; // first name
@@ -699,7 +697,6 @@ int main()
 
 	//printf("Dear %s %s,\nI would like to serve you %s.\nPlease visit %s on %d/%d/%d at %d:%d.\nSincerely,\n%s %s\n",
 	//	res.guest.given, res.guest.family, res.food, res.place, res.day, res.month, res.year, res.hours, res.minutes, res.host.given, res.host.family);
-
 
 	// 14.6 구조체와 포인터
 	//struct names {
@@ -770,7 +767,6 @@ int main()
 	//printf("%f %f\n", d2.arr[0], d2.arr[1]);
 	//printf("%lld %lld\n\n", (long long)&d2.arr[0], (long long)&d2.arr[1]);
 
-
 	// 14.7 구조체를 함수로 전달하는 방법
 	//struct fortune my_fortune = {
 	//	"Wells-Fargo",
@@ -790,7 +786,6 @@ int main()
 	//// member value로 동적할당 메모리를 받아오면 주소만 복사된다.
 	//// 따라서 구조체를 함수 인자로 넣어줄 때는 """포인터"""로 넣어주는 것이 좋다.
 
-
 	// 14.8 구조체와 함수 연습문제
 	//struct name_count user_name;
 
@@ -802,10 +797,9 @@ int main()
 	//user_name = count_characters_v2(user_name);
 	//show_result_v2(user_name);
 
-
 	// 14.9 구조체와 할당 메모리
 	// Dangerous usage
-	//struct namect p = { "Jeong-Mo", "Hong" }; 
+	//struct namect p = { "Jeong-Mo", "Hong" };
 	//printf("%s %s\n", p.fname, p.lname); // p.fname은 "Jeong-Mo"의 첫 주소를 가리키고, "Jeong-Mo"는 TextSegment(ReadOnly)에 저장돼 있다.
 
 	//int f1 = scanf("%[^\n]%*c", p.lname); // 값을 바꾸지 못한다.
@@ -826,7 +820,6 @@ int main()
 	//makeinfo(&person);
 	//showinfo(&person);
 	//cleanup(&person);
-
 
 	// 14.10 복합 리터럴 Compound Literal
 	//struct book book_to_read = { "Crime and Punishment", "Fyodor Dostoyevsky", 11.25f }; // 값을 수정할 수 없다.
@@ -852,7 +845,6 @@ int main()
 
 	//area = rect_area_ptr(&(struct rectangle) { 1.0, 2.0 }); // L-value 이기 때문에 주소 연산자 &를 사용하여 주소를 가져올 수 있다.
 	//printf("%f\n", area);
-
 
 	// 14.11 신축성 있는 배열 멤버(Flexible Array Members)
 	// Flexible Array Members (struct hack in GCC) 편법 -> 표준
@@ -881,7 +873,7 @@ int main()
 	//printf("%lld\n", (long long)&pf->average); // &pf->count와 8 차이 난다.
 	//printf("Address of pf->values %lld\n", (long long)&pf->values); // &pf->average 와 8차이 난다. address of array-name
 	//printf("Value of pf->values %lld\n", (long long)pf->values); // array-name, 위와 같다.
- //	printf("Sizeof pf->values %zd\n", sizeof(pf->values)); // 0, values의 크기를 알 수 없다.
+	//	printf("Sizeof pf->values %zd\n", sizeof(pf->values)); // 0, values의 크기를 알 수 없다.
 
 	//pf->count = n; // 동적 할당을 받았기 때문에 사이즈를 측정할 수 없다.
 	//pf->values[0] = 1.1;
@@ -909,9 +901,8 @@ int main()
 	//struct flex* pf2 = (struct flex*)malloc(sizeof(struct flex) + n * sizeof(double));
 	//if (pf2 == NULL) exit(1);
 
-	////*pf2 = *pf; // Don't copy flexible members, use memcpy() instead 
+	////*pf2 = *pf; // Don't copy flexible members, use memcpy() instead
 	//// 동적할당을 받은 건 40이었지만, 구조체의 크기는 16이었다. 컴파일러 입장에선, 대입을 시도했을 때 16바이트만 복사를 해준다.
-
 
 	// 14.12 익명 구조체
 	//struct names
@@ -940,7 +931,6 @@ int main()
 	//// struct person2 ted2 = { 124, "Steve", "wozniak" }; // also works
 	//puts(ted2.first); // Dot operator를 한 번만 하고 바로 first로 접근할 수 있다.
 
-
 	// 14.13 구조체의 배열을 사용하는 함수
 	//struct book my_books[3]; // = {{"The Great Gatsby", "F. Scott Fitzgerald"}, ...};
 	//my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
@@ -963,38 +953,97 @@ int main()
 	//
 	//printf_books_malloc(my_books_malloc, 3);
 
-	
-	// 14.14 구조체 파일 입출력 연습문제
-	int temp;
-	int n = 3;
+	// // 14.14 구조체 파일 입출력 연습문제
+	// int temp;
+	// int n = 3;
 
-	struct book* my_books = (struct book*)malloc(sizeof(struct book) * n);
-	if (!my_books)
+	// struct book* my_books = (struct book*)malloc(sizeof(struct book) * n);
+	// if (!my_books)
+	// {
+	// 	printf("malloc() failed.\n");
+	// 	exit(1);
+	// }
+
+	// my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
+	// my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
+	// my_books[2] = (struct book){ "The Odyssey", "Homer" };
+
+	// print_books(my_books, n);
+
+	// printf("\nWriting to a file.\n");
+	// write_books("books.txt", my_books, n);
+	// free(my_books);
+	// n = 0;
+	// printf("Done.\n");
+
+	// printf("\nPress any key to read data from a file.\n\n");
+	// temp = _getch(); // 아무 키나 입력 받기 위해
+
+	// my_books = read_books("books.txt", &n);
+	// //read_books2("books.txt", &my_books, &n);
+	// print_books(my_books, n);
+	// free(my_books);
+	// n = 0;
+
+	// 14.15 공용체(Union)의 원리
+	// Union vs Structure
+
+	// 구조체와 비슷하다.
+	// 구조체는 int, double, char 각각이 메모리를 차지하고, 중간에 패딩이 들어갈 수 있다.
+	// 그러나 공용체는 int, double, char이 메모리를 같이 사용한다.
+	// 즉 타입이 다른 데이터들이 같은 메모리 공간을 사용한다.
+	union my_union
 	{
-		printf("malloc() failed.\n");
-		exit(1);
-	}
+		int i;
+		double d;
+		char c;
+	};
 
-	my_books[0] = (struct book){ "The Greate Gatsby", "F. Scott Fitzerald" };
-	my_books[1] = (struct book){ "Hamlet", "Willian Shakespeare" };
-	my_books[2] = (struct book){ "The Odyssey", "Homer" };
-	
-	print_books(my_books, n);
+	union my_union uni;						 // 유니온 변수 선언
+	printf("%zd\n", sizeof(union my_union)); // 8, 구조체였다면 int(4) + double(8) + char(1) = 13
+	printf("%lld\n", (long)&uni);
+	printf("%ld %ld %ld\n", (long)&uni.i, (long)&uni.d, (long)&uni.c);
+	// vs 컴파일러에서는 주소가 모두 동일하다. 메모리를 공유하기 때문에..
 
-	printf("\nWriting to a file.\n");
-	write_books("books.txt", my_books, n);
-	free(my_books);
-	n = 0;
-	printf("Done.\n");
+	union my_union save[10];
+	printf("%zd\n", sizeof(save)); // 80
 
-	printf("\nPress any key to read data from a file.\n\n");
-	temp = _getch(); // 아무 키나 입력 받기 위해
+	// debug
+	union my_union uni1; // 8바이트, 쓰레기 값으로 CC CC CC CC
+	uni1.c = 'A';		 // 1바이트만 사용 41 CC CC CC
+	printf("%c %x %d\n", uni1.c, (int)uni1.c, uni1.i);
+	// uni1.c = 'A'에서 41(10진법으로 65)로 바뀐다.
+	// 즉, 0xCCCCCC41 = -858993599가 된다. (vscompiler)
 
-	my_books = read_books("books.txt", &n);
-	//read_books2("books.txt", &my_books, &n);
-	print_books(my_books, n);
-	free(my_books);
-	n = 0;
+	uni1.i = 0;	  // 00 00 00 00 위에서 1바이트를 사용하는 것을 지우고 4바이트 사용
+	uni1.c = 'A'; // 41 00 00 00
+	// 0x00000041
+	printf("%c %x %d\n", uni1.c, (int)uni1.c, uni1.i); // uni1.i를 정수로 출력해도 65로 제대로 나온다.(00 00 00 00으로 한 번 초기화 했기 때문)
+
+	uni1.d = 1.2; // 33 33 33 33 33 33 f3 3f
+	// 0xf33f333333333333
+	printf("%d %f %d %c\n", uni1.i, uni1.d, (int)uni1.c, uni1.c);
+	// uni1.i: 4바이트, 0x 33 33 33 33 = 858993459
+	// uni1.d: 8바이트, 1.200...
+	// uni1.c: 1바이트, 33(10진수로 51), '3'
+
+	union my_union uni2 = uni1; // copy another union
+	union my_union uni3 = {10}; // 문법상(메모리 상) 한 가지 원소로만 초기화한다.
+	union my_union uni4 = {.c = 'A'}; // designated initializer
+	union my_union unio5 = {.d = 1.23, .i = 100}; // DO NOT RECOMMEND
+
+	uni.i = 123;
+	uni.d = 1.2;
+	uni.c = 'K';
+
+	printf("%d %f %c\n", uni.i, uni.d, uni.c);
+
+	union my_union* pu = &uni; // pointer to union
+	int x = pu->i;
+
+	// char를 넣어놓고 사용할 떄는 double로 사용하면...
+	uni.c = 'A';
+	double real = 3.14 * uni.d; // Do Not Recommend
 
 	return 0;
 }
