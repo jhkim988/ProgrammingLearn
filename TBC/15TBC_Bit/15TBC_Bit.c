@@ -3,6 +3,17 @@
 #include <math.h> // pow()
 #include <string.h> // strlen()
 #include <stdlib.h> // exit()
+#include <stdbool.h>	//struct
+//{
+//	bool has_sword : 1;
+//	bool has_shield : 1;
+//	bool has_magic_potion : 1;
+//	bool has_choes : 1;
+//	bool has_gun : 1;
+//	bool has_pet : 1;
+//	bool has_guntlet : 1;
+//	bool has_arrow : 1;
+//} items_flag;
 
 // shift를 이용해도 되고, Hex, Octet을 이용해서 선언할 수도 있다.
 #define MASK_SWORD 		(1 << 0)
@@ -94,6 +105,7 @@ void int_binary(const int num)
 */
 
 // 15.7
+/*
 void char_binary(const char num)
 {
 	printf("Decimal %3d\t==Binary ", num);
@@ -115,12 +127,28 @@ void int_binary(const int num)
 	const size_t bits = sizeof(num) * 8;
 	for (size_t i = 0; i < bits; ++i)
 	{
-		const char mask = 1 << (bits - 1 - i);
+		const int mask = 1 << (bits - 1 - i);
 		if ((num & mask) == mask)
 			printf("%d", 1);
 		else
 			printf("%d", 0);
 	}
+	printf("\n");
+}
+*/
+
+// 15.10
+void char_to_binary(unsigned char uc)
+{
+	const int bits = CHAR_BIT * sizeof(unsigned char);
+	for (int i = bits - 1; i >= 0; --i)
+		printf("%d", (uc >> i) & 1);
+}
+
+void print_binary(char* data, int bytes) // extended for any sizes
+{
+	for (int i = 0; i < bytes; ++i)
+		char_to_binary(data[bytes - 1 - i]);
 	printf("\n");
 }
 
@@ -245,59 +273,181 @@ int main()
 	// int_binary((unsigned)0x00ffffff >> 3);
 
 	// 15.7 비트단위 연산자의 다양한 사용법
-	// 비트마스킹 = 마스크를 쓰면 쓰지 않은 부분만 보이는 것처럼, 비트에서 1인 부분만 뽑아낼 수 있다.
-	char flags = 0; // mask flags
-	char_binary(flags);
+	//// 비트마스킹 = 마스크를 쓰면 쓰지 않은 부분만 보이는 것처럼, 비트에서 1인 부분만 뽑아낼 수 있다.
+	//char flags = 0; // mask flags
+	//char_binary(flags);
 
-	flags |= MASK_SWORD; // bitwise OR 연산자로 특정 비트를 1로 바꿔줄 수 있다.
-	char_binary(flags);
+	//flags |= MASK_SWORD; // bitwise OR 연산자로 특정 비트를 1로 바꿔줄 수 있다.
+	//char_binary(flags);
 
-	flags |= MASK_AMULET;
-	char_binary(flags);
+	//flags |= MASK_AMULET;
+	//char_binary(flags);
 
-	printf("\nTurning Bits off (Clearning Bits)\n");
-	flags |= MASK_POTION;
-	char_binary(flags);
+	//printf("\nTurning Bits off (Clearning Bits)\n");
+	//flags |= MASK_POTION;
+	//char_binary(flags);
 
-	flags &= ~MASK_POTION; // bitwise AND과 NOT으로 특정 비트를 0으로 바꿔줄 수 있다.
+	//flags &= ~MASK_POTION; // bitwise AND과 NOT으로 특정 비트를 0으로 바꿔줄 수 있다.
 
-	printf("\nToggling Bits\n");
-	// 0을 1로 1을 0으로 바꿔주기 때문에 Toggling으로 사용할 수 있다.
-	flags = flags ^ MASK_HAMMER;
-	char_binary(flags);
+	//printf("\nToggling Bits\n");
+	//// 0을 1로 1을 0으로 바꿔주기 때문에 Toggling으로 사용할 수 있다.
+	//flags = flags ^ MASK_HAMMER;
+	//char_binary(flags);
 
-	flags = flags ^ MASK_HAMMER;
-	char_binary(flags);
+	//flags = flags ^ MASK_HAMMER;
+	//char_binary(flags);
 
-	flags = flags ^ MASK_HAMMER;
-	char_binary(flags);
-	
-	printf("\nChecking the Value of a Bit\n");
-	if ((flags & MASK_KEY) == MASK_KEY)
-	{
-		printf(">> You can enter.\n");
-	}
-	else
-	{
-		printf(">> You can't enter.\n");
-	}
+	//flags = flags ^ MASK_HAMMER;
+	//char_binary(flags);
+	//
+	//printf("\nChecking the Value of a Bit\n");
+	//if ((flags & MASK_KEY) == MASK_KEY)
+	//{
+	//	printf(">> You can enter.\n");
+	//}
+	//else
+	//{
+	//	printf(">> You can't enter.\n");
+	//}
 
-	flags |= MASK_KEY;
+	//flags |= MASK_KEY;
 
-	if ((flags & MASK_KEY) == MASK_KEY)
-	{
-		printf(">> You can enter.\n");
-	}
-	else
-	{
-		printf(">> You can't enter.\n");
-	}
+	//if ((flags & MASK_KEY) == MASK_KEY)
+	//{
+	//	printf(">> You can enter.\n");
+	//}
+	//else
+	//{
+	//	printf(">> You can't enter.\n");
+	//}
 
-	printf("\nTrimming\n");
-	int int_flag = 0xffffffff; // 전체가 4바이트인 플래그
-	int_binary(int_flag);
-	int_flag  &= 0xff; // 1바이트부분만 보고 싶을 때
-	int_binary(int_flag);
+	//printf("\nTrimming\n");
+	//int int_flag = 0xffffffff; // 전체가 4바이트인 플래그
+	//int_binary(int_flag);
+	//int_binary((int)0xff);
+	//int_flag  &= 0xff; // 1바이트부분만 보고 싶을 때
+	//int_binary(int_flag);
+
+	// 15.8 RGBA 색상 비트 마스크 연습문제
+	//unsigned int rgba_color = 0x66cdaaff; // medium aqua marine (102, 205, 170, 225)
+	//unsigned char red, green, blue, alpha; // 따로따로 가지고 다닐 필요가 없다.
+
+	//alpha = (rgba_color & 0xff);
+	//blue = (rgba_color >> 8) & 0xff;
+	//green = (rgba_color >> 16) & 0xff;
+	//red = (rgba_color >> 24) & 0xff;
+
+	//printf("(R, G, B, A) = (%hhu, %hhu, %hhu, %hhu)\n", red, green, blue, alpha);
+
+	// 15.9 구조체 안의 비트필드
+	//// 비트필드: 비트가 연속적으로 나열돼 있는 형태
+
+	//// 사용할 비트 개수를 콜론(:) 다음에 써준다.
+	//struct
+	//{
+	//	bool has_sword : 1;
+	//	bool has_shield : 1;
+	//	bool has_magic_potion : 1;
+	//	bool has_choes : 1;
+	//	bool has_gun : 1;
+	//	bool has_pet : 1;
+	//	bool has_guntlet : 1;
+	//	bool has_arrow : 1;
+	//} items_flag;
+
+	//items_flag.has_sword = 1; // flags = flags | MASK_SWORD;
+
+	// 15.10 비트필드의 사용방법
+	//struct items
+	//{
+	//	bool has_sword : 1;
+	//	bool has_shield : 1;
+	//	bool has_magic_potion : 1;
+	//	bool has_choes : 1;
+	//	bool has_gun : 1;
+	//	bool has_pet : 1;
+	//	bool has_guntlet : 1;
+	//	bool has_arrow : 1;
+	//} items_flag;
+
+	//printf("Size = %zd\n", sizeof(items_flag)); // 1 바이트(8 비트)
+
+	//items_flag.has_sword = 1;
+	//items_flag.has_shield = 0;
+	//items_flag.has_magic_potion = 0;
+	//items_flag.has_choes = 1;
+	//items_flag.has_gun = 0;
+	//items_flag.has_pet = 1;
+	//items_flag.has_guntlet = 0;
+	//items_flag.has_arrow = 0;
+
+	//printf("Size = %zd\n", sizeof(items_flag));
+	//print_binary((char*)&items_flag, sizeof(items_flag));
+
+	//// 비트 필드를 이용하면 아래와 같은 코딩 스타일로 코딩할 수 있다.
+	//if (items_flag.has_arrow == 1)
+	//	printf(">> You have arrow.");
+
+	//// union을 이용하여 두 가지 방법으로 조작할 수도 있다.
+	//union
+	//{
+	//	struct items bf;
+	//	unsigned char uc;
+	//} uni_flag;
+
+	//uni_flag.uc = 0;
+	//uni_flag.bf.has_arrow = true;
+	//uni_flag.uc |= (1 << 4);
+
+	//print_binary((char*)&uni_flag, sizeof(uni_flag));
+
+	//// KNK DOS example
+	//// 모든 파일에 공통적으로 저장되는 정보는 작을수록 좋다.
+	//struct file_time {
+	//	unsigned int seconds : 5; // 2^5 = 32, 0 ~ 31, 2초 단위로 기록한다.
+	//	unsigned int minutes : 6; // 2^6 = 64, 0 ~ 59분
+	//	unsigned hours : 5; // 2^5 = 32, 0 ~ 23 시간
+	//};
+	//struct file_date {
+	//	unsigned int day : 5; //  2^5, 0 ~ 31일
+	//	unsigned int month : 4; // 2^4 1 ~ 12월
+	//	unsigned year : 7; // 2^7 = 128, 1980년 ~ 
+	//} fd; 
+	//fd.day = 28; // 범위를 벗어나면 overflow
+	//fd.month = 12;
+	//fd.year = 8;
+	//
+	//printf("Day %u, Month %u, Year %u\n", fd.day, fd.month, fd.year);
+	////scanf("%d", &fd.day); // 오류가 난다.
+
+	// 15.11 비트필드의 패딩
+	struct {
+		bool option1 : 1;
+		bool option2 : 1;
+		unsigned long long option3 : 1; // 추가하면 sizeof(bbf)가 16바이트로 바뀐다. 패딩이 돼서 option1, option2에 8바이트를 배정하고, option3에 8바이트를 배정한 것이다.
+	} bbf;
+
+	memset((char*)&bbf, 0xff, sizeof(bbf));
+	bbf.option1 = 0;
+	bbf.option2 = 0;
+	bbf.option3 = 0;
+
+	printf("%zu bytes\n", sizeof(bbf)); // 1바이트
+
+	struct {
+		unsigned short option1 : 8;
+		unsigned short option2 : 7;
+		unsigned short option3 : 1;
+	} usbf;
+
+	printf("%zu bytes\n", sizeof(usbf)); // 2바이트, 1비트씩만 사용하는 것으로 바꿔도 2바이트이다.
+
+	struct {
+		unsigned int option1 : 1;
+		unsigned int option2 : 1;
+	} uibf;
+
+	printf("%zu bytes\n", sizeof(uibf)); // 4바이트, 자료형(unsigned int)에 따라 다르다.
 
 	return 0;
 }
