@@ -4,6 +4,8 @@
 #include <string.h> // strlen()
 #include <stdlib.h> // exit()
 #include <stdbool.h>	//struct
+// #include <stdalign.h> // _Alignas, _Alignof -> alignas, alignof, 헤더파일 다운받아야 하는듯?
+
 //{
 //	bool has_sword : 1;
 //	bool has_shield : 1;
@@ -421,33 +423,61 @@ int main()
 	////scanf("%d", &fd.day); // 오류가 난다.
 
 	// 15.11 비트필드의 패딩
-	struct {
-		bool option1 : 1;
-		bool option2 : 1;
-		unsigned long long option3 : 1; // 추가하면 sizeof(bbf)가 16바이트로 바뀐다. 패딩이 돼서 option1, option2에 8바이트를 배정하고, option3에 8바이트를 배정한 것이다.
-	} bbf;
+	// struct {
+	// 	bool option1 : 1;
+	// 	bool : 0; // 강제로 메모리를 더 할당
+	// 	bool option2 : 1;
+	// 	unsigned long long option3 : 1; // 추가하면 sizeof(bbf)가 16바이트로 바뀐다. 패딩이 돼서 option1, option2에 8바이트를 배정하고, option3에 8바이트를 배정한 것이다.
+	// } bbf;
 
-	memset((char*)&bbf, 0xff, sizeof(bbf));
-	bbf.option1 = 0;
-	bbf.option2 = 0;
-	bbf.option3 = 0;
+	// memset((char*)&bbf, 0xff, sizeof(bbf));
+	// bbf.option1 = 0;
+	// bbf.option2 = 0;
+	// bbf.option3 = 0;
 
-	printf("%zu bytes\n", sizeof(bbf)); // 1바이트
+	// printf("%zu bytes\n", sizeof(bbf)); // 1바이트
 
-	struct {
-		unsigned short option1 : 8;
-		unsigned short option2 : 7;
-		unsigned short option3 : 1;
-	} usbf;
+	// struct {
+	// 	unsigned short option1 : 8;
+	// 	unsigned short option2 : 7;
+	// 	unsigned short option3 : 1;
+	// } usbf;
 
-	printf("%zu bytes\n", sizeof(usbf)); // 2바이트, 1비트씩만 사용하는 것으로 바꿔도 2바이트이다.
+	// printf("%zu bytes\n", sizeof(usbf)); // 2바이트, 1비트씩만 사용하는 것으로 바꿔도 2바이트이다.
 
-	struct {
-		unsigned int option1 : 1;
-		unsigned int option2 : 1;
-	} uibf;
+	// struct {
+	// 	unsigned int option1 : 1;
+	// 	unsigned int option2 : 1;
+	// } uibf;
 
-	printf("%zu bytes\n", sizeof(uibf)); // 4바이트, 자료형(unsigned int)에 따라 다르다.
+	// printf("%zu bytes\n", sizeof(uibf)); // 4바이트, 자료형(unsigned int)에 따라 다르다.
 
+	// 15.12 메모리 줄맞춤 alignof, alignas
+	// ms컴파일러에서는 되지 않는다. gcc 컴파일러에서 가능
+	printf("Alignment of char = %zu\n", _Alignof(char)); // 1바이트
+	printf("alignof(float[10]) = %zu\n", _Alignof(float[10])); // 각각의 원소에 대해 align을 몇 바이트 간격으로 해줘야 하는지
+	printf("alignof(struct{char c; int n;}) = %zu\n", _Alignof(struct{char c; int n;})); // 크기가 큰 (int)4바이트로 한다.
+
+	double dx;
+	char ca;
+	char cx;
+	double dz;
+	char cb;
+	// char _Alignas(double) cz;
+	// char _Alignas(16) cz;
+	char cz;
+
+	printf("char alignment %zd\n", _Alignof(char));
+	printf("double alignment: %zu\n", _Alignof(double));
+	
+	// 메모리 줄맞춤..
+	printf("&dx: %p %ld\n", &dx, (long)&dx % 8); // 나머지가 0
+	printf("&ca: %p %ld\n", &ca, (long)&ca % 8);
+	printf("&cx: %p %ld\n", &cx, (long)&cx % 8);
+	printf("&dz: %p %ld\n", &dz, (long)&dz % 8); // 나머지가 0
+	printf("&cb: %p %ld\n", &cb, (long)&cb % 8);
+	printf("&cz: %p %ld\n", &cz, (long)&cz % 8); // _Alignas(double), _Alignas(16)을 하면 나머지가 0으로 된다.
+	
+	unsigned char _Alignas(long double) c_arr[sizeof(long double)]; // 배열을 만들 때도 Align을 사용할 수 있다.
 	return 0;
 }
