@@ -1,6 +1,54 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
+// 16.6
+#include <stdio.h> // 컴파일러가 위치를 알고 있는 경우.. 대부분 표준 라이브러리
+#include "my_functions.h"
+// #include "my_functions.c"
+#include "my_structures.h"
+#include "my_headers/my_macros.h" // 절대 경로로 해도 된다. vs 설정에서 경로를 추가하면 <>로 바꿀 수 있다.
+extern int status;
+
+// 16.7
+#include "Header_B.h"
+#define TYPE 3
+#if TYPE == 1
+#include "my_function_1.h"
+#elif TYPE == 2
+#include "my_function_2.h"
+#else
+static void my_function()
+{
+    printf("Worng compile option!");
+}
+#endif
+
+#define REPORT // 매크로 이름만 정의, empty macro
+//#undef REPORT
+int sum(int i, int j)
+{
+    int s = 0;
+    for (int k = i; k <= j; ++k)
+    {
+        s += k;
+#ifdef REPORT
+    printf("%d %d\n", s, k);
+#endif
+    }
+    return s;
+}
+
+// multiplatform
+void say_hello()
+{
+#ifdef _WIN64
+    printf("Hello, WIN64");
+#elif _WIN32
+    printf("Hello, WIN32");
+#elif __linux__
+    printf("Hello, linux");
+#endif
+}
 int main()
 {
     // 16.1 전처리기가 해주는 일들
@@ -156,11 +204,57 @@ int main()
     // PRINT(2, "x = %.2f, y = %.4f\n", x, y);
 
     // 16.6 #include와 헤더파일
-    #include <stdio.h> // 컴파일러가 위치를 알고 있는 경우.. 대부분 표준 라이브러리
-    #include "my_functions.h" 
-    #include "my_structures.h"
-    #include "my_headers/my_macros.h" // 절대 경로로 해도 된다. vs 설정에서 경로를 추가하면 <>로 바꿀 수 있다.
+    //// include는 단순히 전처리기가 파일 내용을 복사 붙여넣기 하는 것이다.
+    //#include "hello_world.h" // hello world 출력.. 이런식으로 코딩하면 안된다.
 
+    //printf("PI = %f\n", PI);
+    //printf("%p %d\n", &status, status);
+    //print_status();
+
+    //// header file의 static
+    //// static 키워드는 파일 스코프를 갖는다.
+    //// #include는 복사 붙여넣기 하는 것과 같기 때문에, #include 한 파일에서 파일 스코프를 갖는다.
+
+    //printf("%d\n", multiply(51, 2));
+
+    //printf("main()\n");
+    //printf("Static function address %p\n", multiply);
+    //printf("Static vatiable address %p\n", &si);
+
+    //print_address();
+    //// 직접 my_functions.c 파일을 #include 하면 ststic function/variable의 주소가 같다. (gcc 컴파일러에서는 작동되지 않음 실행 설정을 해줘야 하는듯?)
+    //// #include는 코드 내용을 복사/붙여넣기 하는 것과 거의 같기 때문에, main()함수가 있는 파일에서 코드가 복사된 것으로 인식돼 그런 듯하다.
+    //// 비주얼 스튜디오에서는 my_functions.h만 #include 해도 링커가 c파일까지 연결해준다.
+    //// print_address()를 하면 my_functions.c에 있는 static 변수/함수의 주소가 출력되기 때문에 주소가 다르다..
+
+    //// #pragma once
+    //// 헤더가드, 헤더가드가 없으면 중복으로 #include되는 상황이 일어난다. (자기가 자기자신을 #include 될 수도 있다.)
+    //// 자기 자신을 #include 하면 Too many include 에러가 나온다.
+    //
+    ////#ifndef __MY_FUNCTIONS__ // if not define
+    ////#define __MY_FUNCTIONS__
+    ////#endif // end if
+
+    //// #pragma once가 #ifndef - #define - #endif 과정을 해주는 것이다.
+
+    // 16.7 조건에 따라 다르게 컴파일 하기
+    // #undef: #define 했던 것을 undefine 시킨다. 정의가 되지 않은 키워드도 undefine 시킬 수 있다.
+    // #pragma once    
+    //test_function_A();
+    //test_function_B();
+    // 중복 #include... already has a body Error
+
+    // #if #elif #else #endif
+    // TYPE의 값에 따라 #include를 다르게 하여 다른 함수(이름은 같다.)를 호출한다.
+    //my_function();
+
+    printf("\n%d \n", sum(1, 10));
+    
+    // properties -> C/C++ -> Preprocessor에서 설정을 해서 전처리기 정의 값을 만들 수 있다. (REPORT;)
+    // Debug/Release 모드를 설정하거나 할 수 있다.
+    // Release 모드에서는 세부값이 보이지 않고, Debug 모드에서만 세부 사항이 보일 수 있게끔 코딩할 수도 있다.
+
+    say_hello();
 
     return 0;
 }
