@@ -1,15 +1,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 
 // 16.6
+/*
 #include <stdio.h> // 컴파일러가 위치를 알고 있는 경우.. 대부분 표준 라이브러리
 #include "my_functions.h"
 // #include "my_functions.c"
 #include "my_structures.h"
 #include "my_headers/my_macros.h" // 절대 경로로 해도 된다. vs 설정에서 경로를 추가하면 <>로 바꿀 수 있다.
 extern int status;
+*/
 
 // 16.7
+/*
 #include "Header_B.h"
 #define TYPE 3
 #if TYPE == 1
@@ -41,6 +45,8 @@ int sum(int i, int j)
 // multiplatform
 void say_hello()
 {
+    // _WIN64, _WIN32, __linux__ 등은 컴파일러가 어딘가에서 define을 해둔다.
+    // defined 연산자.. defined(_WIN64) -> 정의가 돼있으면 true 리턴, 안 돼있으면 false 리턴
 #ifdef _WIN64
     printf("Hello, WIN64");
 #elif _WIN32
@@ -49,6 +55,135 @@ void say_hello()
     printf("Hello, linux");
 #endif
 }
+*/
+
+// 16.8
+/*
+#include "DifferentFile.h"
+void different_function()
+{
+    printf("This function is %s\n", __func__);
+    printf("This is line %d\n", __LINE__);
+}
+*/
+
+// 16.9
+/*
+#pragma pack(1)
+struct s {
+    int i;
+    char ch;
+    double d;
+};
+*/
+
+// 16.10
+/*
+#define MYTYPE(X) _Generic((X), \
+int: (X + 123), \
+float: "float", \
+double: "double", \
+long: "long", \
+int*: "int*", \
+default: "other"\
+)
+*/
+
+// 16.11
+/*
+// c파일에 직접 넣기보단 헤더파일에서 사용하는 것이 일반적이다.
+inline static int foo() // static을 붙이지 않으면 기본적으로 external이기 때문에 gcc, clang에서 컴파일 오류가 발생한다.
+{
+    return 5;
+}
+*/
+
+// 16.13
+// #include <math.h>
+
+// 16.14
+/*
+#include <stdlib.h>
+// rand() srand() malloc(), free(), ...
+
+void goodbye(void)
+{
+    printf("Good Bye.\n");
+}
+
+void thankyou(void)
+{
+    printf("Thank you.\n");
+}
+
+// 비주얼 스튜디오에서 지원하지 않는다.
+//_Noreturn void stop_now(i)
+//{
+//    if (i > 0) exit(i);
+//}
+*/
+
+// 16.15
+/*
+#include <assert.h>
+int divide(int a, int b)
+{
+    // 반드시 만족해야할 조건을 assert()에 넣어준다.
+    assert(b != 0);
+    //if (b == 0)
+    //{
+    //    printf("Cannot divide\n");
+    //    exit(1);
+    //}
+    return a / b;
+}
+*/
+
+// 16.16
+/*
+#include <string.h>
+#define LEN 30
+void prt(int* arr, int n)
+{
+    for (int i = 0; i < n; ++i)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+*/
+
+// 16.17
+#include <stdarg.h>
+#include <string.h>
+double average(int num, ...) // '...'는 맨 뒤에 와야한다. '...'만 넣어도 안된다.
+{
+    va_list ap;
+    double sum = 0.0;
+    int i;
+
+    va_start(ap, num); // 매크로, '...' 앞에 있는 가장 마지막 인자를 넣어준다.
+    for (i = 0; i < num; ++i)
+        sum += va_arg(ap, double); // '...'에서 어떤 타입을 받을지
+    va_end(ap); // '...'의 사용이 끝나면..
+
+    return sum / (double)num;
+}
+
+double average2(char* format_string, ...)
+{
+    int num = strlen(format_string);
+
+    va_list ap;
+    double sum = 0.0;
+    int i;
+
+    va_start(ap, format_string); // 매크로, '...' 앞에 있는 가장 마지막 인자를 넣어준다.
+    for (i = 0; i < num; ++i)
+        sum += va_arg(ap, double); // '...'에서 어떤 타입을 받을지
+    va_end(ap); // '...'의 사용이 끝나면..
+
+    return sum / (double)num;
+}
+
 int main()
 {
     // 16.1 전처리기가 해주는 일들
@@ -248,13 +383,204 @@ int main()
     // TYPE의 값에 따라 #include를 다르게 하여 다른 함수(이름은 같다.)를 호출한다.
     //my_function();
 
-    printf("\n%d \n", sum(1, 10));
-    
-    // properties -> C/C++ -> Preprocessor에서 설정을 해서 전처리기 정의 값을 만들 수 있다. (REPORT;)
-    // Debug/Release 모드를 설정하거나 할 수 있다.
-    // Release 모드에서는 세부값이 보이지 않고, Debug 모드에서만 세부 사항이 보일 수 있게끔 코딩할 수도 있다.
+    //printf("\n%d \n", sum(1, 10));
+    //
+    //// properties -> C/C++ -> Preprocessor에서 설정을 해서 전처리기 정의 값을 만들 수 있다. (REPORT;)
+    //// Debug/Release 모드를 설정하거나 할 수 있다.
+    //// Release 모드에서는 세부값이 보이지 않고, Debug 모드에서만 세부 사항이 보일 수 있게끔 코딩할 수도 있다.
 
-    say_hello();
+    //say_hello();
+
+    // 16.8 미리 정의된 매크로들, #line, #error
+    //printf("__FILE__: %s\n", __FILE__); // 현재 매크로가 사용된 파일의 이름을 문자열로 바꿔준다.
+    //printf("__DATE__: %s\n", __DATE__); // 전처리(컴파일)가 된 날짜
+    //printf("__TIME__: %s\n", __TIME__); // 전처리(컴파일가 된 순간의 시간, 실행하는 시간이 아니다.(따로 있다.)
+    //printf("__LINE__: %d\n", __LINE__); // 프로그램 코드의 LINE number
+    //printf("__func__: %s\n", __func__); // 함수의 이름
+
+    //different_function();
+    //different_function_in_different_file();
+
+    // 비주얼 스튜디오에서는 제공을 해주지 않는다.
+    //printf("__STDC__: %d\n", __STDC__); // C언어 표준을 지켰는지?
+    //printf("__STDC_HOSTED__: %d\n", __STDC_HOSTED__); // C언어 표준 용어.. hosted vs freestanding KNK p.330 (표준을 더 엄격하게 따르느냐 아니냐)
+    //printf("__STDC_VERSION__: %ld\n", __STDC_VERSION__); // C표준의 버전
+
+//#line 7 // 줄 번호를 강제로 바꿔버린다.
+//    printf("__LINE__: %d\n", __LINE__);
+//
+//#line 1 "hello.txt" // 파일 이름도 바꿀 수 있다.
+//    printf("__FILE__: %s\n", __FILE__);
+//    printf("__LINE__: %d\n", __LINE__);
+
+//#if __LINE__ != 296
+//#error Not line 32 // 컴파일 에러를 낸다.
+//#endif
+//
+//
+//#if defined(_WIN64) != 1
+//#error Not line 33
+//#endif
+
+//#if __STDC_VERSION__ != 201112L
+//#error Not C11
+//#endif
+
+    // 16.9 #pragma 지시자
+    // header guard(include guard)
+//#pragma once // 표준은 아니었지만 대부분의 컴파일러가 지원해준다.
+    // #ifndef - #define - #endif 를 이용해도 된다.
+    
+    // 컴파일러마다 #pragma 지원이 다르다.
+    // #pragma pack(1) // padding 1
+    //struct s A;
+    //printf("Size of A is : %zd", sizeof(A));
+
+    //_Pragma : 전처리 연산자, 비주얼 스튜디오에서는 지원하지 않는다.
+    //_Pragma("pack(1)"); // #pragma pack(1)과 같다. // destringizing을 해서 처리한다...
+//#define PACK1 _Pragma("pack(1)")
+//PACK1
+
+//#pragma warning(disable: 4477) // 4477 warning을 없앤다.
+//#pragma warning(error: 4477) // warning을 error처럼 처리할 수도 있다.
+
+    // 16.10 _Generic 표현식
+    // 비주얼 스튜디오에서 지원하지 않는다.
+    // Generic programming
+    // 코드가 특정한 자료형에 대해서 종속되는 게 아니라, 일반적인/여러가지 자료형에 대해서 모두 작동하는 프로그래밍 코드
+    // _Generic: C11에서 추가
+    //int d = 5;
+
+    //printf("%d\n", MYTYPE(d));
+    //printf("%s\n", MYTYPE(2.0*d));
+    //printf("%s\n", MYTYPE(3L));
+    //printf("%s\n", MYTYPE(&d));
+
+    // 16.11 inline 함수
+    // Function call has overhead
+    // set up the call, pass arguments, jump to the function code, and return
+    // 오버헤드를 없애기 위한 방법
+    // 1. 매크로 - 함수 호출 오버헤드는 없어지지만, 구조적인 프로그램을 만들기는 어렵다.
+    // 2. inline function specifier - 컴파일러에게 매크로처럼 바꿔치기 하도록 "제안"한다.
+
+    // inline function은 짧아야 한다.
+    // inline function은 internal linkage여야 한다.(gcc, clang) 비주얼 스튜디오에서는 아니어도 가능하다.
+    // inline - 코드에 복사 - 붙여넣기를 하는 것이다. 따라서 그것의 주소를 사용할 수 없다.(function pointer)
+    //int ret;
+    //ret = foo();
+    //printf("Output is %d\n", ret);
+    // 어셈블리 코드를 확인해보면 inline을 사용하면 function call을 하지 않는 것을 알 수 있다.
+
+    // 16.12 라이브러리
+    // MyLibrary.c, MyLibrary.h
+
+    // 16.13 표준 수학 라이브러리
+    //printf("%f\n", cos(3.141592));
+
+    //double c = 5.0, b = 4.0, a; // a = ?
+    //a = sqrt(c * c - b * b); // double
+    //printf("a = %f\n", a);
+
+    //float cf = 5.0f, bf = 4.0f, af;
+    //af = sqrtf(cf * cf - bf * bf); // float
+    //printf("af = %f\n", af);
+
+    //// 비주얼 스튜디오에서는 지원하지 않는다.
+    //// type variants
+    //// tgmath.h library(type generit math)
+
+    //#define SQRT(X) _Generic((X),\
+    //long double: sqrtl,\
+    //default: sqrt,\
+    //float: sqrtf)(X)
+
+    //double t1 = SQRT(2.0f);
+    //double t2 = SQRT(2.0);
+
+    //if (t1 == t2)
+    //    printf("Identical\n");
+    //else
+    //    printf("Not identical\n");
+    //// 다르다..
+
+    //// tgmath.h
+    //double a1 = sqrt(2.0f); // 원래 sqrt는 double로 캐스팅 하여 계산한다. tgmath.h의 sqrt는 타입을 파악하여 내부적으로 sqrtf, sqrt를 호출해준다.
+    //double a2 = sqrt(2.0);
+
+    //if (a1 == a2)
+    //    printf("Identical\n");
+    //else
+    //    printf("Not identical\n");
+
+    // 16.14 표준 유틸리티 라이브러리
+    //// <stdlib.h>
+    //// atexit() - 프로그램이 종료될 때 호출할 함수를 등록한다.
+    //printf("Purchased?\n");
+    //if (getchar() == 'y')
+    //    atexit(thankyou);
+
+    //while (getchar() != '\n');
+    //printf("Goodbye message?\n");
+    //if (getchar() == 'y')
+    //    atexit(goodbye);
+
+    //// exit(0);
+    //// qsort();
+
+    //// _Noreturn : function specifier, 함수가 끝나고 호출된 곳으로 돌아가지 않고 프로그램을 종료한다.
+    //// 비주얼 스튜디오에서 지원하지 않는다.
+    ////puts("preparing to stop...");
+    ////stop_now(2); // 종료코드 2, 0을 넣어주면 Segmentation fault 에러가 난다. (되돌아가면 안되는 함수가(_Noretur) 돌아갔기 때문..
+    ////puts("This code is newver executed.");
+
+    // 16.15 assert 라이브러리
+    //// <assert.h>
+    //// 반드시 만족해야할 조건을 assert()에 넣어준다.
+    //int a, b;
+    //int f = scanf("%d%d", &a, &b);
+    //
+    //printf("a / b = %d", divide(a, b));
+    //// Assertion failed
+    //// Release 모드에는 Assertion이 작동하지 않는다. 오직 Debug 용
+
+    //// 비주얼 스튜디오에서는 지원하지 않는다.(C++에서는 가능)
+    ////_Static_assert(CHAR_BIT == 9, "9-bit char assumed"); // 컴파일 타임에서 잡아준다.
+
+    // 16.16 memcpy()와 memmove()
+    //// <string.h>
+    //// 꼭 string이 아니더라도 메모리를 복사, 이동할 수 있다.  
+    //// memcpy(), memmove()는 문자열의 마지막 null char(\0)을 신경쓰지 않고 오로지 메모리에 대해서만 복사, 이동한다.
+    //int arr1[LEN] = { 1, 3, 5, 7, 9, 11 };
+    //// int arr[LEN] = {0,};
+    //int* arr2 = (int*)malloc(LEN * sizeof(int));
+    //if (arr2 == NULL) exit(1);
+
+    ////for (int i = 0; i < LEN; ++i)
+    ////    arr2[i] = arr1[i];
+
+    //memcpy(arr2, arr1, sizeof(int) * LEN);
+    //prt(arr2, LEN);
+
+    //// memmove() - memcpy와 비슷하지만, 내부적으로 다르다.
+    //// int arr1[LEN] = {1, 3, 5, 7, 9, 11}에서 arr1[2]~arr1[5] 4개를 arr1[0]~arr1[3]으로 옮긴다면
+    //// 겹치는 부분이 있을 경우 memcpy를 사용하면 문제가 생길 수 있다.(표준에서는..)
+    //// memmove()는 복사할 것을 버퍼에 저장해뒀다가 복사하는 방식이기 때문에 겹치는 구간이 있어도 문제가 생기지 않도록 구현돼 있다.
+    //memmove(arr1, &arr1[2], sizeof(int) * 4); // 반환값이 void* (return copy of dst)
+    //prt(arr1, LEN);
+
+    // 16.17 가변 인수
+    double a, b;
+
+    //a = average(3, 1.1, 2.2, 3.3);
+    //b = average(6, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6);
+
+    // average2 - 첫 번째 오는 문자열의 문자 수에 따라 평균값을 구한다.
+    a = average2("dd", 1.1, 2.2, 3.3);
+    b = average2("ddd", 1.1, 2.2, 3.3, 4.4, 5.5, 6.6);
+
+    printf("%lf\n", a);
+    printf("%lf\n", b);
+    // 디버깅이 힘들기 때문에, 사용하는 것을 권장하지 않는다.
 
     return 0;
 }
