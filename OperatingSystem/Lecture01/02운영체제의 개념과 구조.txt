@@ -1,0 +1,128 @@
+운영체제
+컴퓨터 파드웨어를 관리하는 소프트웨어
+User <-> App <-> OS <-> HW
+App - 컴파일러, 어셈블러, 텍스트 에디터, DBsystem, ... 등
+
+항상 실행되는 프로그램
+kernel
+
+커널에서 system programs, app programs - 인터페이스 제공
+커널부분이 OS의 핵심부분
+
+전통적인 컴퓨터 시스템
+cpu, 컨트롤러, 버스
+cpu는 버스를 통해 disk/ram/usb controller/grapics adapter/무선연결장치 등과 연결돼 있다.
+
+부트스트랩 프로그램(부팅용 프로그램)
+- 부팅 = 부트스트래핑
+
+컴퓨터 전원을 켜면 메모리는 휘발성이기 때문에 쓰레기값이 들어있다.
+(EEP)ROM에 있는 명령어를 이용하여 초기화한다. 부팅
+
+부트스트랩 프로그램은 메모리에 운영체제(커널)를 로딩하는 역할을 해야한다.
+
+Interrupts
+I/O device(키보드 등..)에서 입력이 들어오면 cpu에게 알려줘야하는데, 이러한 과정을 Interrupts라고 한다.
+하드웨어는 언제나 Interrupts를 trigger 시킬 수 있다.
+
+폰 노이만 아키텍쳐
+- cpu와 메모리가 fetch - execute 하는 사이클
+- instruction register
+
+비휘발성 저장장치 - storage system
+용량, 접근 속도에 따라 여러 개의 계층 구조가 있다.
+가장 빠른 것은 cpu 안에 있는 register
+cpu <-> cache memory <-> RAM
+1. register
+2. cache
+3. main memory(RAM)
+4. SSD
+5. hard disk
+6. optical disk
+7. magnetic tapes
+
+I/O Structure
+cpu가 thread of execution 갖고 있다.
+cache를 통해 ram에 액세스
+I/O device가 interrupt, data...
+DMA - Direct memory access
+
+Symmetric multiprocessing(SMP)
+메모리는 하나인데 CPU가 여러 개 연결 돼 있다.(각 cpu는 register와 cache를 갖고 있다.)
+
+Multi-core design
+칩 하나 안에 여러 cpu가..
+
+Multiprogramming
+program - set of instruction
+예전에는 프로그램 한 개를 메모리에 로딩
+multiprogramming - 여러 개의 프로그램을 동시에 메모리에 올려서 동시에 실행
+여러 프로그램을 동시에 실행하면 cpu 효율을 높일 수 있다.
+
+multitasking(=multiprocessing)
+예를 들면 사람이 문서 작성 프로그램을 이용하여 문서를 작성한다면, cpu가 노는 시간이 많다.
+time-sharing(시분할)을 하자.
+여러 개의 일을 자주 바꿔주면(번갈아가면서) 여러 개의 일이 동시에 할 수 있게 된다. - multitasking, multiprocessing
+
+CPU scheduling
+RAM에 여러 프로그램이 올라아 있는데 어떤 프로그램을 먼저 실행시킬지?
+CPU 효율을 가장 좋게 하는 선택 방법이 무엇인가?
+
+user mode / kernel mode
+운영 체제는 incorrect한 실행을 막아주는 역할도 해야한다.
+user process가 system call을 하면(os에 서비스를 요청) - kernel 모드로 바꾼 후 system call 처리
+kernel mode에서만 할 수 있는 게 있다. 이런 제한을 둬서 incorrect한 실행을 막을 수 있다.
+
+Virtualization - 가상화
+processor - 실행 중인 프로그램
+프로세서를 여러 개 메모리에 올리는 것 - multiprogramming
+cpu가 메모리에 있는 여러 프로그램을 스케쥴링하면서 동시에 실행하는것 - multitasking
+운영체제도 여러 개 돌릴 수 있지 않을까???
+VMM - virtual machine manager(monitor)
+VMware, XEN, WSL, ...
+
+VMM 스케쥴링을 하면 여러 운영체제를 돌릴 수 있다.
+
+single operating system:
+Processes
+kernel
+hardware
+
+three virtual machines:
+Processes Processes Processes
+kernel1   kernel2   kernel3
+VM1       VM2       VM3
+----vitual machine manager----
+-----------hardware-----------
+
+Computing Envirnments
+Traditional Computing
+Mobile Computing(Android, IOS...)
+Client-Server Computing
+Peer-to-Peer Computing
+Cloud Computing
+Real-Time Embedded Systems
+
+Processor, Thread -> Multiprocessing
+동기화 문제 해결해야한다. synchronization
+memory 관리를 어떻게 할 것인지?
+가상 메모리를 어떻게 관리할 것인지?
+CPU 스케쥴링을 어떻게 할 것인지?
+
+사용자가 인터페이스 하는 방법
+CLI: 명령어 기반 인터페이스(shells, sh, bash, zch, ...)
+GUI: 그래픽 유저 인터페이스
+
+컴퓨터 응용프로그램이 OS와 인터페이스 하는 방법
+App과 OS는 system call을 통해서 한다.
+
+#include <unistd.h>
+sszie_t read(int fd, void *buf, size_t count);
+
+시스템 콜 함수를 호출하는 것...
+API - Application Programming Interface
+
+user mode에서 system call -> kernel 모드로 바꿔서 실행 -> 다시 user 모드로 변경
+매번 이렇게 하기 힘들다.
+-> 라이브러리를 제공한다.
+standard C library... -> 중요한 system call들을 처리시켜서 일일이 컨트롤 하지 않게 한다.
