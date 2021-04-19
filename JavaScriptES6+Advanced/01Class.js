@@ -102,3 +102,6 @@
 // constructor에서 return을 작성하지 않으면 생성한 인스턴스를 반환한다.
 // constructor에서 Number, String을 반환하면 이를 무시하고 인스턴스를 반환한다.
 // constructor에서 Object를 반환하면, 인스턴스를 반환하지 않고 Object를 반환한다.
+
+
+// getter - method를 호출하여 값을 구한다.
