@@ -1,0 +1,48 @@
+프로세스: 실행중인 프로그램, 작업의 단위
+프로세스가 실행되기 위해서는 자원이 필요하다. - cpu time, memory, files, I/O devices.
+
+Storage(HDD, SSD)에 있는 a.out 파일을 메모리에 load 시킨다.
+cpu가 메모리에 load 돼 있는 a.out을 fetch 하여 실행시킨다.
+메모리에 load 돼 있는 상태의 프로그램을 프로세스라고 한다.
+
+운영체제는 프로세스를 관리하는 일을 한다.
+
+메모리 레이아웃
+- 텍스트 섹션: 실행 가능한 코드
+- 데이터 섹션: 전역변수
+- 힙 섹션: 동적할당
+- 스택 섹션: 함수 파라미터, 리턴 값, 지역변수 등
+
+>> main.c
+
+프로세스의 5가지 상태 - New, Running, Waiting, Ready, Terminated
+
+fork - 새로운 프로세스를 만드는 시스템 콜
+1. New 상태로 만든다.
+2. 기타 초기화 작업이 끝나면 Ready 상태가 되어 Ready Queue에 들어간다.
+3. OS가 CPU 스케쥴링을 통해 프로세스를 실행하면 Running 상태가 된다.
+4-a. CPU를 너무 오래 점유하면 OS가 interrupt를 주면 Ready 상태로 되돌아간다.
+4-b. I/O를 하거나 이벤트를 처리하기 위해서 Waiting Queue로 들어가서 Waiting 상태가 된다. 
+     I/O나 이벤트처리가 끝나면 다시 Ready 상태가 된다.(dispatch)
+5. Running 상태에서 프로세스가 끝나면 Terminated 상태가 된다.
+
+프로세스 관리
+PCB(Process Control Block, TCB(Task Control Block))이라는 구조체를 만든다.
+이 구조체에 프로세스가 가져야할 정보를 모두 저장한다.
+PCB를 이용하여 프로세스를 조작한다.
+PCB에 포함된 정보
+- 프로세스 상태(New, Running, ...)
+- Program Counter(실행할 명령어 주소 조작, 순차적으로 늘려서 실행하다가 goto(if, for, ...)를 만나면 점프)
+- CPU Registers(IR, DR, Program counter, ...)
+- CPU Scheduling info.
+- Memory management info.
+- Accounting info.
+- I/O status info.
+
+프로세스는 Single Thread of Execution
+- PCB를 교체함으로써 다른 프로세스를 실행할 수 있다.
+
+Multi-Processing(tasking): Multiple Threads of Excecution
+하나의 프로세스 내부에서도 여러 개의 Threads를 실행하고 싶다면?
+
+thread: light-weight process
