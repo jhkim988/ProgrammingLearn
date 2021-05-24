@@ -13,7 +13,7 @@ cpu가 메모리에 load 돼 있는 a.out을 fetch 하여 실행시킨다.
 - 힙 섹션: 동적할당
 - 스택 섹션: 함수 파라미터, 리턴 값, 지역변수 등
 
->> main.c
+Ch3_MemoryLayout.c
 
 프로세스의 5가지 상태 - New, Running, Waiting, Ready, Terminated
 
@@ -45,4 +45,54 @@ PCB에 포함된 정보
 Multi-Processing(tasking): Multiple Threads of Excecution
 하나의 프로세스 내부에서도 여러 개의 Threads를 실행하고 싶다면?
 
-thread: light-weight process
+thread: light-weight process(ch.4)
+여러 개의 프로세스를 이용하는 것보다 여러 개의 스레드를 이용하는 것이 장점이 더 많다.
+
+multi-programming의 목적
+- 동시에 여러 개의 프로세스를 실행한다.
+- CPU 사용률을 최대화한다.
+
+time sharing의 목적
+- 프로세스간에 CPU core/process를 빈번하게 교체해서 사용자 입장에선 동시에 실행하고 있는 것처럼 생각되게 한다.
+
+Scheduling Queue
+: 프로세스가 대기열(Ready Queue)에서 대기하고 있다가, 순서대로 CPU를 할당받는다.(Running 상태)
+time sharing에서 time이 끝나면 다시 ready queue로 들어가면 된다.
+running 상태에서 waiting 상태로 바뀔 때(I/O completion)는 waiting queue로 들어간다. I/O가 끝나면 다시 Ready Queue로 들어간다.
+실제 구현은 Linked lists of PCBs로 한다.
+waiting queue는 여러 개가 있을 수 있다.(device가 여러 개라면)
+
+Queueing Diagram
+
+Context Switch
+- Process가 사용되고 있는 상태를 Context라고 한다.
+- Context의 정보는 PCB에 저장돼 있다.
+- 현재 프로세스의 상태(PCB)를 저장하고 다음 프로세스의 상태(PCB)를 복원하는 것을 Context Switch라고 한다.
+
+프로세스 생성/종료
+프로세스가 새로운 프로세스를 생성한다.
+프로세스를 만드는 프로세스 - parent process
+만들어진 프로세스 - child process
+fork()라는 시스템 콜을 이용하여 프로세스를 만들 수 있다.
+tree of process
+
+실행 측면에서 두 가지 방법
+1. parent process와 child process가 동시에 실행되는 방법
+2. parent process는 waiting 상태가 되고, child process가 terminated 될 때 다시 실행되는 방법
+
+address-space 측면에서 두 가지 방법
+1. child process가 parent process와 같은 일을 하는 프로세스라면(text section이 같다면), 굳이 새로운 프로세스를 만들 필요가 없다.(PCB만 새로 만들면 된다.)
+2. 새로운 프로그램을 load하는 방법
+
+Ch3_OperationOfProcess.c
+
+Zombie and Orphan
+zombie process: parent 프로세스가 wait를 호출하지 않고 child 프로세스가 종료된 상태
+orphan process: parent 프로세스가 wait를 호출하지 않고 종료됐다면 child 프로세스가 고아가 된다.
+daemon process, background process를 만들 때 활용한다.
+
+UNIX-like O/S에서 새로운 프로세스는 fork() 시스템 콜을 통해 생성된다.
+child process는 copy of address space로 만든다.
+parent process와 child process는 fork() system call 이후의 instruction을 실행한다.
+차이점은 fork()를 했을 때 return code가 0이면 child process이고, 0이 아니면(OS kernel이 부여한 pid를 리턴해주면) parent process이다.
+
