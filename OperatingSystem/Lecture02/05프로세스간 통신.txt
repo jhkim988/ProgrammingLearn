@@ -1,0 +1,27 @@
+프로세스의 동시 실행은 두 가지로 나눌 수 있다.
+- 독립적인 프로세스들의 실행(independent)
+- 협업하는 프로세스들의 실행(cooperating)
+
+프로세스가 독립적
+- 공유하는 데이터가 없다.
+
+프로세스끼리 협업
+- 프로세스간에 영향을 주고 받는다. 데이터나 메세지를 공유하고 주고 받는다.
+
+ICP: Inter-Process Communication
+- 프로세스 간에 데이터를 주고 받는다.
+
+ICP의 두 가지 모델
+- shared memory(공유메모리)를 이용하는 방법
+- message passing, 메세지를 주고 받는 방법(운영체제에게 맞긴다. message queue를 이용한다.)
+
+Shared Memory Systems
+- Producer-Consumer Problem
+producer: 정보를 생산
+consumer: 정보를 소비
+Ex) 컴파일러가 C 코드를 컴파일하여 어셈블리 코드를 생성, 어셈블러는 어셈블리 코드로 기계어를 생성한다.
+Ex) 웹서버에서, 브라우저가 request를 하면 웹서버가 html 파일을 전송한다.
+버퍼를 이용하여 producer는 버퍼에 전송할 정보를 채우고, consumer는 버퍼에서 정보를 가져온다.
+bounded buffer에서 버퍼가 가득 차면 producer는 wait 상태로 바꿔야한다.
+버퍼가 비어있으면 consumer는 wait상태로 바꿔야된다.
+Shared Memory: producer와 consumer가 공유하고 있는 메모리
