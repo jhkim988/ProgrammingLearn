@@ -96,3 +96,6 @@ child process는 copy of address space로 만든다.
 parent process와 child process는 fork() system call 이후의 instruction을 실행한다.
 차이점은 fork()를 했을 때 return code가 0이면 child process이고, 0이 아니면(OS kernel이 부여한 pid를 리턴해주면) parent process이다.
 
+fork() 시스템 콜 이후에는
+- parent process는 실행을 계속 진행할 수 있다.
+- child process가 running 하는 동안에 wait() 시스템 콜을 이용하여 child process를 기다릴 수 있다.(wait queue로 보낸다.)
