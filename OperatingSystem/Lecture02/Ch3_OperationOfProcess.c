@@ -9,12 +9,13 @@ int main() {
     pid = fork(); // 새로운 pid를 받는다.
 
     if (pid < 0) { // error occurred
-        fprintf(stderr, "Fork Failed");
+        fprintf(stderr, "Fork Failed\n");
     } else if (pid == 0) { // child process
         execlp("/bin/ls", "ls", NULL); // ls라는 명령어를 실행한다.
+        printf("Line J\n"); // 실행되지 않는다. 메모리 레이아웃에서 ls로 완전히 교체됐기 때문
     } else { // parent process
         wait(NULL); // wait null을 호출한다.
-        printf("Child Complete");
+        printf("Child Complete\n");
     }
 
     return 0;

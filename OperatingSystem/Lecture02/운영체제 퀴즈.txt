@@ -1,0 +1,49 @@
+1) 1
+2) 2
+3) 4 (X) 5
+4) 2
+5) 4
+6) 4
+
+int main()
+{
+    pid_t pid = fork();
+    if (pid > 0) {
+        wait(NULL);
+        // LINE A
+    } else {
+        pid = fork();
+        if (pid == 0) {
+            // LINE B
+        } else {
+            wait(NULL);
+            // LINE C
+        }
+    }
+    // LINE D
+}
+
+B D C D A D
+
+7) 2
+
+int x = 10;
+
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) { // child, x = 10
+        x += 10;
+    } else { // parent, x = 10;
+        wait(NULL);
+        pid = fork();
+        x += 10;
+        if (pid > 0) {
+            wait(NULL);
+        } else {
+            x += 10;
+        }
+    }
+    printf("%d ", x);
+}
+
+20 30 20
