@@ -25,3 +25,7 @@ Ex) 웹서버에서, 브라우저가 request를 하면 웹서버가 html 파일�
 bounded buffer에서 버퍼가 가득 차면 producer는 wait 상태로 바꿔야한다.
 버퍼가 비어있으면 consumer는 wait상태로 바꿔야된다.
 Shared Memory: producer와 consumer가 공유하고 있는 메모리
+>> Ch3_SharedMemory.c
+
+Shared Memory 방식의 단점
+- application programmer가 shared memory를 직접(명시적으로) 조작해야한다.
