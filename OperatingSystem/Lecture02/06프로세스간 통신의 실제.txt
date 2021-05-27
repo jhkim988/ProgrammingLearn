@@ -7,7 +7,7 @@ fd = shm_open(name, O_CREAT | ORDWR, 0666); // shared memory 생성
 ftruncate(fd, 4096); // 하나의 정크의 크기를 4096으로 정한다
 mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); // memory-mapped file를 shared memory에 mapping 시킨다
 
->> Ch3_SharedMemory.c
+>> Ch3_SharedMemoryExample.c
 
 Message Passing: Pipes
 - Pipes: One of the earliest IPC mechanisms on UNIX systems.
