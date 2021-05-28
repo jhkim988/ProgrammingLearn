@@ -7,8 +7,27 @@ fd = shm_open(name, O_CREAT | ORDWR, 0666); // shared memory 생성
 ftruncate(fd, 4096); // 하나의 정크의 크기를 4096으로 정한다
 mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); // memory-mapped file를 shared memory에 mapping 시킨다
 
->> Ch3_SharedMemoryExample.c
+>> Ch3_SharedMemoryExampleProducer.c
+>> Ch3_SharedMemoryExampleConsumer.c
 
 Message Passing: Pipes
 - Pipes: One of the earliest IPC mechanisms on UNIX systems.
+- unidirection? bidirection?
+- two-way communication, half-duplex? full-duplex?
+- relationship? (parent-child)
+- network? (socket)
 
+Ordinary pipe
+- parent creates pipe, use it to communicate with a child.
+- producer(write), consumer(read)
+- unidirectional: only one-way
+- two-way communication: use two pipes
+Named pipe
+- pipe having name
+
+pipe(): System call on UNIX
+pipe(int fd []); // length of fd = 2
+fd[0] - read end
+fd[1] - write end
+
+>> Ch3_PipeExample.c
