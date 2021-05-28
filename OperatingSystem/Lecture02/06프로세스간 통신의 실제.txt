@@ -31,3 +31,17 @@ fd[0] - read end
 fd[1] - write end
 
 >> Ch3_PipeExample.c
+
+Sockets: endpoints for communication
+IP address로 연결할 컴퓨터를 특정한다.
+Port로 연결할 pipe를 특정한다.
+IP address와 Port를 묶어서 Socket이라고 한다.
+
+32bit, 64bit, Big endian, Little endian, 등 연결할 컴퓨터와 환경이 다르다면 처리할 게 많다.
+RPCs(Remote Procedure Calls, 원격 함수 호출)
+
+Java: 쉬운 소켓 프로그래밍 인터페이스를 제공
+Socket class(Server socket, ...): connection-oriented(TCP)
+DatagramSocket: connectionless(UDP)
+MulticastSocket: multiple recipients
+>> Ch3_SocketProgrammingExample.java
