@@ -28,7 +28,15 @@ Threads in Java
 - 1) Inheritance from Thread class, public void run() overriding
     Java는 다중 상속이 되지 않기 때문에, Thread 클래스를 상속받으면 다른 클래스를 상속받을 수 없다.
     때문에 2번 방법을 주로 이용한다.
+    >> ThreadExample1.java
 - 2) Implementing the Runnable interface, public void run() overriding
     클래스를 만들어야한다. 굳이 클래스를 만들 필요가 없다면 3번 방법을 이용한다.
+    >> ThreadExample2.java
 - 3) Using the Lambda expression(익명 Thread)
+    >> ThreadExample3.java
 
+부모 Thread의 대기 - join(process에서는 wait, thread에서는 join이라고 한다.)
+>> ThreadExample4.java
+
+Thread의 종료 - stop() method is deprecated, use interrupt();
+>> ThreadExample5.java
