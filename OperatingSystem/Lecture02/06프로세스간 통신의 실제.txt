@@ -44,4 +44,19 @@ Java: 쉬운 소켓 프로그래밍 인터페이스를 제공
 Socket class(Server socket, ...): connection-oriented(TCP)
 DatagramSocket: connectionless(UDP)
 MulticastSocket: multiple recipients
->> Ch3_SocketProgrammingExample.java
+>> DateServer.java
+>> DateClient.java
+
+RPC(Remote Procedure Call)
+- Java에서는 RMI(Remote Method Invocation) 로 구현돼 있다.
+- 원격지(서버)에 있는 함수를 클라이언트가 호출하는 것이다.
+- 클라이언트는 서버에 어떤 함수가 있는지 알아야하고, 그것을 stub이라고 한다.
+- 서버에 함수를 호출하기 위해 인자를 넘겨줄 때, 상대 컴퓨터와 호환 문제, 객체 직렬화 등의 문제가 발생한다.
+- 데이터를 정렬(호환성 해결)하는 것을 marshaling이라고 한다. 함수 인자와 리턴 값을 marshaling 하여 주고 받는다.
+
+Quiz
+1) 1
+2) 3 (X) -> 4
+3) 4
+4) 4
+5) 3
