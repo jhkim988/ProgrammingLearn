@@ -40,3 +40,16 @@ Threads in Java
 
 Thread의 종료 - stop() method is deprecated, use interrupt();
 >> ThreadExample5.java
+
+Multi-core System.
+- 병행성 향상
+- single core: thread will be interleaved overtime(시분할, CPU 스케쥴링...)
+- multi core: some threads can run in parallel(동시에 실행)
+- 동시에 실행하면서 문제가 많이 생긴다.
+
+Multi-core System의 어려운 점
+identifying tasks: separate task를 찾아내는 것이 중요하다.
+balance: task를 균형있게 나누어서 thread에 할당한다.
+data splitting
+data dependency
+testing and debugging
