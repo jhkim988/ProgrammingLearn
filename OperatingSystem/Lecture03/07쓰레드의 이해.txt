@@ -53,3 +53,6 @@ balance: task를 균형있게 나누어서 thread에 할당한다.
 data splitting
 data dependency
 testing and debugging
+
+Amdahl's Law: 코어는 무조건 많을수록 좋은가?
+- No

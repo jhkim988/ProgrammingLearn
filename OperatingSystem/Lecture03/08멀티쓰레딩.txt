@@ -1,0 +1,14 @@
+threads: 두 가지 타입이 있다
+- 1) User threads: 사용자 모드에서 사용하는 thread, 직접 core를 조작할 수 없다.
+- 2) Kernel threads: OS가 사용하는 thread, 직접 core를 조작한다.
+
+user thread와 kernal thread의 관계
+1) Many to one Model
+2) One to one Model
+3) Many to many model
+
+3 main thread libraries:
+1) POSIX Pthreads(UNIX LINUX 계열) >> PthreadExample.c
+2) WINDOW thread
+3) Java thread
+
