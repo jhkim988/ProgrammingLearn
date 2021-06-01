@@ -17,3 +17,18 @@ user thread와 kernal thread의 관계
 
 Implicit Threading
 : Excuter Framework, Java
+1) Thread pool을 만든다.
+2) fork() and join()
+3) OpenMP - 컴파일러 지시어를 이용하여 C/C++에서 병렬처리를 간단하게 지원한다.
+4) Grand Central Dispatch(GCD, Apple(MacOS/IOS))
+
+OpenMP
+- parallel regions을 block으로 지정해주면 자동으로 병렬처리 해준다.
+- 컴파일러에게 일을 시킨다.
+>> OpenMPExample1.c
+>> OpenMPExample2.c
+>> OpenMPExample3.c
+>> OpenMPExample3NotParallel.c
+
+실행시간 명령어 - time
+time ./a.out
