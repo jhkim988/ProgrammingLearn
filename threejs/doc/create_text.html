@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Creating Text</title>
+        <style>
+            #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display:block;
+        }
+        </style>
+    </head>
+    <body>
+        <!-- 글자를 추가하는 방법 -->
+        <!-- 1. DOM + CSS -->
+        <div id="info">Description</div>
+
+        <!-- 2. Texture 사용 -->
+        <script>
+            const texture = new THREE.TxtureLoader().load("texture/water.jpg");
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(4, 4);
+        </script>
+    </body>
+</html>
