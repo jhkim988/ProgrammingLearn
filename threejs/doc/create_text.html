@@ -19,12 +19,18 @@
         <!-- 1. DOM + CSS -->
         <div id="info">Description</div>
 
-        <!-- 2. Texture 사용 -->
+        <!-- 2. Texture method 사용 -->
         <script>
             const texture = new THREE.TxtureLoader().load("texture/water.jpg");
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
             texture.repeat.set(4, 4);
+        </script>
+
+        <!-- 4. 절차적 TextGeometry -->
+        <script>
+            new THREE.TextGeometry( text, parameters );
+            // font parameter가 THREE.Font 인스턴스로 설정돼 있어야한다.
         </script>
     </body>
 </html>
