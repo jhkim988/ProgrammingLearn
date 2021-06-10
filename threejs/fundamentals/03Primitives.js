@@ -31,29 +31,50 @@ function main() {
         const material = new THREE.MeshPhongMaterial({color});
         const obj = new THREE.Mesh(geometry, material);
 
+        const windowHalfX = thing.renderer.clientWidth / 2;
+        const windowHalfY = thing.renderer.clientHeight / 2;
+
         // initial rot
         thing.rotX = 0.5;
         thing.rotY = 0.5;
 
-        const controls= new DragControls([obj], thing.camera, thing.renderer.domElement);
+        const mouseDownEvent = e => {
+            e.preventDefault();
+            controls.addEventListener("mousemove", mouseMoveEvent, false);
+            controls.addEventListener("mouseup", mouseUpEvent, false);
+            controls.addEventListener("mouseout", mouseOutEvent, false);
         
-        const start = {x : 0, y : 0};
-        controls.addEventListener("dragstart", e => {
-            start.x = e.object.position.x;
-            start.y = e.object.position.y;
+            mouseXOnMouseDown = e.clientX - windowHalfX;
+            targetRotationOnMouseDownX = targetRotationX;
+    
+            mouseYOnMouseDown = e.clientY - windowHalfY;
+            targetRotationOnMouseDownY = targetRotationY;
+        }
+    
+        const mouseMoveEvent = e => {
+            mouseX = e.clientX - windowHalfX;
+            targetRotationX = (mouseX - mouseXOnMouseDown);
+            mouseY = e.clientY - windowHalfY;
+            targetRotationY = (mouseY - mouseYOnMouseDown);
+        }
+    
+        const mouseUpEvent = e => {
+            controls.removeEventListener("mousemove", mouseMoveEvent, false);
+            controls.removeEventListener("mouseup", mouseUpEvent, false);
+            controls.removeEventListener("mouseout", mouseOutEvent, false);
+        }
+    
+        const mouseOutEvent = e => {
+            controls.removeEventListener("mousemove", mouseMoveEvent, false);
+            controls.removeEventListener("mouseup", mouseUpEvent, false);
+            controls.removeEventListener("mouseout", mouseOutEvent, false);
+        }
+        
+        const controls = new DragControls([obj], thing.camera, thing.renderer.domElement);
 
-            console.log('start: ', start.x, start.y)
-        })
-        controls.addEventListener("drag", e => {
-            thing.rotX = e.object.position.x - start.x;
-            thing.rotY = e.object.position.y - start.y;
-
-            console.log('thing.rot', thing.rotX, thing.rotY);
-        });
-
+        controls.addEventListener("mousedown", mouseDownEvent, false);
         thing.scene.add(obj);
         thing.obj = obj;
-
         return thing;
     }
 
@@ -78,8 +99,8 @@ function main() {
             camera.updateProjectionMatrix();
         }
 
-        thing.obj.rotation.y = thing.rotX * time * 0.001;
-        thing.obj.rotation.x = thing.rotY * time * 0.001;
+        // thing.obj.rotation.x = thing.rotX * time * 0.001;
+        thing.obj.rotation.y = thing.rotY * time * 0.001;
 
         thing.renderer.render(thing.scene, thing.camera);
         requestAnimationFrame(render);
