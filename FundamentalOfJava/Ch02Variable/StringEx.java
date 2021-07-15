@@ -12,7 +12,7 @@ public class StringEx {
         
         // 참조변수는 null 또는 객체의 주소를 값으로 갖는다.
         // 참조변수의 초기화
-        Date today = new Date(); // 객체를 생성하는 연산자 new의 결과는 객체의 주소이다.
+        // Date today = new Date(); // 객체를 생성하는 연산자 new의 결과는 객체의 주소이다.
         // JVM이 32bit가 아니라 64bit라면 참조형 변수의 크기는 8byte가 된다.
 
         // char는 내부적으로 정수로 저장하기 때문에 정수형과 다르지 않으며, 정수형 실수형과 연산도 가능하다.
