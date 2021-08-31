@@ -98,7 +98,7 @@
     return x = x + 1;
   }
   var a = 3;
-  var b = add(a); // a의 복사본을 함수에 전달하여 x에 할당된다. 값의 전달
+  var b = add1(a); // a의 복사본을 함수에 전달하여 x에 할당된다. 값의 전달
   console.log("a = " + a + ", b = " + b);
 }
 
@@ -162,4 +162,90 @@
   }
   f();
   console.log(a); // global
+}
+
+{
+  // 함수 안에서의 변수 선언과 변수 끌어올림(호이스팅)
+  function f() {
+    console.log(a); // 호이스팅이 일어나서 local이 출력된다. undefined가 아니다.
+    var a = "local";
+    console.log(a);
+    return a;
+  }
+}
+
+{
+  // 함수 안에서의 변수 선언 생략
+  function f() { // 함수 내부에 a를 선언하지 않았다. a는 전역변수가 된다.
+    a = "local";
+    console.log(a);
+    return a;
+  }
+  f();
+  console.log("Here:" + a);
+}
+
+{
+  // 블록 유효 범위: let, const
+  // let은 변수 선언, const는 상수 선언
+  let x = "outer x";
+  {
+    let x = "inner x";
+    let y = "innter y";
+    console.log(x); // inner x
+    console.log(y); // inner y
+  }
+  console.log(x); // outer x
+  // console.log(y); // ReferenceError
+
+  // JS 엔진은 var로 선언한 변수는 선언문을 평가하기 전에 undefined로 초기화한다.(호이스팅)
+  // let과 const도 호이스팅을 하지만, 선언문을 평가하기 전에 undefined로 초기화하지 않는다.
+  // 이 기간을 Temporal Dead Zone(TDZ)라고 한다.
+}
+
+{
+  // 함수 리터럴로 함수 정의하기
+  var square = function(x) {
+    return x * x;
+  };
+  // 여기서 우변 function(x) {...} 는 함수 리터럴이다. 무명함수/익명함수라고 한다.
+  // 함수 선언문에는 세미콜론을 붙일 필요가 없지만, 함수 리터럴에는 붙여야 한다.
+  // 함수 선언문과 리터럴 모두 내부적으로 square 변수에 함수 객체의 참조를 저장한다.
+  // 함수 선언문으로 정의한 함수는 호이스팅을 하지만, 함수 리터럴로 정의한 함수는 호이스팅을 하지 않는다.
+
+  {
+    // console.log(squre(3)); // 호이스팅이 발생하지 않아 에러가 난다. 
+    var square = function(x) {return x * x;};
+  }
+
+  // 익명함수에 이름을 붙일 수 있지만, 함수 안에서만 유효하다.
+  var sqaure = function sq(x) {return x * x;};
+}
+
+{
+  // 객체의 메서드
+  // 객체의 프로퍼티 중에서 함수 객체의 참조를 값으로 담고 있는 프로퍼티를 메서드라고 부른다.
+  // 메서드를 정의할 때는 프로퍼티 값으로 함수 리터럴을 대입한다.
+  var circle = {
+    center: {x : 1.0, y : 2.0},
+    radius: 2.5,
+    area: function() {
+      // 함수 객체 안에 적힌 this는 그 함수를 메서드로 갖고 있는 객체(여기서는 circle)을 가리킨다.
+      return Math.PI * this.radius * this.radius;
+    }
+  }
+
+  console.log(circle.area());
+
+  // 메서드도 프로퍼티이므로, 추가할 수 있다.
+  circle.translate = function(a, b) {
+    this.center.x = this.center.x + a;
+    this.center.y = this.center.y + b;
+  }
+
+  circle.translate(1, 2);
+  console.log(circle.center);
+
+  // 메서드는 일반적으로 메서드가 속한 객체 내부 데이터의 상태를 바꾸는 용도로 사용한다.
+  // C++/Java 등에서는 객체 안의 데이터와 메서드를 별개로 다루지만, JS에서는 모두 프로퍼티로 똑같다.
 }
