@@ -90,3 +90,76 @@
   // }
   // 선언문이 아니기 때문에 위 대신 아래를 사용하면 에러가 난다. 
 }
+
+{
+  // 참조에 의한 호출과 값에 의한 호출
+  // 함수는 원시값을 인수로 넘겼을 때와 객체를 인수로 넘겼을 때 다르게 동작한다.
+  function add1(x) {
+    return x = x + 1;
+  }
+  var a = 3;
+  var b = add(a); // a의 복사본을 함수에 전달하여 x에 할당된다. 값의 전달
+  console.log("a = " + a + ", b = " + b);
+}
+
+{
+  // 객체가 인수인 경우
+  function add1(p) {
+    p.x = p.x + 1;
+    p.y = p.y + 1;
+    return p;
+  }
+
+  var a = {x: 3, y: 4}; // a에 {...}의 참조가 저장돼 있다.
+  var b = add1(a); // 인자에 참조를 전달한다. 같은 객체를 참조하고 있다. 수정하면 a도 바뀐다.
+  console.log(a, b);
+}
+
+{
+  // 인수 여러 개를 우아하게 전달하는 방법
+  // 인수 개수가 많아지면 다음과 같은 문제가 발생한다.
+  // 1. 인수의 순서를 착각하기 쉽다.
+  // 2. 인수 개수를 바꾸면 함수의 호출 방법이 바뀌므로, 프로그램 전체를 수정해야한다.
+  // 객체의 프로퍼티에 인수를 담아서 넘기면 이러한 문제를 해결할 수 있다.
+
+  function setBallProperties(x, y, vx, vy, radius) {
+    // do something
+  }
+  setBallProperties(0, 0, 10, 15, 5);
+  var parameters = {
+    x: 0,
+    y: 0,
+    vx: 10,
+    vy: 15,
+    radius: 5
+  };
+
+  function setBallProperties1(params) {
+    // do something
+  }
+  setBallProperties1(parameters);
+}
+
+{
+  // 변수의 유효범위 scope
+  // 유효범위를 결정하는 두 가지 방법:
+  // 어휘적 범위(lexical scope): 프로그램의 구문만으로 유효범위를 정한다.
+  // 동적 범위(dynamic scope): 프로그램 실행 중에 유효범위를 정한다.
+  // 전역변수 - 지역변수
+
+  // 전역변수: 함수 바깥에서 선언된 변수, 유효범위가 전체 프로그램
+  // 지역변수: 함수 안에서 선언된 변수, 유효 범윈는 변수가 선언된 함수 내부
+  // 프로그램의 다른 부분에서 선언된 이름이 같은 변수와 충돌하지 않도록 하기 위해서 유효범위를 설정한다.
+
+  // 전역변수와 지역변수 이름이 같으면 두 변수가 충돌한다.
+  // 이 때는 전역변수를 숨기고 지역변수를 사용하게 된다.\
+
+  var a = "global";
+  function f() {
+    var a = "local";
+    console.log(a); // local
+    return a;
+  }
+  f();
+  console.log(a); // global
+}
