@@ -1,3 +1,4 @@
 *.class
 *.out
 threejs/node_modules/
+.vscode/

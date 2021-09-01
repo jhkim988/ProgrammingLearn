@@ -9,7 +9,7 @@ public class FlowEx2 {
     String tmp = scanner.nextLine();
     input = Integer.parseInt(tmp);
 
-    if (intput == 0) 
+    if (input == 0) 
       System.out.println("입력하신 숫자는 0입니다.");
     System.out.printf("입력하신 숫자는 %d입니다.\n", input);
   }
