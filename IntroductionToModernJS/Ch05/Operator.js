@@ -104,3 +104,126 @@ console.log(msg);
 function stringToArray(s) {
   return s.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[^\uD800-\uDFFF]/g) || [];
 }
+
+// 논리연산자와 관계연산자
+// ==: 좌우 피연산자의 타입을 변환한 다음에 같은지 느슨하게 비교한다.
+// 1. 좌우 피연산자의 타입이 같을 때, 값이 같으면 true, 다르면 false
+// 객체 타입 변수의 값이 같은지를 판별하는 행위는, 같은 객체를 가리키는지 판별하는 것과 같다.
+var a = [1, 2, 3];
+var b = [1, 2, 3];
+var c = a;
+console.log(a == b); // false
+console.log(a == c); // true
+// 2. 좌우 피연산자의 값이 다를 때, 같은 타입이 되도록 타입을 변환한 다음에 판별한다.
+// undefined와 null은 같은 것으로 친다.
+// 한쪽이 숫자고, 다른 한쪽이 문자열이면 문자열을 숫자로 변환해서 비교한다.
+// 한쪽이 논리값이면 true는 1로, false는 0으로 변환하여 비교한다.
+// 한쪽이 객체이고, 다른 한쪽이 숫자/문자열이면, 객체를 toString이나 valueOf 메서드를 사용하여 원시타입으로 변환한 다음 비교한다.
+// 위의 규칙에 벗어나면 모두 false
+console.log(null == undefined); // true
+console.log(1 == "1"); // true
+console.log("0xff" == 255); // true
+console.log(true == 1); // true
+console.log(true == "1"); // true
+console.log((new String("a")) == "a"); // true, toString, valueOf
+console.log((new Number(2)) == 2); // true, valueOf
+console.log([2] == 2); // true, valueOf
+
+// ===: 타입을 변환하지 않은 상태의 두 값을 엄격하게 비교한다.
+// NaN은 모든 값과 같지 않다. (NaN === NaN: false)
+// 값이 NaN인지 판별하는 방법은 isNaN 메서드를 사용하면 된다.
+
+// 논리 연산자
+// &&, ||, !
+// 피연산자가 논리값이 아니라면 필요에 따라 타입을 변환한다.
+// 0, -0, 빈문자열(""), NaN, null, undefined: false
+// 0을 제외한 숫자, 빈 문자열을 제외한 문자열, 모든 객체, 심벌: true
+// short-circuit evalutaion: &&, ||의 경우 앞의 피연산자만으로 값이 결정되면 뒤의 피연산자를 계산하지 않는다.
+// &&와 || 연산자는 ""마지막으로 평가한 피연산자 값을 반환한다"" (C/Java처럼 true false 반환이 아니다.)
+
+// &&를 이용하면 객체가 null인지 아닌지 확인하고자 할 때 유용하다.
+var p = null;
+p && p.name // null, p가 false로 평가되므로 p를 반환한다. 우변은 평가하지 않음
+p = {name : "Tom", age: 18};
+p && p.name; // Tom, p가 true로 평가되므로 p.name을 반환한다.
+
+// ||을 이용하면 null/undefined가 아닌 값을 선택하고자 할 때 유용하다.
+var time = time_interval || animationSettings.time || 33;
+
+function f(x) { // 함수의 초깃값을 설정할 때 유용하게 사용할 수 있다.
+  x = x || 100;
+}
+
+f(); // x가 undefined이므로 x에 100이 할당된다.
+f(2); // x가 2이다.
+// 주의해야할 점: 0이나 ""등을 넘기면 100이 그대로 사용된다. 
+
+// bit 연산
+// 비트논리연산 / 비트 시프트 연산
+// &, |, ^, ~
+// <<, >>
+
+// 기타 연산자
+// typeof: 데이터 타입을 조사한다.
+// ? : : 조건 연산자
+// void: 정의되지 않은 값을 반환한다.
+// , : 왼쪽에서 오른쪽 순서대로 피연산자를 연속해서 실행한다.
+// delete: 객체의 프로퍼티나 배열 요소를 제거한다.
+// new : 객체를 생성한다.
+// in : 객체 프로퍼티의 포함 여부를 확인한다.
+// instanceof: 객체의 종류를 확인한다.
+// eval(): 인수로 받은 문자열을 자바스크립트 코드로 실행한다.
+
+var s = "ABC";
+console.log(typeof s); // string
+// typeof는 함수 이외의 객체에 대해 object를 반환하므로, 객체 유형은 파악할 수 없다.
+// 객체 유형을 조사할 때는 instanceof 연산자와 객체의 constructor 프로퍼티를 사용한다.
+
+// 조건 연산자
+var parity = (a % 2 == 0) ? "짝수" : "홀수";
+
+// eval()
+// 함수를 호출한 유표 범위 안에 있는 변수를 사용한다. (일반 함수처럼 함수 유효범위를 만들지 않는다.)
+// 보안 문제가 있다, 속도가 느리다.
+
+// 명시적 타입 변환
+// 숫자를 문자열로
+// 1. 숫자 + 문자열: 문자열로 바뀐다.
+10 + "cookies"; // "10cookies"
+100 + ""; "100"
+("0000" + 12).slice(-4); // 0012
+
+// 2. Number 객체의 메서드를 활용하는 방법
+var n = 26;
+n.toString(); // "26", 10진수 문자열
+n.toString(2); // "11010" 2진수 문자열
+n.toString(16); // "1a" 16진수 문자열
+(26).toString(16); // "1a"
+
+var x = 1234.567;
+x.toString(); // "1234.567"
+x.toString(16); // "4d2.9126e978d5"
+x.toFixed(0); // 1235
+x.toFixed(2); // 1234.57
+x.toFixed(4); // 1234.5670
+x.toExponential(3); // 1.235e+3
+x.toPrecision(3); // 1.23e+3
+x.toPrecision(5); // 1234.57
+
+// 3. String 함수를 활용하는 방법
+// new 연산자를 붙이지 않으면 일반적인 함수로 활용할 수 있다. 반환값은 String 객체가 아닌 문자열이다.
+// String 함수는 모든 데이터 타입을 문자열 타입으로 바꾼다.
+
+// 문자열을 숫자로 변환하기
+var s = "2";
+s - 0; // 2
++s; // 2
+
+// parseInt, parseFlot 메서드
+// 숫자 이후의 문자는 무시한다. 해석할 숫자가 앞에 없으면 NaN
+// 두 번째 인자로 기수를 설정할 수 있다.(2~36진법)
+// Number 함수 활용, 10진수만 처리 가능
+
+// 논리값으로 변환
+!!x;
+Boolean(x);
