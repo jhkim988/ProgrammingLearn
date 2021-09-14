@@ -20,7 +20,7 @@ public class ArrayEx2 {
     System.out.println();
     System.out.println(Arrays.toString(iArr2));
     System.out.println(Arrays.toString(iArr3));
-    SYstem.out.println(Arrays.toString(chArr));
+    System.out.println(Arrays.toString(chArr));
     System.out.println(iArr3); // I@-------
     System.out.println(chArr); // println 메서드는 ch[]를 출력할 수 있다.
   }

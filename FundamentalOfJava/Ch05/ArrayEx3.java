@@ -8,7 +8,7 @@ public class ArrayEx3 {
     System.out.println("[변경전]");
     System.out.println("arr.l;ength: " + arr.length);
     for (int i = 0; i < arr.length; i++) {
-      SYstem.out.println("arr[" + i + "]: " + arr[i]);
+      System.out.println("arr[" + i + "]: " + arr[i]);
     }
 
     int[] tmp = new int[arr.length * 2];
@@ -21,7 +21,7 @@ public class ArrayEx3 {
     System.out.println("변경후");
     System.out.println("arr.l;ength: " + arr.length);
     for (int i = 0; i < arr.length; i++) {
-      SYstem.out.println("arr[" + i + "]: " + arr[i]);
+      System.out.println("arr[" + i + "]: " + arr[i]);
     }
   }  
 }
