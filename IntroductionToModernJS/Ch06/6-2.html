@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>시각을 콘솔에 표시하기</title>
+    <script>
+      // head의 자식요소로 배치한다.
+      // DOM을 사용하면 body 요소의 바깥에서 body 요소 안에 있는 HTMl 요소를 조작할 수 있다.
+      // head - script가 실행되는 시점은 body를 읽어들이기 전이다.
+      // 이 시점에는 조작하고자 하는 요소가 없으므로 이벤트 처리기를 등록할 수 없다.
+      // 따라서 작업 실행 시점을 HTML 문서 전체를 읽어 들인 이후로 바꾼다.
+      // Window 객체의 onload 프로퍼티에 이벤트 처리기를 등록하는 작업을 수행하는 초기 설정 함수를 정의한다.
+      
+      // 웹브라우저는 HTML 문서를 위에서 아래로 차례대로 해석한다. 중간에 script를 만나면 코드를 해석해서 실행한다.
+      // 그 동안에 HTML 문서 해석이 멈춘다.
+      
+      function displayTime() {
+        var d = new Date();
+        console.log(`현재 시각은 ${d.toLocaleString()} 입니다.`);
+      }
+      // window 객체의 onloae 프로퍼티에 함수를 저장한다.
+      // 웹 브라우저가 문서를 모두 읽어들이면 함수를 실행한다.
+      window.onload = function() {
+        // input 요소의 객체를 가져온다.
+        // id가 button인 요소를 찾는다. 찾지 못하면 null을 반환한다.
+        var button = document.getElementById("button");
+        // input 요소를 클릭했을 때 동작하는 이벤트 처리기를 등록한다.
+        button.onclick = displayTime; // 이벤트 처리기 프로퍼티
+        // 이벤트 처리기를 제거하기 위해서는 null을 대입해준다. (기본적으로 등록하지 않으면 null이다.)
+      }
+    </script>
+  </head>
+  <body>
+    <input type = "button" value = "click" id = "button">
+  </body>
+</html>

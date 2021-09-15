@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>시각을 콘솔에 표시하기</title>
+    <script>
+      function displayTime() {
+        var d = new Date();
+        console.log(`현재시각은 ${d.toLocaleString()}입니다.`);
+      }
+    </script>
+  </head>
+  <body>
+    <input type = "button" value = "click" onclick = "displayTime()">
+    <!-- onclick = "displayTime()" 부분이 이벤트 처리기 속성이다. -->
+    <!-- 
+      onclick: 마우스로 클릭했을 때
+      ondblclick: 마우스로 더블클릭 했을 때
+      onmousedown: 마우스 버튼을 눌렀을 때
+      onmouseup: 마우스 버튼에서 손가락을 뗐을 때
+      onmousemove: 마우스 포인터가 HTML 요소 위에서 움직일 때
+      onmouseout: 마우스 포인터가 HTML 요소를 벗어났을 때
+      onmouseover: 마우스 포인터가 HTML 요소 위에 놓여있을 때
+      onkeydown: 키보드의 키를 눌렀을 때(Keycode)
+      onkeypress: 키보드의 키를 누르고 손가락을 떼었을 때(ASCII)
+      onkeyup: 키보드 키에서 손가락을 떼었을 때(Keycode)
+      onchange: input 요소의 값이 바뀌었을 때
+      onblur: input 요소가 포커스를 잃었을 때
+      onfocus: input 요소에 포커스를 맞췄을 때
+      onselect: 텍스트 필드 등의 텍스트를 선택했을 때
+      onsubmit: 폼 제출 버튼을 눌렀을 때
+      onload: HTML을 모두 읽어 들였을 때
+      onunloadWeb: 웹 페이지가 메모리에서 내려갈 때(다른 페이지로 전환 등)
+      onabort: 페이지나 이미지 읽어 들이기가 중단되었을 때
+      onerror: 페이지나 이미지를 읽는 중 오류가 발생했을 때
+      onresize: HTML 요소 크기가 바뀌었을 때
+
+      실행할 JS 문장을 문자열로 만들어 대입한다.
+      문장을 여러 개 작성할 때는 문장과 문장을 세미콜론으루 구분한 문자열을 사용한다.
+      HTML 코드와 JS 코드가 뒤섞인다.
+    -->
+  </body>
+</html>
