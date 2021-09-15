@@ -52,3 +52,7 @@ console.dir(p);
 console.time("answer_time");
 alert("확인 버튼을 누르십시오.");
 console.timeEnd("answer_time");
+
+// document.write()
+// 인수로 받은 문자열을 HTML 문서의 body 요소 안에 출력한다.
+// document.write("<p>안녕 세상아</p>");
