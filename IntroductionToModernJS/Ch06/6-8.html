@@ -14,29 +14,35 @@
         var ctx = canvas.getContext("2d");
         var img = new Image();
         img.onload = function() {
+          canvas.setAttribute("width", img.width);
+          canvas.setAttribute("height", img.height);
           ctx.drawImage(img, 0, 0);
           
           var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          console.dir(imageData);
           imageData.getRGBA = function(sw, sh, i) {
-            return imageData[imageData.width * sh * 4 + 4 * sw + i];
+            return this.data[imageData.width * sh * 4 + 4 * sw + i];
           }
 
           var rgb = document.getElementById("rgb");
           canvas.onclick = function(event) {
             var x = event.offsetX;
-            var y = event.offSetY;
-            rgb.innerHTML = `R: ${to3digit(imageData.getRGBA(x, y, 0))} G: ${to3digit(imageData.getRGBA(x, y, 1))} B: ${to3digit(imageData.getRGBA(x, y, 2))}`;
+            var y = event.offsetY;
+            rgb.innerHTML = `Click: (${x}, ${y}) / R: ${to3digit(imageData.getRGBA(x, y, 0))} G: ${to3digit(imageData.getRGBA(x, y, 1))} B: ${to3digit(imageData.getRGBA(x, y, 2))}`;
           }
         }
         img.src = "./cat.jpg";
         function to3digit(n) {
           return ("000" + n).slice(-3);
         }
+
+        // ctx.createImageData(width, height); // 새로운 imageData 객체를 만든다. 투명한 검정색으로 초기화 돼 있다.
+        // ctx.createImageData(anotherImageData); // anotherImageData와 크기가 같은 이미지를 담을 수 있는 imageData 객체를 생성한다. 초기화는 위와 같다.
       }
     </script>
   </head>
   <body>
-    <canvas id="myCanvas" width="1024" height="800"></canvas>
+    <canvas id="myCanvas" width="1024" height="640"></canvas>
     <div><output id="rgb"></output></div>
   </body>
 </html>
