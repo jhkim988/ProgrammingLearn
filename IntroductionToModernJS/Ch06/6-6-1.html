@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>Canvas</title>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.lineWidth = 10; // 선 두께
+        // ctx.lineCap = "butt"; // "square, round", 열린 패스의 종단점 모양 설정
+        // ctx.lineJoin = "miter"; // "round, "bevel", 패스의 정점 모양
+        ctx.strokeStyle = "red";
+        ctx.fillStyle = "blue";
+
+        ctx.globalAlpha = 0.6; // 투명도, 도형 각각에 설정하려면 strokeStyle, fillStyle 프로퍼티에 CSS의 rgba 함수를 문자열로 입력한다.
+        ctx.strokeRect(10, 10, 100, 80);
+        ctx.fillRect(150, 10, 100, 80);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id = "myCanvas"></canvas>
+  </body>
+</html>

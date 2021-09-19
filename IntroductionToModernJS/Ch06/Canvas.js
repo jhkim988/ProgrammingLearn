@@ -9,3 +9,17 @@
 
 // 패스로 그리기
 // 6-5-2.html ~ 6-5-7.html
+
+// graphics 속성 설정
+// 6-6-1.html
+
+// 그림 읽어 들이기
+// 6-7.html
+
+// 픽셀 제어
+// getImageData(x, y, width, height);
+// 이미지 내부에서 (x, y, width, height) 영역의 imageData 객체를 가져온다.
+// imageData 의 프로퍼티: width, height, data(픽셀값이 저장돼 있는 1차원 배열(unsigned 8bit int[]))
+// data는 RGBA값이 하나씩 들어있다. 따라서 width * height * 4 크기의 배열이다.
+// getImageData() 역시 크로스 도메인 이슈에 따른 정보 유출을 방지하기 위해 origin-clean한 canvas 요소에서만 작동한다.
+// 6-8.html

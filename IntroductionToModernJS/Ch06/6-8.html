@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>픽셀의 RGB 값</title>
+    <style>
+      canvas {
+        border: 2px solid gray;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var img = new Image();
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0);
+          
+          var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          imageData.getRGBA = function(sw, sh, i) {
+            return imageData[imageData.width * sh * 4 + 4 * sw + i];
+          }
+
+          var rgb = document.getElementById("rgb");
+          canvas.onclick = function(event) {
+            var x = event.offsetX;
+            var y = event.offSetY;
+            rgb.innerHTML = `R: ${to3digit(imageData.getRGBA(x, y, 0))} G: ${to3digit(imageData.getRGBA(x, y, 1))} B: ${to3digit(imageData.getRGBA(x, y, 2))}`;
+          }
+        }
+        img.src = "./cat.jpg";
+        function to3digit(n) {
+          return ("000" + n).slice(-3);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1024" height="800"></canvas>
+    <div><output id="rgb"></output></div>
+  </body>
+</html>

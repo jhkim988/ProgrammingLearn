@@ -2,3 +2,4 @@
 *.out
 threejs/node_modules/
 .vscode/
+*.jpg
