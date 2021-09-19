@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "UTF-8">
+    <title>Canvas 기본</title>
+    <script src = "6-6.js"></script>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("mycanvas");
+        var ctx = canvas.getContext("2d");
+        strokeRoundedRect(ctx, 10, 10, 100, 80, 10);
+        strokeRoundedRect(ctx, 150, 10, 100, 80, 30);
+      }
+    </script>  
+  </head>
+  <body>
+    <canvas id = "mycanvas" width = "640" height = "400"></canvas>
+    <!-- 
+      1. canvas 요소 배치
+      width, height의 단위는 픽셀이며, 300, 150이 기본값이다. DOM을 이용하여 width, height를 바꿀 수도 있다.
+     -->
+  </body>
+</html>
