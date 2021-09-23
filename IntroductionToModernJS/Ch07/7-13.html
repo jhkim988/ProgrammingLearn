@@ -91,20 +91,21 @@
         var dy = (ymax - ymin) / h;
 
         // 반지름 2 안에 있던 횟수로 색을 구분한다.
-        var color = [];
+        var color = []; // 색깔 집합, index가 커질수록 흰색에 가까워진다.
         color[0] = "black"; // 집합의 점 black
         var L = 255, dL = 255 / maxit;
         for (var i = maxit; i > 0; i--) {
           color[i] = "rgb(255, "+Math.floor(L)+", 255)";
           L -= dL;
         }
-
+        // view 좌표의 모든 (i, j)에 대하여
         for(var i = 0; i < w; i++) {
           var x = xmin + i * dx;
           for (var j = 0; j < h; j++) {
             var y = ymin + j * dy;
             var a = x, b = y;
             var a2 = a * a, b2 = b * b;
+            // 복소수 c (x, y) <-> (i, j)에 대해 |z_n| <= 2 인지 체크한다.
             for (var count = maxit; a2 + b2 <= 4 && count; count--) {
               b = 2 * a * b + y;
               a = a2 - b2 + x;
