@@ -4,39 +4,6 @@
     <meta charset="UTF-8">
     <title>망델브로 집합 그리기</title>
     <script>
-      // 월드 좌표계: 실제 (x, y) 좌표계
-      // 뷰 좌표계: 그림을 그릴 Canvas의 좌표계
-      // 쉽게 계산하기 위해 월드 좌표계를 뷰 좌표계에 맞춘다.
-      // xmin, xmax, ymin, ymax: 월드 좌표계의 범위
-      // w, h: canvas의 너비, 높이
-      // 뷰 좌표계의 원점(왼쪽 위)은 월드 좌표계의 (xmin, ymin)에 대응하게 된다.
-      
-      // 월드 좌표계: (x, y) / 뷰 좌표계: (i, j)
-      // dx = (xmax - xmin) / w;
-      // dy = (ymax - ymin) / h;
-      // x = xmin + i * dx;
-      // y = ymin + j * dy;
-
-      // xc, yc: 마우스로 클릭한 점
-      // mag: 사용자 입력 배율
-      // xmin = xc - 1 / mag;
-      // xmax = xc + 1 / mag;
-      // y는 종횡비를 맞추기 위해 아래와 같이 계산한다.
-      // ymin = yc - (xmax - xmin) * h / w / 2;
-      // ymax = yc + (xmax - xmin) * h / w / 2;
-
-      // 아래 두 명제는 필요충분조건이다.
-      // 복소수 c가 망델브로 집합에 속한다 (def: z_0 = 0, z_(n+1) = z_n ^ 2 + c 가 수렴한다.)
-      // 모든 자연수 n에 대하여 |z_n| <= 2 이다.
-      
-      // 모든 자연수를 비교할 수 없기 때문에 n의 상한선 maxit을 정하고, maxit 이하의 모든 n에 대하여 성립하면
-      // c가 망델브로 집합에 속하는 것으로 한다.
-
-      // c = x + yi;
-      // z_n = a + bi;
-      // z_(n+1) = a' + b'i = a*a + 2*a*b*i - b*b + x + i*y;
-      // |z_(n+1)| <= 2 <=> a'^2 + b'^2 <= 4
-    
       window.onload = function() {
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
@@ -55,13 +22,6 @@
           xc += (2 * ix / width - 1) / mag;
           yc += (2 * iy - height) / mag / width;
           mag = parseFloat(document.getElementById("magnification").value);
-          
-          // 아래 식을 xmin xmax ymin ymax 없이 기술한 것이 위의 식이다.
-          // xmin = xc - 1/mag 등...
-          // dx = (xmax - xmin) / w;
-          // dy = (ymax - ymin) / h;
-          // xc = xmin + ix * dx;
-          // yc = ymin + iy * dy;
           draw();
         };
         function draw() {
@@ -80,42 +40,101 @@
         var h = c.canvas.height;
         var xmin = xc - 1 / mag;
         var xmax = xc + 1 / mag;
-
-        // 같은 식:
         var ymin = yc - (xmax - xmin) * h / w / 2;
         var ymax = yc + (xmax - xmin) * h / w / 2;
-        // var ymin = yc - h / mag / w;
-        // var ymax = yc + h / mag / w;
         var dx = (xmax - xmin) / w;
         var dy = (ymax - ymin) / h;
 
-        // 반지름 2 안에 있던 횟수로 색을 구분한다.
-        var color = []; // 색깔 집합, index가 커질수록 흰색에 가까워진다.
-        color[0] = "black"; // 집합의 점 black
-        var L = 255, dL = L / maxit;
-        for (var i = maxit; i > 0; i--) {
-          var val = Math.floor(L);
-          color[i] = `rgb(255, ${val}, 255)`;
-          L -= dL;
+        var maxCount = 0;
+        IterationCounts = [];
+        for (var i = 0; i < w; i++) {
+          IterationCounts[i] = [];
+          for (var j = 0; j < h; j++) {
+            IterationCounts[i][j] = 0;
+          }
         }
-        // view 좌표의 모든 (i, j)에 대하여
+
         for(var i = 0; i < w; i++) {
           var x = xmin + i * dx;
           for (var j = 0; j < h; j++) {
             var y = ymin + j * dy;
             var a = x, b = y;
             var a2 = a * a, b2 = b * b;
-            // 복소수 c (x, y) <-> (i, j)에 대해 |z_n| <= 2 인지 체크한다.
-            for (var count = maxit; a2 + b2 <= 4 && count; count--) {
+            var count = 0;
+            for (count = 0; a2 + b2 <= 4 && count < maxit; count++) {
               b = 2 * a * b + y;
               a = a2 - b2 + x;
               a2 = a * a;
               b2 = b * b;
             }
-            c.fillStyle = color[count];
-            c.fillRect(i, j, 1, 1);
+            IterationCounts[i][j] = count;
+            if (maxCount < count) {
+              maxCount = count;
+            }
+            // c.fillStyle = color[count];
+            // c.fillRect(i, j, 1, 1);
           }
         }
+        NumIteratorPerPixel = [];
+        for (var i = 0; i < maxCount; i++) {
+          NumIteratorPerPixel[i] = 0;
+        }
+        for (var i = 0; i < w; i++) {
+          for (var j = 0; j < h; j++) {
+            NumIteratorPerPixel[IterationCounts[i][j]]++;
+          }
+        }
+        
+        var total = 0;
+        for (var i = 0; i < maxCount; i++) {
+          total += NumIteratorPerPixel[i];
+        }
+
+        hue = [];
+        for (var x = 0; x < w; x++) {
+          hue[x] = [];
+          for (var y = 0; y < h; y++) {
+            hue[x][y] = 0.0;
+          }
+        }
+
+        var mult = Math.pow(16, 6) - 1;
+        for (var x = 0; x < w; x++) {
+          for (var y = 0; y < h; y++) {
+            if (IterationCounts[x][y] == maxit) {
+              c.fillStyle = "black";
+              c.fillRect(x, y, 1, 1);
+              continue;
+            }
+            for (var i = 0; i <= IterationCounts[x][y]; i++) {
+              hue[x][y] += NumIteratorPerPixel[i] / total;
+            }
+            var val = Math.floor(hue[x][y] * mult) * mult;
+            c.fillStyle = getColor(hue[x][y]);
+            c.fillRect(x, y, 1, 1);
+          }
+        }
+        console.log("Complete!");
+      }
+      function getColor(num) {
+        var color = num * 256 * 8;
+        if (color < 256) {
+            return `rgb(255, ${color}, 0)`;
+          } else if (color < 256 * 2) {
+            return `rgb(${256 * 2 - color}, 255, 0)`;
+          } else if (color < 256 * 3) {
+            return `rgb(0, 255, ${color - 256 * 2})`;
+          } else if (color < 256 * 4) {
+            return `rgb(0, ${256 * 4 - color}, 255)`;
+          } else if (color < 256 * 5) {
+            return `rgb(${color - 256 * 4}, 0, 255)`;
+          } else if (color < 256 * 6) {
+            return `rgb(255, 0, ${256 * 6 - color})`;
+          } else if (color < 256 * 7) {
+            return `rgb(255, ${color - 256 * 6}, 0)`;
+          } else {
+            return `rgb(255, 255, ${color - 256 * 7})`;
+          }
       }
     </script>
     <style>
@@ -131,7 +150,7 @@
     </div>
     <div>
       <label>확대 배율: <input id="magnification" type="number" value="0.65"></label>
-      <label>최대 반복 횟수: <input id="maxit" type="number" value="60"></label>
+      <label>최대 반복 횟수: <input id="maxit" type="number" value="100"></label>
       <input id="button" type="button" value="그리기">
     </div>
   </body>
