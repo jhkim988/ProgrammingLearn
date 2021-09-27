@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var width = canvas.width;
+        var height = canvas.height;
+        var mult = 256 * 6;
+        for (var i = 0; i < width; i++) {
+          var color = i * mult / width;
+
+          if (color < 256) {
+            ctx.fillStyle = `rgb(255, ${color}, 0)`;
+          } else if (color < 256 * 2) {
+            ctx.fillStyle = `rgb(${256 * 2 - color}, 255, 0)`;
+          } else if (color < 256 * 3) {
+            ctx.fillStyle = `rgb(0, 255, ${color - 256 * 2})`;
+          } else if (color < 256 * 4) {
+            ctx.fillStyle = `rgb(0, ${256 * 4 - color}, 255)`;
+          } else if (color < 256 * 5) {
+            ctx.fillStyle = `rgb(${color - 256 * 4}, 0, 255)`;
+          } else {
+            ctx.fillStyle = `rgb(255, 0, ${256 * 6 - color})`;
+          }
+          ctx.fillRect(i, 0, 1, height);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1000" height="100"></canvas>
+  </body>
+</html>

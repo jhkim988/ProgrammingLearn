@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>망델브로 집합 그리기</title>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var width = canvas.width;
+        var height= canvas.height;
+        var mag = parseFloat(document.getElementById("magnification").value);
+        // 초기 중심점 설정
+        var xc = -0.6, yc = 0;
+        draw();
+
+        document.getElementById("button").onclick = draw;
+        document.getElementById("myCanvas").onclick = function(event) {
+          var ix = event.offsetX;
+          var iy = event.offsetY;
+          
+          xc += (2 * ix / width - 1) / mag;
+          yc += (2 * iy - height) / mag / width;
+          mag = parseFloat(document.getElementById("magnification").value);
+          draw();
+        };
+        function draw() {
+          var mag = document.getElementById("magnification").value;
+          var maxit = document.getElementById("maxit").value;
+          displayCenter(xc, yc);
+          mandelbrot(ctx, xc, yc, mag, maxit);
+        }
+      };
+      function displayCenter(xc, yc) {
+        document.getElementById("xc").innerHTML = xc.toFixed(3);
+        document.getElementById("yc").innerHTML = yc.toFixed(3);
+      }
+      function mandelbrot(c, xc, yc, mag, maxit) {
+        var w = c.canvas.width;
+        var h = c.canvas.height;
+        var xmin = xc - 1 / mag;
+        var xmax = xc + 1 / mag;
+        var ymin = yc - (xmax - xmin) * h / w / 2;
+        var ymax = yc + (xmax - xmin) * h / w / 2;
+        var dx = (xmax - xmin) / w;
+        var dy = (ymax - ymin) / h;
+
+        var maxCount = 0;
+        IterationCounts = [];
+        for (var i = 0; i < w; i++) {
+          IterationCounts[i] = [];
+          for (var j = 0; j < h; j++) {
+            IterationCounts[i][j] = 0;
+          }
+        }
+
+        for(var i = 0; i < w; i++) {
+          var x = xmin + i * dx;
+          for (var j = 0; j < h; j++) {
+            var y = ymin + j * dy;
+            var a = x, b = y;
+            var a2 = a * a, b2 = b * b;
+            var count = 0;
+            for (count = 0; a2 + b2 <= 4 && count < maxit; count++) {
+              b = 2 * a * b + y;
+              a = a2 - b2 + x;
+              a2 = a * a;
+              b2 = b * b;
+            }
+            IterationCounts[i][j] = count;
+            if (maxCount < count) {
+              maxCount = count;
+            }
+            // c.fillStyle = color[count];
+            // c.fillRect(i, j, 1, 1);
+          }
+        }
+        NumIteratorPerPixel = [];
+        for (var i = 0; i < maxCount; i++) {
+          NumIteratorPerPixel[i] = 0;
+        }
+        for (var i = 0; i < w; i++) {
+          for (var j = 0; j < h; j++) {
+            NumIteratorPerPixel[IterationCounts[i][j]]++;
+          }
+        }
+        
+        var total = 0;
+        for (var i = 0; i < maxCount; i++) {
+          total += NumIteratorPerPixel[i];
+        }
+
+        hue = [];
+        for (var x = 0; x < w; x++) {
+          hue[x] = [];
+          for (var y = 0; y < h; y++) {
+            hue[x][y] = 0.0;
+          }
+        }
+
+        var mult = Math.pow(16, 6) - 1;
+        for (var x = 0; x < w; x++) {
+          for (var y = 0; y < h; y++) {
+            if (IterationCounts[x][y] == maxit) {
+              c.fillStyle = "black";
+              c.fillRect(x, y, 1, 1);
+              continue;
+            }
+            for (var i = 0; i <= IterationCounts[x][y]; i++) {
+              hue[x][y] += NumIteratorPerPixel[i] / total;
+            }
+            var val = Math.floor(hue[x][y] * mult) * mult;
+            c.fillStyle = getColor(hue[x][y]);
+            c.fillRect(x, y, 1, 1);
+          }
+        }
+        console.log("Complete!");
+      }
+      function getColor(num) {
+        var color = num * 256 * 8;
+        if (color < 256) {
+            return `rgb(255, ${color}, 0)`;
+          } else if (color < 256 * 2) {
+            return `rgb(${256 * 2 - color}, 255, 0)`;
+          } else if (color < 256 * 3) {
+            return `rgb(0, 255, ${color - 256 * 2})`;
+          } else if (color < 256 * 4) {
+            return `rgb(0, ${256 * 4 - color}, 255)`;
+          } else if (color < 256 * 5) {
+            return `rgb(${color - 256 * 4}, 0, 255)`;
+          } else if (color < 256 * 6) {
+            return `rgb(255, 0, ${256 * 6 - color})`;
+          } else if (color < 256 * 7) {
+            return `rgb(255, ${color - 256 * 6}, 0)`;
+          } else {
+            return `rgb(255, 255, ${color - 256 * 7})`;
+          }
+      }
+    </script>
+    <style>
+      #myCanvas {border: 1px solid gray}
+      input {margin: 0 10px; width: 60px; text-align: center}
+      div {font-size: small; margin-bottom: 5px;}
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="640"></canvas>
+    <div>
+      중심 좌표(<span id="xc"></span>, <span id="yc"></span>) 마우스로 클릭하면 바뀝니다.
+    </div>
+    <div>
+      <label>확대 배율: <input id="magnification" type="number" value="0.65"></label>
+      <label>최대 반복 횟수: <input id="maxit" type="number" value="100"></label>
+      <input id="button" type="button" value="그리기">
+    </div>
+  </body>
+</html>
