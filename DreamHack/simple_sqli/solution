@@ -1,0 +1,4 @@
+res = query_db(f'select * from users where userid="{userid}" and userpassword="{userpassword}"')
+
+query:
+select * from users where userid="admin" and userpassword="1" or userid="admin"
