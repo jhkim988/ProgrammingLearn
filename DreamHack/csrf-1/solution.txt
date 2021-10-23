@@ -1,0 +1,5 @@
+<img src="/admin/notice_flag?userid=admin">
+
+1. 서버에서 /admin/notice_flag에 접속시키면 전역변수 memo_text에 flag가 추가된다.
+2. /flag를 통해 서버가 /vuln에 접속하게 할 수 있다.
+3. 서버가 /admin/notice_flag에 접속할 수 있도록 userid를 admin으로 설정하여 flag에서 POST 한다.
