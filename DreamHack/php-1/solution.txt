@@ -1,0 +1,20 @@
+취약점:
+index.php에서, <div class="container"></div>에서 include 함수를 실행하고 있다.
+php의 include 함수는 인자로 전달된 파일을 읽은 후 내용을 출력한다.
+파일 내용 중 php코드로 해석되는 구문이 있다면 해당 코드를 실행한다.
+
+따라서 host:port/?page= 뒤에 /var/www/uploads/flag를 실행할 수 있는 코드를 작성한다.
+단순히 host:port/?page=/var/www/uploads/flag를 입력하게 되면 flag.php를 실행하게 된다.
+실행이 아니라 원래의 flag의 코드를 보기 위해서는 php wrapper를 이용해야한다.
+
+file wrapper를 이용하면
+file:///var/www/uploads/flag
+단순히 flag.php를 실행하는 것이 된다.
+
+php wrappe의 filter를 이용하면
+php://filter/convert.base64-encode/resource=/var/www/uploads/flag
+base64로 인코딩한 값을 얻을 수 있다.
+다시 base64로 디코딩하면 원래의 코드를 얻을 수 있고, FLAG 변수와 그 값을 알아낼 수 있다.
+
+expect wrapper는 기본적으로 disable로 설정돼 있기 때문에 테스트해볼 수 없었다.
+만일 가능하다면 cat /var/www/uploads/flag.php 명령어를 직접 실행시켜 코드를 직접 볼 수 있었을 것이다.
