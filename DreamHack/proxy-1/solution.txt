@@ -1,0 +1,36 @@
+프로그램 개요
+1. /
+index.html
+
+2. GET /socket
+socket.html
+
+3. POST /socket
+form에서 host, port, data를 받는다.
+3초의 시간제한을 설정한다.
+host:port에 연결하여 data를 socket으로 전송한다.
+소켓을 통해 받은 데이터를 디코딩하여 retData에 추가하고
+socket_result.html에 retData를 넣어 보여준다.
+
+4. /admin
+여러 가지 제약조건을 통과하면 FLAG를 리턴한다.
+(1) remote_addr이 127.0.0.1
+(2) DreamhackUser 값이 admin 
+(3) request 헤더의 User-Agent가 Admin Browser
+(4) cookie에 admin값이 true
+(5) form 데이터에서 userid가 admin
+
+위의 제약조건을 바탕으로 request 헤더를 data에 직접 작성한다.
+/socket에서 POST로 보낼 값
+
+host: 127.0.0.1
+port: 8000
+data:
+POST /admin HTTP/1.1
+User-Agent: Admin Browser
+DreamhackUser: admin
+cookie: admin=true;
+Content-Type: application/x-www-form-urlencoded;
+Content-length: 12
+
+userid=admin
