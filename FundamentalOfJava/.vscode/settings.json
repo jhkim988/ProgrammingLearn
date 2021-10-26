@@ -1,8 +1,9 @@
 {
   "java.project.sourcePaths": [
+    "Ch06",
     "Ch05",
     "Ch03Operator",
     "Ch02Variable",
-    "Ch06"
+    "Ch07"
   ]
 }
