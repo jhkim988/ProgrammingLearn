@@ -14,7 +14,7 @@ class Point {
     return "x: " + x + ", y : " + y;
   }
 }
-class Point3D extends Point{
+class Point3D extends Point {
   int z;
   Point3D(int x, int y, int z) { 
     // 컴파일러가 이 곳에 super()를 추가한다.
