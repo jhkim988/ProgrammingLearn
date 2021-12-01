@@ -1,5 +1,5 @@
-import java.lang.Math.*;
-import java.lang.System.*;
+import static java.lang.Math.*;
+import static java.lang.System.*;
 
 public class MathEx1 {
   public static void main(String[] args) {
