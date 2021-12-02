@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-
+<p th:text="'hello ' + ${name}">hello! empty</p>
+<!--
+    <p>내용</p>
+    html 파일을 템플릿 엔진을 사용하지 않고(서버 없이) 그대로 실행하면 내용부분이 나온다.
+    템플릿 엔진이 th:text="새로운 내용"으로 바꿔준다.
+-->
 </body>
 </html>
