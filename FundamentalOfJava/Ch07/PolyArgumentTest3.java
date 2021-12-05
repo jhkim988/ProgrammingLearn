@@ -33,7 +33,7 @@ class Buyer {
     }
     money -= p.price;
     bonusPoint += p.bonusPoint;
-    item[i++] = p;
+    item.set(i++, p);
     System.out.println(p + "을/를 구입했습니다.");
   }
   void refund(Product p) {

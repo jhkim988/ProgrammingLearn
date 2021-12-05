@@ -1,4 +1,4 @@
-public class ExcaptionEx13 {
+public class ExceptionEx13 {
   public static void main(String[] args) {
     method1();
   }  

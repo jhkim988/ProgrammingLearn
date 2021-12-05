@@ -21,7 +21,7 @@ public class FighterTest {
 
 class Fighter extends Unit implements Fightable {
   public void move(int x, int y) { /* 내용 생략 */ }
-public void attack(Unit u) { /* 내용 생략 */ }
+  public void attack(Unit u) { /* 내용 생략 */ }
 }
 
 class Unit {
@@ -31,5 +31,5 @@ class Unit {
 }
 interface Fightable extends Movable, Attackable { }
 interface Movable { void move(int x, int y); }
-interface Attackable { void attck(Unit u); }
+interface Attackable { void attack(Unit u); }
 
