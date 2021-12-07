@@ -6,6 +6,7 @@ public class PointTest {
 
 class Point {
   int x, y;
+  Point() { } // 임의로 추가
   Point(int x, int y) {
     this.x = x;
     this.y = y;

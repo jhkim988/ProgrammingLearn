@@ -1,6 +1,4 @@
-import java.util.*;
-
-class Circle implements Clonable {
+class Circle implements Cloneable {
   Point p;
   double r;
   Circle(Point p, double r) {

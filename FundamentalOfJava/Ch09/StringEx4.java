@@ -3,7 +3,7 @@ import java.util.*;
 public class StringEx4 {
   public static void main(String[] args) {
     String animals = "dog,cat,bear";
-    String[] arr = animal.split(",");
+    String[] arr = animals.split(",");
     System.out.println(String.join("-", arr));
 
     StringJoiner sj = new StringJoiner("/", "[", "]");
