@@ -1,0 +1,13 @@
+# no extension
+*
+!*.*
+!*/
+
+*.c
+*.py
+*.php
+**/static
+**/templates
+*.txt
+!solution.*
+
