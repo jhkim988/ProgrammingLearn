@@ -1,0 +1,20 @@
+data_integrity.c
+count++, count--가 한 문장처럼 보이지만
+기계어 레벨에서는 3개의 문장으로 구성된다.
+
+register1 = count
+register1 = register1 + 1
+count = register1
+
+register2 = count
+register2 = register2 + -
+count = register2
+
+세 문장 사이 중 어디서든지 context switching이 발생할 수 있다.
+
+Race condition: 경쟁 상태
+- 여러 개의 프로세스(스레드)가 공유하는 데이터에 동시에 접근/조작할 때
+- 결과가 실행 순서에 따라 달라지는 것
+
+어떤 시점에 데이터를 오직 한 프로세스만 접근 가능하게 하면 해결할 수 있다.
+이를 프로세스 동기화라고 한다.
