@@ -14,5 +14,5 @@ int main() {
   pthread_create(&tid2, NULL, run, NULL);
   pthread_join(tid1, NULL);
   pthread_join(tid2, NULL);
-  printf("%d\n", sum);
+  printf("%d\n", sum); // 20000이 정상적으로 나올 때도 있고, 안 나올 때도 있다.
 }
