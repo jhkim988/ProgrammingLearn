@@ -1,0 +1,13 @@
+Software based solution:
+- 2 processes: Dekker Algorithm
+- n processes: Eisenberg and McGuire's Algorithm
+- Backery Algorithm
+- Peterson's Algorithm
+
+Peterson Algorithm
+- no guarantee
+
+Hardware based solution:
+- memory barriers or fences
+- hardware instructions, compare_and_swap()
+- atomic variables
