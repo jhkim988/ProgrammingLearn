@@ -1,0 +1,36 @@
+Higher Level software toos - CSP
+- mutex locks: 간단한 동기화 툴(두 개의 프로세스 제어)
+- semaphore: n개의 프로세스 제어 가능
+- monitor: 뮤텍스, 세마포어의 단점을 개선한 도구
+---- Mutex(Mutual Exclusion, 상호배제)만 해결 가능 ----
+- liveness: 데드락 문제까지 해결해주는 도구
+
+Mutex Lock
+- 열쇠를 줘서 임계영역에 들어가고, 나갈 땐 다시 반납한다.
+- acquire lock: 열쇠 획득, entry section
+- release lock: 열쇠 반납, exit section
+- boolean available
+- acquire(), release() 과정이 atomically 해야한다.
+
+Busy waiting
+- 무한 루프를 돌면서 기다린다. CPU 낭비
+
+Spinlock: Busy waiting을 이용한 Mutex lock
+- CPU 낭비가 있지만, 멀티 코어 시스템에서는 acquire()를 얻자마자 바로 작업을 재개할 수 있다.
+- Context switching 시간을 아낄 수 있다.
+
+Semaphore: 신호기
+- int semaphore
+- P(), V() Operator
+- wait(), signal()(notify)
+- atomically 하게 구현해야 한다.
+- Mutex에서 available을 true/false 스위칭을 해줬는데
+- 세마포어에서는 구분값을 정수로, 값을 증가/감소 해서 구분한다.
+- 열쇠를 하나 줄 때마다 값을 감소 시키고 S가 0이 되면 busy waiting을 하면서 기다린다.
+- 작업을 마치면 다시 S 값을 1 올린다.(열쇠 반납)
+- Binary Semaphore(S = 1로 초기화): Mutex lock과 똑같다.
+- Counting Semaphore(S = N으로 초기화): 사용 가능한 자원 개수로 초기화해준다.
+- S를 0으로 초기화해서 실행 순서를 지정할 수도 있다.
+- Busy Waiting 문제:
+  - wait()상태일 때 waiting queue에 넣으면 된다.(sleep)
+  - 다른 프로세스가 signal()을 호출하면, waiting queue에 있던 프로세스를 ready queue로 보낸다.(wakeup)

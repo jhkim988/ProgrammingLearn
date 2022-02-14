@@ -9,5 +9,5 @@ Peterson Algorithm
 
 Hardware based solution:
 - memory barriers or fences
-- hardware instructions, compare_and_swap()
+- hardware instructions, test_and_set(), compare_and_swap()
 - atomic variables
