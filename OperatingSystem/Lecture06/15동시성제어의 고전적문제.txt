@@ -1,4 +1,57 @@
 Bounded-Buffer Problem:
 - Producer-Cousumer Problem
+Producer와 Consumer가 크기 n인 버퍼를 공유 데이터로 사용
+
+// mutual exclusion
+semaphore mutex = 1; // binary semaphore
+
+// empty/full buffer를 카운팅할 때 사용하는 변수
+semaphore empty = n; // counting semaphore
+semaphore full = 0; // counting semaphore 
+
+// producer:
+while (true) {
+  // produce an item in next_produced
+
+  wait(empty);
+  wait(mutex);
+  
+  // add next_produced to the buffer
+
+  signal(mutex);
+  signal(full);
+}
+
+// consumer:
+while (true) {
+  wait(full);
+  wait(mutex);
+
+  // remove an item from buffer to next_consumed
+
+  signal(mutex);
+  signal(empty);
+
+  // consume the item in next_consumed
+}
+
+
 Readers-Writers Problem:
+- 2 types Process:
+(1) Reader: read only
+(2) Writer: write (and read, update, ...)
+reader: 여러 개가 동시에 공유 데이터에 접근해도 문제가 발생하지 않는다.
+writer: writer와 다른 프로세스가 동시에 접근하면 문제가 발생한다.
+
+우선순위
+(1st problem) reader는 다른 reader를 기다리지 않는다. (writer가 대기 하고 있기 때문)
+(2nd problem) writer가 대기 중이라면 새로운 reader를 실행하지 않는다.
+
+// semaphore 두 개를 사용한다.(binary semaphore)
+semaphore rw_mutex = 1; // critical section 보호, read_count와 연계
+semaphore mutex = 1; // critical section 보호
+int read_count = 0;
+
+
+
 Dining-Philosophers Problem:
