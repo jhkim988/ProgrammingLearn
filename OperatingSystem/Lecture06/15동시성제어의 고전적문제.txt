@@ -52,6 +52,39 @@ semaphore rw_mutex = 1; // critical section 보호, read_count와 연계
 semaphore mutex = 1; // critical section 보호
 int read_count = 0;
 
+// writer:
+while (true) {
+  wait(rw_mutex);
+  // writing is performed
+  signal(rw_mutex);
+}
 
+// reader:
+while (true) {
+  wait(mutex);
+  { // critical section
+    read_count++;
+    if (read_count == 1) {
+      wait(rw_mutex);
+    }
+  }    
+  signal(mutex);
+  // reading is performed
+
+  wait(mutex);
+  { // critical section
+    read_count--;
+    if (read_count == 0) {
+      signal(rw_mutex);
+    }
+  }
+  signal(mutex);
+}
+
+// if 1 writer is in critical section, 
+// 1 reader: rw_mutex wait
+// n-1 reader: mutex wait
+
+Reader-Writer locks
 
 Dining-Philosophers Problem:
