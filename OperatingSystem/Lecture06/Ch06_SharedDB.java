@@ -36,12 +36,13 @@ public class Ch06_SharedDB {
     }
   }
   public static void main(String[] args) {
-    SharedDB.acquireReadLock();
-    SharedDB.read();
-    SharedDB.releaseReadLock();
-  
-    SharedDB.acquireWriteLock();
-    SharedDB.write();
-    SharedDB.releaseWriteLock();
+    SharedDB sdb = new SharedDB();
+    sdb.acquireReadLock();
+    sdb.read();
+    sdb.releaseReadLock();
+    
+    sdb.acquireWriteLock();
+    sdb.write();
+    sdb.releaseWriteLock();
   }
 }
