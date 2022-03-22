@@ -23,3 +23,11 @@ int main() {
   }
   return 0;
 }
+
+void init() {
+  int i;
+  for (i = 0; i < NUM_PHILS; i++) {
+    state[i] = THINKING;
+    pthread_cond_init(&)
+  }
+}
