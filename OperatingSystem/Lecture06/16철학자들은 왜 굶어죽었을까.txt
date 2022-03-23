@@ -19,3 +19,8 @@ Monitor를 이용한 방법
 : 3가지 상태로 구분한다. thinking -> hungry -> eating
 양 옆의 철학자가 eating 상태가 아닐 때(양 쪽의 젓가락이 사용 가능할 때)만 eating 상태로 전환 가능
 (starvation은 해결할 수 없다.)
+
+thread-safe concurrent
+1. Transactional Memory
+2. OpenMP
+3. Functional Programming Language
