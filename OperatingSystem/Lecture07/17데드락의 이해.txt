@@ -2,7 +2,7 @@
 어떤 프로세스 집합의 모든 프로세스들이 그 집합의 프로세스를 기다리고 있는 상황
 waiting thread가 자신의 상태를 바꿀 수 없는 상황
 
-데드락의 4가지 필수 조건
+데드락의 4가지 필요조건
 1. Mutual Exclusion
 2. Hold and wait(점유한 후에 대기하고 있는 경우)
 3. No preemption(선점 불가)
@@ -13,3 +13,26 @@ node: active thread / resource types 두 가지로 나뉜다.
 edge:
 Ti(active) -> Rj(resource) request edge, Thread Ti가 Resource Rj를 요청했다.
 Rj(resource) -> Ti assignment edge, Resource Rj가 Thread Ti에 할당됐다.
+
+RAG에 사이클이 없으면 dead lock이 발생하지 않는다.
+사이클이 있어도 dead lock이 발생하지 않을 수도 있다.
+
+데드락 핸들링 방법:
+1. 무시
+2. 예방(prevention)하거나 피한다(avoid).
+prevention: 어렵다.
+avoid: Banker's Algorithm
+3. detect and recover
+
+Dead lock Prevention:
+4가지 필요조건 중 적어도 1개가 발생하지 않도록 한다.
+1. Mutual Exclusion
+- 모든 자원이 sharable 하다면 문제가 발생하지 않는다.
+- 대부분 non-sharable 리소스가 존재하기 때문에 그러한 경우는 고려하지 않는다.
+2. Hold and wait
+- 기존 자원을 모두 해제하고 새로운 자원을 요청하는 것은 실질적으로 불가능하다.
+3. No Preemption
+- 선점된 것을 가져오면 자원을 사용하고 있던 쪽에서 문제가 발생할 수 있다. 일반적으로 불가능하다.
+4. Circular Wait
+- 현실적인 방법
+- 리소스에 순서를 부여한다.
