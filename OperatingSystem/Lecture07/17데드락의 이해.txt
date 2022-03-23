@@ -1,0 +1,15 @@
+데드락:
+어떤 프로세스 집합의 모든 프로세스들이 그 집합의 프로세스를 기다리고 있는 상황
+waiting thread가 자신의 상태를 바꿀 수 없는 상황
+
+데드락의 4가지 필수 조건
+1. Mutual Exclusion
+2. Hold and wait(점유한 후에 대기하고 있는 경우)
+3. No preemption(선점 불가)
+4. Circular Wait(환형 대기)
+
+RAG(Resourse-Allocation Graph)
+node: active thread / resource types 두 가지로 나뉜다.
+edge:
+Ti(active) -> Rj(resource) request edge, Thread Ti가 Resource Rj를 요청했다.
+Rj(resource) -> Ti assignment edge, Resource Rj가 Thread Ti에 할당됐다.
