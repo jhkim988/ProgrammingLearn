@@ -40,3 +40,46 @@ Allocation[i][j] = k; thread Ti가 resource Rj의 인스턴스를 k개 점유하
 Need[i][j] = k; thread Ti가 resource Rj의 인스턴스를 (앞으로) k개 더 필요로 한다.
 
 Safety Algorithm:
+ex)
+5 threads T = {T0, T1, T2, T3, T4}
+3 resource types  R = {A, B, C}
+A = 10, B = 5, C = 7 (인스턴스 개수)
+Need[i][j] = MAX[i][j] - alloc[i][j]
+    alloc MAX Avail Need
+    ABC   ABC ABC   ABC
+T0: 010   753 332   743
+T1: 200   322       122
+T2: 302   902       600
+T3: 211   222       011
+T4: 002   433       431
+sum:725
+
+Sequence: <T1 T3 T4 T0 T2>
+
+(1) work, finish vector initialize
+work = (3, 3, 2) (available)
+finish = (false, false, false, false, false) (Ti: false)
+(2) For finish = false && for all i, Need[i] <= work[i]
+(3) work = work + alloc, finish[i] = true
+(4) all finish[i] are true -> safe state
+
+int numTrue = 0;
+int i = 0;
+outer: while (true) {
+  if (finish[i]) continue;
+  for (int j = 0; j < R.length; j++) {
+    if (Need[i][j] > work[j]) {
+      i++;
+      if (i >= T.length) i = 0;
+      continue outer
+    };
+  }
+  for (int j = 0; j < R.length; j++) {
+    work[j] += alloc[j];
+  }
+  finish[i] = true;
+  numTrue++;
+  if (numTrue >= T.length) break;
+  i++;
+  if (i >= T.length) i = 0;
+}
