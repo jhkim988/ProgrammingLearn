@@ -81,13 +81,13 @@ while (true) {
   if (numTrue >= numT) break;
 }
 
+Resource-Request Algorithm:
 new request:
 T1 request, request = (1, 0, 2)
 decide grant or not
-(1) request <= Need[1] (1,2,2)
-(2) request <= available (3,3,2)
-alloc[1] = alloc[1] + request[1] = (3,0,2)
-need[1] = max[1] - alloc[1] = (0,2,0)
+(1) request <= Need[1] (1,2,2), if not, fail
+(2) request <= available (3,3,2), if not, fail
+alloc[1] = alloc[1] + request = (3,0,2)
+need[1] = need[1] - request = (0,2,0)
 available = available - request = (2,3,0)
-
 -> safety algorithm again...
