@@ -91,3 +91,29 @@ alloc[1] = alloc[1] + request = (3,0,2)
 need[1] = need[1] - request = (0,2,0)
 available = available - request = (2,3,0)
 -> safety algorithm again...
+
+request를 할 때마다 safety algorithm을 실행한다.
+그리고 Unsafety 상태지만 Dead Lock이 발생하지 않는 request가 있다.
+시스템에 부하가 갈 수 있다.
+-> Dead Lock 상태를 허용하고, 그것을 감지하도록 한다. 그리고 Dead Lock이 발생하면 복구하도록 한다.
+
+Single Instance: wait-for graph(resource-allocation 그래프의 변형, dependency 그래프)를 유지한다.
+주기적으로 알고리즘을 실행하여, waif-for 그래프에 사이클이 생기는지 판단한다.
+waif-for graph: resource-allocation에서 resource를 제거하고, 스레드의 의존관계만 edge로 연결한다.
+
+Several Instance: Banker's algorithm와 비슷하게 한다.
+- 초기화: Allocation != 0 이면 Finish를 false로, Allocation == 0 이면 Finish를 true로 초기화한다.
+- Need 대신 Request로 비교한다.
+- 알고리즘 실행이 끝나고, Finish가 false인 것이 있으면, Dead Lock이 발생한다.
+
+얼마나 Dead Lock이 자주 발생하는가? - 자주 발생하면, 자주 탐지를 하면 된다.
+스레드의 개수에 따라서 dead lock 사이클이 많아질 수 있다.
+사이클의 개수가 많아질 수 있기 때문에, 어느 사이클에서 Dead Lock이 발생하는지 알 수 없다.
+
+Dead Lock Recovery:
+방법1. 프로세스/스레드 종료
+  1. 모든 Dead Lock Cycle을 재시작시킨다.
+  2. Dead Lock Cycle의 프로세스/스레드를 하나씩 재시작한다.
+방법2. Resource Preemption
+  select victim - roll back - restart
+  Starvation이 발생할 수 있다. (victim의 횟수를 저장하여 하나의 리소스만 집중적으로 victim으로 선택되지 않도록 한다.)
