@@ -1,0 +1,23 @@
+Process: 실행 중인 프로그램
+실행 중: instruction의 집합이 메모리에 올라가 있다는 의미
+메모리: array of bytes와 메모리 주소
+CPU: instruction을 fetch 한다.
+instruction: 메모리에 load, store
+
+메모리에 어떻게 프로세스를 저장하고, 관리할 것인가?
+
+base register, limit register 를 이용하여 제어한다.
+Operating System, Process1, Process2, Process3 가 메모리에 올라가 있다면,
+Process_i 자신에게 허용된 메모리 범위에만 접근 가능해야한다.(Shared Memory가 아닌 이상...)
+base register, limit register를 설정하여 [base, base + limit) 사이의 메모리 주소만 허용한다.
+-> 허용되지 않은 메모리 접근: Segment Fault
+
+Protection of Memory Space: [base, base + limit) 범위인지 체크
+
+Address Binding:
+프로그램마다 메모리 주소를 다루는 방식이 다르다.
+소스코드에서는 compiler 가 메모리 주소를 다룬다.
+(int a = 10; a의 주소는 컴파일러가 정한다.)
+compiler 가 만든 exe 파일도 binary executable 파일로 disk 에 저장돼 있는 것이다.
+이 파일을 메모리에 올리면 프로세스가 된다.
+메모리의 어느 위치에 로딩될지는 OS 커널이 결정한다.
