@@ -12,5 +12,8 @@ public class Main {
 		String msg = g.greet("스프링");
 		System.out.println(msg);
 		ctx.close();
+		// BeanFactory <- AnnotationContext <- AnnotationConfigApplicationContext
+		// BeanFactory, ApplicationContext는 Bean 객체의 생성, 초기화, 보관 제거 등을 관리한다. 이를 Spring 컨테이너라고 표현한다.
+		// 스프링 컨테이너는 내부적으로 빈 객체와 빈 이름을 연결하는 정보를 갖는다.
 	}
 }
