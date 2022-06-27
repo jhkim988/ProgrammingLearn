@@ -11,6 +11,8 @@ public class MainForSpring {
 	private static ApplicationContext ctx = null;
 	public static void main(String[] args) throws IOException {
 		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+//		ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
+//		ctx = new AnnotationConfigApplicationContext(AppConfImport.class);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			System.out.println("명령어를 입력하세요:");
@@ -92,6 +94,11 @@ public class MainForSpring {
 		VersionPrinter versionPrinter = ctx.getBean("versionPrinter", VersionPrinter.class);
 		versionPrinter.print();
 	}
+	// getBean()에서 인자를 틀리는 경우 Exception 발생
+	// 어떤 타입의 빈 객체가 한 개만 존재하면 빈 이름(첫 번째 인자)를 생략할 수 있다.
+	// 주입 대상 객체를 모두 빈 객체로 설정할 필요는 없다.
+	// 다만, 그럴 경우엔 스프링 컨테이너가 객체를 관리하지 않고 getBean으로 객체를 구할 수 없다.
+	// 자동 주입, 라이프사이클 관리 등 스프링 객체관리 기능은 빈으로 등록한 객체에만 이용할 수 있다.
 	private static void printHelp() {
 		System.out.println();
 		System.out.println("잘못도니 명령입니다. 아래 명령어 사용법을 확인하세요.");
