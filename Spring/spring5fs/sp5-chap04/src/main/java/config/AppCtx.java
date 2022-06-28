@@ -40,7 +40,11 @@ public class AppCtx {
 	}
 	@Bean
 	public MemberInfoPrinter infoPrinter() {
-		return new MemberInfoPrinter();
+		MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
+		infoPrinter.setPrinter(memberPrinter2());
+		// 여기서 setter를 통해 주입해도, @Autowired가 붙어있으면 자동주입을 통해 일치하는 빈을 주입한다.
+		// 자동주입과 수동주입을 혼용하면 디버그에 시간이 걸릴 수 있다. 일관되게 사용해야한다.
+		return infoPrinter;
 	}
 	@Bean
 	public VersionPrinter versionPrinter() {
