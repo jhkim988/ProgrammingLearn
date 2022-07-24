@@ -5,8 +5,10 @@ import java.util.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 
 @Aspect
+@Order(2)
 public class ExeTimeAspect {
 	@Pointcut("execution(public * chap07..*(..))")
 	private void publicTarget() {

@@ -4,8 +4,10 @@ import java.util.*;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 
 @Aspect
+@Order(1)
 public class CacheAspect {
 	private Map<Long, Object> cache = new HashMap<>();
 	
