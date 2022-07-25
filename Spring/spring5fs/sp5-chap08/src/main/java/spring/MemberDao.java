@@ -5,6 +5,7 @@ import java.sql.*;
 
 import javax.sql.*;
 import org.springframework.jdbc.core.*;
+import org.springframework.jdbc.support.*;
 
 class MemberRowMapper implements RowMapper<Member>{
 	@Override
@@ -43,7 +44,22 @@ public class MemberDao {
 		return results.isEmpty() ? null : results.get(0);
 	}
 	public void insert(Member member) {
-		
+		KeyHolder keyHolder = new GeneratedKeyHolder(); // 자동으로 생성된 키값을 구해준다.
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+				PreparedStatement pstmt = conn.prepareStatement(
+						"insert into MEMBER (EMAIL, PASSWORD, NAME, REGDATE) values(?, ?, ?, ?)",
+						new String[] {"ID"});
+				pstmt.setString(1,  member.getEmail());
+				pstmt.setString(2,  member.getPassword());
+				pstmt.setString(3,  member.getName());
+				pstmt.setTimestamp(4, Timestamp.valueOf(member.getRegisterDateTime()));
+				return pstmt;
+			}
+		}, keyHolder);
+		Number keyValue = keyHolder.getKey();
+		member.setId(keyValue.longValue());
 	}
 	public void update(Member member) {
 		jdbcTemplate.update("update Member set NAME = ?, PASSWORD = ? WHERE EMAIL = ?",
