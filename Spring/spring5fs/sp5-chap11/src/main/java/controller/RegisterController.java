@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,11 @@ public class RegisterController {
 	
 	// 2. @RequestParam 을 이용하는 방법
 	@PostMapping("/register/step2")
-	public String handleStep2(@RequestParam(value="agree", defaultValue="false") Boolean agree) {
+	public String handleStep2(@RequestParam(value="agree", defaultValue="false") Boolean agree, Model model) {
 		if (!agree) {
 			return "redirect:/register/step1";
 		}
+		model.addAttribute("registerRequest", new RegisterRequest());
 		return "register/step2";
 	}
 	
@@ -49,6 +51,9 @@ public class RegisterController {
 	
 	@PostMapping("/register/step3")
 	public String handleStep3(RegisterRequest regReq) {
+		// 뷰 코드에서 사용할 속성 이름: registerRequest
+		// 속성 이름 변경: @ModelAttribute("formData") RegisterRequest regReq
+		// 뷰 코드에서 formData 속성으로 접근할 수 있다.
 		try {
 			memberRegisterService.regist(regReq);
 			return "register/step3";
