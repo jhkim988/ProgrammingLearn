@@ -1,0 +1,28 @@
+scalar DataTime
+
+# union AgendaItem = StudyGroup | Workout
+
+interface AgendaItem {
+  name: String!
+  start: DateTime!
+  end: DateTime!
+}
+
+type StudyGroup implements AgendaItem{
+  name: String!
+  start: DateTime!
+  end: DateTime!
+  subject: String
+  student: [User!]!
+}
+
+type Workout implements AgendaItem {
+  name: String!
+  start: DateTime!
+  end: DateTime!
+  reps: Int!
+}
+
+type Query {
+  agenda: [AgendaItem!]!
+}
