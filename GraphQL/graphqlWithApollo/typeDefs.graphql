@@ -28,6 +28,7 @@ scalar DateTime
     totalPhotos: Int!
     allUsers: [User!]!
     allPhotos: [Photo!]!
+    me: User
   }
 
   input PostPhotoInput {

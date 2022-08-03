@@ -10,13 +10,17 @@ const { MongoClient } = require('mongodb');
 
 const start = async () => {
   const app = express();
-  // const dbConnect = require('./models')
-  // dbConnect();
-
   const client = await MongoClient.connect(process.env.DB_HOST, {useNewUrlParser: true});
   const db = client.db('local');
-  const context = { db }
-  const server = new ApolloServer({ typeDefs, resolvers, context });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async ({req}) => {
+      const githubToken = req.headers.authorization;
+      const currentUser = await db.collection('users').findOne({ githubToken })
+      return { db, currentUser }
+    },
+  });
   await server.start();
   await server.applyMiddleware({app});
   app.get('/', (req, res) => {
