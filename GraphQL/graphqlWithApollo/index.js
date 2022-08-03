@@ -1,93 +1,33 @@
-const { ApolloServer } = require('apollo-server')
+const { readFileSync } = require('fs');
+const { ApolloServer } = require('apollo-server-express');
+const express = require('express');
+const expressPlayground = require('graphql-playground-middleware-express').default;
+const { MongoClient } = require('mongodb');
+require('dotenv').config()
 
-const typeDefs = `
-  enum PhotoCategory {
-    SELFIE
-    PORTRAIT
-    ACTION
-    LANDSCAPE
-    GRAPHIC
-  }
-  type User {
-    githubLogin: ID!
-    name: String
-    avartar: String
-    postedPhotos:[Photo!]!
-  }
-  type Photo {
-    id: ID!
-    url: String!
-    name: String!
-    decription: String
-    category: PhotoCategory!
-    postedBy: User!
-  }
-  type Query {
-    totalPhotos: Int!
-    allPhotos: [Photo!]!
-  }
+const typeDefs = readFileSync('./typeDefs.graphql', 'utf-8');
+const resolvers = require('./resolvers');
 
-  input PostPhotoInput {
-    name: String!
-    category: PhotoCategory=PORTRAIT
-    decription: String
-  }
+const start = async () => {
+  const app = express();
+  const MONGO_DB = process.env.DB_HOST;
+  const client = await MongoClient.connect(
+    MONGO_DB,
+    {useNewUrlParser: true}
+  );
 
-  type Mutation {
-    postPhoto(input: PostPhotoInput!): Photo!
-  }
-`
-var _id = 0;
-var photos = [];
-var users = [
-  {
-    githubLogin: `gg`,
-    name: `jinhan`
-  }
-];
-var photos = [
-  {
-    id: `1`,
-    name: `Sad Dear`,
-    description: `Let me have no shame under heaven 'til I die`,
-    category: `PORTRAIT`,
-    githubUser: `gPlake`,
-  }
-]
-
-const resolvers = {
-  Query: {
-    totalPhotos: () => photos.length,
-    allPhotos: () => photos,
-  },
-  Mutation: {
-    postPhoto: (parent, args) => {
-      var newPhoto = {
-        id: _id++,
-        ...args.input
-      }
-      photos.push(newPhoto);
-      return newPhoto;
-    } 
-  },
-
-  // trivial type
-  Photo: {
-    url: parent => `http://yoursite.com/img/${parent.id}.jpg`,
-    postedBy: parent => {
-      return users.find(u => u.githubLogin==parent.githubUser)
+  const db = client.db();
+  const context = { db };
+  const server = new ApolloServer({ typeDefs, resolvers, context });
+  await server.start();
+  await server.applyMiddleware({app});
+  app.get('/', (req, res) => {
+      res.set({"content-type" : "text/html; charset=utf-8"});
+      res.end('PhotoShare API에 오신 것을 환영합니다.');
     }
-  },
-
-  User: {
-    postedPhoto: parent => {
-      return photos.filter(p => p.githubLogin==parent.githubLogin);
-    },
-  },
+  );
+  app.get('/playground', expressPlayground({ endpoint: '/graphql'}));
+  app.listen({ port: 4000 }, () => console.log(`GraphQL Server running @ http://localhost:4000${server.graphqlPath}`));
 }
 
-const server = new ApolloServer({typeDefs, resolvers});
-
-server
-  .listen()
-  .then(({url}) => console.log(`GraphQL Service running on ${url}`));
+start();
