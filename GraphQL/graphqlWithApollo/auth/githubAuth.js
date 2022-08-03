@@ -51,15 +51,14 @@ const githubAuth = async (parent, { code }, { db }) => {
     githubToken: access_token,
     avatar: avatar_url,
   }
-  console.dir(await db
-    .collection("users")
-    .replaceOne({githubLogin: login}, latestUserInfo, {upsert: true}));
-  const {
-    ops: [user]
-  } = await db
-    .collection("users")
+
+  await db
+    .collection('users')
     .replaceOne({githubLogin: login}, latestUserInfo, {upsert: true});
-    return { user, token: access_token };
+
+  return {
+    user: await db.collection('users').findOne({ githubLogin: login }),
+    token: access_token };
 };
 
 module.exports = githubAuth;

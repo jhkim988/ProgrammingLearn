@@ -6,6 +6,5 @@ module.exports = {
   totalUsers: (parent, args, { db }) => 
     db.collection('users').estimatedDocumentCount(),
   allUsers: (parent, args, { db }) => 
-    db.collections('users').find().toArray(),
+    db.collection('users').find().toArray(),
 }
-
