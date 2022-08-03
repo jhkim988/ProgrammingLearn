@@ -9,7 +9,7 @@ scalar DateTime
   type User {
     githubLogin: ID!
     name: String
-    avartar: String
+    avatar: String
     postedPhotos:[Photo!]!
     inPhotos: [Photo!]!
   }

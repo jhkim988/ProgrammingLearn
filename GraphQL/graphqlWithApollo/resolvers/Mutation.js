@@ -1,5 +1,5 @@
 module.exports = {
-    postPhoto: (parent, args) => {
+  postPhoto: (parent, args) => {
     var newPhoto = {
       id: _id++,
       ...args.input,
@@ -7,6 +7,6 @@ module.exports = {
     }
     photos.push(newPhoto);
     return newPhoto;
-  }
-  
+  },
+  githubAuth: require('../auth/githubAuth'),
 }
