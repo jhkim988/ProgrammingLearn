@@ -58,7 +58,8 @@ const githubAuth = async (parent, { code }, { db }) => {
 
   return {
     user: await db.collection('users').findOne({ githubLogin: login }),
-    token: access_token };
+    token: access_token
+  };
 };
 
 module.exports = githubAuth;
