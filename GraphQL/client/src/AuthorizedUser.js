@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Query, Mutation, useApolloClient } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { ROOT_QUERY } from './App';
