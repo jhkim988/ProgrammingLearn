@@ -20,6 +20,9 @@ const start = async () => {
       const currentUser = await db.collection('users').findOne({ githubToken })
       return { db, currentUser }
     },
+    cors: {
+      origin: ["http://localhost:3000"]
+    }
   });
   await server.start();
   await server.applyMiddleware({app});
