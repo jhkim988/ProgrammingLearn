@@ -1,17 +1,19 @@
 import React from 'react';
-import { Query, Mutation, ROOT_QUERY } from './App';
+import { gql } from 'apollo-boost'
+import { Query, Mutation } from 'react-apollo';
+import { ROOT_QUERY } from './App'
 
-const Users = () => {
+const Users = () => (
   <Query query={ROOT_QUERY}>
     {({ data, loading, refetch }) => loading ?
       <p>사용자 불러오는 중...</p>:
       <UserList count={data.totalUsers} users={data.allUsers} refetchUsers={refetch}/>  
   }
   </Query>
-}
+)
 
 // UserList의 attributes를 인자로 받는다.
-const UserList = ({ count, users, refetchUsers }) => {
+const UserList = ({ count, users, refetchUsers }) => (
   <div>
     <p>{count} Users</p>
     <button onClick={() => refetchUsers()}>다시 가져오기</button>
@@ -26,14 +28,14 @@ const UserList = ({ count, users, refetchUsers }) => {
       )}
     </ul>
   </div>
-}
+)
 
-const UserListItem = ({ name, avatar }) => {
+const UserListItem = ({ name, avatar }) => (
   <li>
     <img src={avatar} width={48} height={48} alt="" />
     {name}
   </li>
-}
+)
 
 const ADD_FAKE_USERS_MUTATION = gql`
   mutation addFakeUsers($count:Int!) {
@@ -51,7 +53,7 @@ const updateUserCache = (cache, { data: { addFakeUsers }}) => {
   data.allUsers = [
     ...data.allUsers,
     ...addFakeUsers
-  ]
+  ];
   cache.writeQuery({ query: ROOT_QUERY, data });
 }
 

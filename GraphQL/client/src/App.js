@@ -5,23 +5,23 @@ import { gql } from 'apollo-boost';
 import AuthorizedUser from './AuthorizedUser'
 
 export const ROOT_QUERY = gql`
-  query allUsers
-  totalUsers
+  query allUsers {
+    totalUsers
     allUsers { ...userInfo }
     me { ...userInfo }
-    fragment userInfo on User {
-      githbuLogin
-      name
-      avatar
-    }
+  } 
+  fragment userInfo on User {
+    githubLogin
+    name
+    avatar
+  }
 `;
 
-const App = () => {
-  <BrowerRouter>
+const App = () => (
+  <BrowserRouter>
     <div>
-      <AuthroizedUser />
+      <AuthorizedUser />
       <Users />
     </div>  
-  </BrowerRouter>
-}
+  </BrowserRouter>)
 export default App;
