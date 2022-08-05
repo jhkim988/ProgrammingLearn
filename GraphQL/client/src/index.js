@@ -1,49 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { request } from 'graphql-request'
+import React from 'react';
+import { render } from 'react-dom';
+import App from './App';
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { persistCache } from 'apollo-cache-persist';
 
-var url = 'http://localhost:4000/graphql'
+const cache = new InMemoryCache();
+persistCache ({
+    cache,
+    storage: localStorage
+  })
 
-var query = `
-    query listUsers {
-      allUsers {
-        avatar
-        name
-      }
-    }
-`
-
-var mutation = `
-    mutation populate($count: Int!) {
-      addFakeUsers(count:$count) {
-        githubLogin
-      }
-    }
-`
-
-const App = ({ users=[] }) =>
-      (<div>
-        {users.map(user =>
-          <div key={user.githubLogin}>
-            <img src={user.avatar} alt="" />
-            {user.name}
-          </div>
-        )}
-        <button onClick={addUser}>Add user</button>
-      </div>)
-
-const render = ({allUsers=[]}) => 
-      ReactDOM.render(
-        <App users={allUsers} />,
-        document.getElementById('root')
-      )
-
-const addUser = () => request(url, mutation, {count: 1})
-        .then(requestAndRender)
-        .catch(console.error)
-
-const requestAndRender = () => {
-  request(url, query).then(render).catch(console.error);
+if (localStorage['apollo-cacge-persist']) {
+  let cacheData = JSON.parse(localStorage['apollo-cache-persis']);
+  cache.restore(cacheData);
 }
 
-requestAndRender();
+const client = new ApolloClient({ 
+  cache,
+  uri: 'http://localhost:4000/graphql',
+  request: operation => {
+    operation.setContext(context => ( {
+      headers: {
+        ...CountQueuingStrategy.headers,
+        authorization: localStorage.getItem('token'),
+      }
+    }))
+  }
+});
+
+render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root')
+);
