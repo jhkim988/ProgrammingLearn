@@ -52,13 +52,13 @@ const githubAuth = async (parent, { code }, { db, pubsub }) => {
     avatar: avatar_url,
   }
 
-  const { inserted_id } = await db
+  const { upsertedId } = await db
     .collection('users')
     .replaceOne({githubLogin: login}, latestUserInfo, {upsert: true});
-  const newUser = await await db.collection('users').findOne({ githubLogin: login })
-  inserted_id && pubsub.publish('new-user', { newUser })
+  const user = await await db.collection('users').findOne({ githubLogin: login })
+  upsertedId && pubsub.publish('new-user', { newUser: user })
   return {
-    user: newUser,
+    user,
     token: access_token
   };
 };
