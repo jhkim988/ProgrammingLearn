@@ -29,7 +29,7 @@ const authorizeWithGithub = async credentials => {
   return {...githubUser, access_token}
 }
 
-const githubAuth = async (parent, { code }, { db }) => {
+const githubAuth = async (parent, { code }, { db, pubsub }) => {
   let {
     message,
     access_token,
@@ -52,12 +52,13 @@ const githubAuth = async (parent, { code }, { db }) => {
     avatar: avatar_url,
   }
 
-  await db
+  const { inserted_id } = await db
     .collection('users')
     .replaceOne({githubLogin: login}, latestUserInfo, {upsert: true});
-
+  const newUser = await await db.collection('users').findOne({ githubLogin: login })
+  inserted_id && pubsub.publish('new-user', { newUser })
   return {
-    user: await db.collection('users').findOne({ githubLogin: login }),
+    user: newUser,
     token: access_token
   };
 };

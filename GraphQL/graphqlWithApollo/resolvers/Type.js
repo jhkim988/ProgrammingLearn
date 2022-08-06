@@ -5,7 +5,7 @@ module.exports = {
     id: parent => parent.id || parent._id,
     url: parent => `/img/photos/${parent._id}.jpg`,
     postedBy: async (parent, args, { db }) => {
-      return await db.collection('user').findOne({ githubLogin: parent.userID });
+      return await db.collection('users').findOne({ githubLogin: parent.userID });
     },
     taggedUsers: parent => {
       return tags.filter(tag => tag.photoID == parent.id)
