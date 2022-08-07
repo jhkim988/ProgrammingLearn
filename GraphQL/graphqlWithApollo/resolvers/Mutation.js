@@ -25,6 +25,7 @@ module.exports = {
       avatar: r.picture.thumbnail,
       githubToken: r.login.sha1,
     }));
+    console.dir(users);
     await db.collection('users').insert(users);
     users.forEach(newUser => pubsub.publish('new-user', { newUser }));
     return users;

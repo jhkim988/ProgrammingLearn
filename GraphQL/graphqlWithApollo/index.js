@@ -16,7 +16,7 @@ require('dotenv').config()
 const typeDefs = readFileSync('./typeDefs.graphql', 'utf-8');
 const resolvers = require('./resolvers');
 const schema = makeExecutableSchema({typeDefs, resolvers});
-const { MongoClient } = require('mongodb');
+const { MongoClient, ConnectionClosedEvent } = require('mongodb');
 
 const start = async () => {
   const app = express();
@@ -74,6 +74,6 @@ const start = async () => {
       return await getDynamicContext(ctx, msg, args);
     }
   }, wsServer);
-  httpServer.listen({ port: 4000}, () => console.log(`GraphQL Server running at localhost:4000${server.graphqlPath}`));
+  httpServer.listen({ port: 4000 }, () => console.log(`GraphQL Server running at localhost:4000${server.graphqlPath}`));
 }
 start();
