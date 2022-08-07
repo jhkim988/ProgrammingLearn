@@ -9,6 +9,7 @@ import {
   ApolloLink,
   split,
 } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
 import { persistCache } from 'apollo-cache-persist';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws'
@@ -28,7 +29,7 @@ if (localStorage['apollo-cache-persist']) {
   cache.restore(cacheData);
 }
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql'});
+const httpLink = new createUploadLink({ uri: 'http://localhost:4000/graphql'});
 const wsLink = new GraphQLWsLink(createClient({
   url: `ws://localhost:4000/graphql`,
   options: { reconnect: true }

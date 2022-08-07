@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useQuery, useMutation, gql, useApolloClient } from '@apollo/client';
 import { ROOT_QUERY } from './App';
+import { NavLink } from 'react-router-dom';
 
 const Me = ({ logout, requestCode, signingIn }) => {
   const {loading, error, data} = useQuery(ROOT_QUERY);
@@ -8,8 +9,8 @@ const Me = ({ logout, requestCode, signingIn }) => {
     throw new Error(error);
   }
   if (data?.me) return <CurrentUser {...data.me} logout={logout} />
-  // if (error) return <p>{`Error! ${error.message}`}</p>
-  // if (loading) return <p>loading...</p>
+  if (error) return <p>{`Error! ${error.message}`}</p>
+  if (loading) return <p>loading...</p>
   return <button onClick={requestCode} disable={signingIn}>깃허브로 로그인</button>
 }
 
@@ -17,6 +18,7 @@ const CurrentUser = ({ name, avatar, logout }) => (
   <div>
     <img src={avatar} width={48} height={48} alt="" />
     <button onClick={logout}>logout</button>
+    <NavLink to="/newPhoto">Post Photo</NavLink>
   </div>
 )
 
