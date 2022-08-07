@@ -1,34 +1,32 @@
 import React from 'react';
-import { gql } from 'apollo-boost'
-import { Query, Mutation } from 'react-apollo';
+import { useQuery, useMutation, gql } from '@apollo/client';
 import { ROOT_QUERY } from './App'
 
-const Users = () => (
-  <Query query={ROOT_QUERY}>
-    {({ data, loading, refetch }) => loading ?
-      <p>사용자 불러오는 중...</p>:
-      <UserList count={data.totalUsers} users={data.allUsers} refetchUsers={refetch}/>  
-  }
-  </Query>
-)
-
+const Users = () => {
+  const {loading, error, data, refetch} = useQuery(ROOT_QUERY);
+  if (error) return <p>{`Error! ${error.message}`}</p>;
+  if (loading) return <p>사용자 불러오는 중...</p>;
+  return <UserList count={data.totalUsers} users={data.allUsers} refetchUsers={refetch}/>;
+}
 // UserList의 attributes를 인자로 받는다.
-const UserList = ({ count, users, refetchUsers }) => (
-  <div>
-    <p>{count} Users</p>
-    <button onClick={() => refetchUsers()}>다시 가져오기</button>
-    <Mutation mutation={ADD_FAKE_USERS_MUTATION} variables={{ count: 1 }} update={updateUserCache}>
-      {addFakeUsers => {
-        <button onClick={addFakeUsers}>임시 사용자 추가</button>
-      }}
-    </Mutation>
-    <ul>
+const UserList = ({ count, users, refetchUsers }) => {
+  const [addFakeUsers, {loading, error, data}] = useMutation(ADD_FAKE_USERS_MUTATION, {
+    variables: { count: 1},
+  });
+  if (error) return <p>{`Error ${error.message}`}</p>
+  return (
+    <div>
+      <p>{count} Users</p>
+      <button onClick={() => refetchUsers()}>다시 가져오기</button>
+      <button onClick={addFakeUsers}>임시 사용자 추가</button>
+      <ul>
       {users.map(user => 
         <UserListItem key={user.githubLogin} name={user.name} avatar={user.avatar} />  
       )}
-    </ul>
-  </div>
-)
+      </ul>
+    </div>
+  )
+}
 
 const UserListItem = ({ name, avatar }) => (
   <li>

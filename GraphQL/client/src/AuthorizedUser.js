@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Query, Mutation, useApolloClient } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import { React, useState, useEffect } from 'react';
+import { useQuery, useMutation, gql, useApolloClient } from '@apollo/client';
 import { ROOT_QUERY } from './App';
 
-const Me = ({ logout, requestCode, signingIn }) => (
-  <Query query={ROOT_QUERY}>
-    {
-    ({ loading, data }) => data.me ?
-      <CurrentUser {...data.me} logout={logout} /> :
-      loading ?
-        <p>loading...</p> :
-        <button onClick={requestCode} disable={signingIn}>깃허브로 로그인</button>  
-    }
-  </Query>
-)
+const Me = ({ logout, requestCode, signingIn }) => {
+  const {loading, error, data} = useQuery(ROOT_QUERY);
+  if (error) {
+    throw new Error(error);
+  }
+  if (data?.me) return <CurrentUser {...data.me} logout={logout} />
+  // if (error) return <p>{`Error! ${error.message}`}</p>
+  // if (loading) return <p>loading...</p>
+  return <button onClick={requestCode} disable={signingIn}>깃허브로 로그인</button>
+}
 
 const CurrentUser = ({ name, avatar, logout }) => (
   <div>
@@ -34,7 +32,6 @@ const AuthorizedUser = function() {
   const client = useApolloClient();
   const [ signingIn, setSigningIn ] = useState(false);
   const [ location ] = useState(window.location);
-  let githubMutation;
   useEffect(() => {
     if (window.location.search.match(/code=/)) {
       setSigningIn(true);
@@ -57,20 +54,18 @@ const AuthorizedUser = function() {
   const logout = () => {
     localStorage.removeItem('token')
     let data = client.readQuery({ query: ROOT_QUERY });
-    data.me = null;
-    client.writeQuery({ query: ROOT_QUERY, data});
+    client.writeQuery({ query: ROOT_QUERY, data: {
+      totalUsers: data.totalUsers,
+      allUsers: data.allUsers,
+      me: null,
+    }});
   }
+  const [githubMutation, {loading, error, data}] = useMutation(GITHUB_AUTH_MUTATION, {
+    refetchQueries: [{query: ROOT_QUERY}],
+    update: authorizationComplete,
+  });
 
-  return (
-    <Mutation mutation={GITHUB_AUTH_MUTATION} update={authorizationComplete} refetchQueries={[{query: ROOT_QUERY}]}>
-    {
-      mutation => {
-        githubMutation = mutation;
-        return <Me signingIn={signingIn} requestCode={requestCode} logout={logout} />
-      }
-    }
-  </Mutation>
-  )
+  return <Me signingIn={signingIn} requestCode={requestCode} logout={logout} />  
 }
 
 export default AuthorizedUser;
