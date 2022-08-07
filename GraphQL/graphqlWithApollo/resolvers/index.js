@@ -1,13 +1,16 @@
-const Query = require('./Query');
-const Mutation = require('./Mutation');
-const Subscription = require('./Subscription');
-const Type = require('./Type');
+import Query from './Query.js';
+import Mutation from './Mutation.js';
+import Subscription from './Subscription.js';
+import Type from './Type.js';
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs'
 
 const resolvers = {
+  Upload: GraphQLUpload,
   Query,
   Mutation,
   Subscription,
   ...Type
 }
 
-module.exports = resolvers;
+
+export default resolvers;

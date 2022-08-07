@@ -1,4 +1,4 @@
-module.exports = {
+const Query = {
   totalPhotos: (parent, args, { db }) =>
     db.collection('photos').estimatedDocumentCount(),
   allPhotos: (parent, args, { db }) => 
@@ -9,3 +9,4 @@ module.exports = {
     db.collection('users').find().toArray(),
   me: (parent, args, { currentUser }) => currentUser,
 }
+export default Query;

@@ -1,22 +1,26 @@
-const { readFileSync } = require('fs');
-const { createServer } = require('http');
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const {
+import { readFileSync } from 'fs';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
+import path from 'path';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
-} = require('apollo-server-core');
-const { PubSub } = require('graphql-subscriptions');
-const { WebSocketServer } = require('ws');
-const { useServer } = require('graphql-ws/lib/use/ws');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
-const expressPlayground = require('graphql-playground-middleware-express').default;
-require('dotenv').config()
+} from 'apollo-server-core';
+import { PubSub } from 'graphql-subscriptions';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import expressPlayground from 'graphql-playground-middleware-express';
+import dotenv from 'dotenv';
+import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
+import resolvers from './resolvers/index.js'
+import { MongoClient } from 'mongodb';
+import cors from 'cors';
+dotenv.config();
 
 const typeDefs = readFileSync('./typeDefs.graphql', 'utf-8');
-const resolvers = require('./resolvers');
 const schema = makeExecutableSchema({typeDefs, resolvers});
-const { MongoClient, ConnectionClosedEvent } = require('mongodb');
 
 const start = async () => {
   const app = express();
@@ -50,15 +54,20 @@ const start = async () => {
     ]
   });
   await server.start();
-  server.applyMiddleware({app});
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    Credential: true,
+  }));
+  app.use('/img/photos', express.static(path.join(path.resolve(), 'assets', 'photos')));
+  app.use(graphqlUploadExpress());
   app.get('/', (req, res) => {
       res.set({"content-type" : "text/html; charset=utf-8"});
       res.end('PhotoShare API에 오신 것을 환영합니다.');
     }
   );
-  app.get('/playground', expressPlayground({ endpoint: '/graphql'}));
+  app.get('/playground', expressPlayground.default({ endpoint: '/graphql'}));
   // app.listen({ port: 4000 }, () => console.log(`GraphQL Server running @ http://localhost:4000${server.graphqlPath}`));
-
+  server.applyMiddleware({app});
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/graphql'
@@ -74,6 +83,7 @@ const start = async () => {
       return await getDynamicContext(ctx, msg, args);
     }
   }, wsServer);
+  httpServer.timeout = 5000;
   httpServer.listen({ port: 4000 }, () => console.log(`GraphQL Server running at localhost:4000${server.graphqlPath}`));
 }
 start();

@@ -1,9 +1,9 @@
-const { GraphQLScalarType } = require('graphql');
+import {GraphQLScalarType} from 'graphql';
 
-module.exports = {
+const Type = {
   Photo: {
     id: parent => parent.id || parent._id,
-    url: parent => `/img/photos/${parent._id}.jpg`,
+    url: parent => `/img/photos/${parent.url}`,
     postedBy: async (parent, args, { db }) => {
       return await db.collection('users').findOne({ githubLogin: parent.userID });
     },
@@ -31,3 +31,5 @@ module.exports = {
     parseLiteral: ast => ast.value,
   })
 }
+
+export default Type;

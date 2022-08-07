@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const requestGithubToken = credentials => fetch("https://github.com/login/oauth/access_token",
   {
@@ -63,4 +63,4 @@ const githubAuth = async (parent, { code }, { db, pubsub }) => {
   };
 };
 
-module.exports = githubAuth;
+export default githubAuth;
