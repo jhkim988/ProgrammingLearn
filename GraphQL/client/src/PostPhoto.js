@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { gql, useApolloClient, useMutation } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { ROOT_QUERY } from './App';
 
 const POST_PHOTO_MUTATION = gql`
@@ -25,13 +25,8 @@ const PostPhoto = (props) => {
   const [category, setCategory] = useState("PORTRAIT");
   const [saveFileName, setSaveFileName] = useState("");
 
-  const updatePhotos = (cache, { data: {postPhoto}}) => {
-    var data = cache.readQuery({ query: ROOT_QUERY });
-    const copy = {...data}
-    copy.allPhotos = [postPhoto, ...data.allPhotos];
-    copy.totalPhotos =+ 1;
-    cache.writeQuery({query: ROOT_QUERY}, { data: copy });
-    window.location = '/';
+  const updatePhotos = (cache, { data: { postPhoto }}) => {
+    // to do add photo in cache
   }
 
   const [uploadPhoto] = useMutation(UPLOAD_PHOTO, {
@@ -60,7 +55,7 @@ const PostPhoto = (props) => {
         category,
         url: saveFileName
       }},
-      update: updatePhotos
+      update: updatePhotos,      
     });
   }
   if (error) {
