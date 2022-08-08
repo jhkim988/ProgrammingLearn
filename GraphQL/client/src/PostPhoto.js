@@ -26,7 +26,20 @@ const PostPhoto = (props) => {
   const [saveFileName, setSaveFileName] = useState("");
 
   const updatePhotos = (cache, { data: { postPhoto }}) => {
-    // to do add photo in cache
+    const prev = cache.readQuery({ query: ROOT_QUERY });
+    const copy = { ...prev };
+    copy.allPhotos = [postPhoto, ...prev.allPhotos];
+    copy.totalPhotos = prev.totalPhotos+1;
+    cache.writeQuery({
+      query: gql`
+        query {
+          totalPhotos
+          allPhotos
+        }
+      `,
+      data: copy
+    });
+    window.location.href='/';
   }
 
   const [uploadPhoto] = useMutation(UPLOAD_PHOTO, {

@@ -13,12 +13,20 @@ import { createUploadLink } from 'apollo-upload-client';
 import { persistCache } from 'apollo-cache-persist';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws'
-import { getMainDefinition } from '@apollo/client/utilities';
+import { getMainDefinition, offsetLimitPagination } from '@apollo/client/utilities';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        allPhotos: offsetLimitPagination(),
+      }
+    }
+  }
+});
 persistCache ({
   cache,
   storage: localStorage
