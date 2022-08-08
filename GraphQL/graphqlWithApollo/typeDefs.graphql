@@ -28,7 +28,7 @@ type Query {
   totalUsers: Int!
   totalPhotos: Int!
   allUsers: [User!]!
-  allPhotos: [Photo!]!
+  allPhotos(offset: Int=0, limit: Int=5): [Photo!]!
   me: User
 }
 type Mutation {
