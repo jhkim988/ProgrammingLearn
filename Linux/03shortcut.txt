@@ -1,0 +1,31 @@
+ctrl+b: 커서 앞으로
+ctrl+f: 커서 뒤로
+
+ctrl+a: 커서 맨 앞으로
+ctrl+e: 커서 맨 뒤로
+
+alt+b: 커서 한 단어 뒤로
+alt+f: 커서 한 단어 앞으로
+
+ctrl+h: backspace
+ctrl+d: delete
+ctrl+w: 한 단어 삭제
+
+ctrl+k: 커서부터 뒤까지 자르기
+ctrl+u: 커서부터 맨 앞까지 자르기
+ctrl+y: 붙여넣기 yank
+
+ctrl+s: 화면잠금
+ctrl+q: 잠금 해제
+
+ctrl+c: 강제종료
+
+ctrl+i: 화면 지우기, clear
+
+tab: 자동완성
+
+ctrl+p: 이전 명령
+ctrl+n: 다음 명령
+ctrl+r: 명령 이력 검색
+esc: 검색결과를 실행하지 않은 채 커맨드 라인 복귀
+ctrl+g: 검색 결과 지우고 커맨드 라인 복귀

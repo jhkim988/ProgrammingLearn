@@ -1,0 +1,10 @@
+pwd: print working directory
+cd: change directory
+~: home directory
+ls: list
+*, ?: 경로확장, glob
+ls -l: 상세정보 출력
+ls -a: 숨김 파일까지 출력
+ls -F: 파일 종류까지 출력
+ls -w 30: 30글자씩 출력
+ls --quote-name: 따옴표로 묶어서 출력
