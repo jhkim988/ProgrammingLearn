@@ -1,0 +1,854 @@
+[2022-09-12 02:30:34.204] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTestByH2 Starting ProductRepositoryTestByH2 using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 18616 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 02:30:34.218] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTestByH2 The following 1 profile is active: "db"
+[2022-09-12 02:30:34.979] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 02:30:35.071] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 80 ms. Found 1 JPA repository interfaces.
+[2022-09-12 02:30:35.176] [INFO ] [main] org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor Replacing 'dataSource' DataSource bean with embedded version
+[2022-09-12 02:30:35.842] [INFO ] [main] org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory Starting embedded database: url='jdbc:h2:mem:0b405057-fa53-479c-a295-e116ab8389ab;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+[2022-09-12 02:30:36.505] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 02:30:36.611] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 02:30:36.934] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 02:30:37.162] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+[2022-09-12 02:30:38.103] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 02:30:38.116] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 02:30:38.831] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTestByH2 Started ProductRepositoryTestByH2 in 5.54 seconds (JVM running for 7.624)
+[2022-09-12 02:30:38.869] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Began transaction (1) for test context [DefaultTestContext@134d26af testClass = ProductRepositoryTestByH2, testInstance = com.springboot.test.data.repository.ProductRepositoryTestByH2@2b4c1d96, testMethod = saveTest@ProductRepositoryTestByH2, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@66ac5762 testClass = ProductRepositoryTestByH2, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@797cf65c key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1ef6d34c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7c51f34b, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@6cdba6dc, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@78aa1f72, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@e6b593f3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@302f7971, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@2ae2fa13]; rollback [true]
+[2022-09-12 02:30:39.219] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Rolled back transaction for test: [DefaultTestContext@134d26af testClass = ProductRepositoryTestByH2, testInstance = com.springboot.test.data.repository.ProductRepositoryTestByH2@2b4c1d96, testMethod = saveTest@ProductRepositoryTestByH2, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@66ac5762 testClass = ProductRepositoryTestByH2, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@797cf65c key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1ef6d34c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7c51f34b, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@6cdba6dc, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@78aa1f72, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@e6b593f3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@302f7971, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+[2022-09-12 02:30:39.233] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Began transaction (1) for test context [DefaultTestContext@134d26af testClass = ProductRepositoryTestByH2, testInstance = com.springboot.test.data.repository.ProductRepositoryTestByH2@4be7acd9, testMethod = selectTest@ProductRepositoryTestByH2, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@66ac5762 testClass = ProductRepositoryTestByH2, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@797cf65c key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1ef6d34c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7c51f34b, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@6cdba6dc, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@78aa1f72, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@e6b593f3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@302f7971, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@2ae2fa13]; rollback [true]
+[2022-09-12 02:30:39.260] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Rolled back transaction for test: [DefaultTestContext@134d26af testClass = ProductRepositoryTestByH2, testInstance = com.springboot.test.data.repository.ProductRepositoryTestByH2@4be7acd9, testMethod = selectTest@ProductRepositoryTestByH2, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@66ac5762 testClass = ProductRepositoryTestByH2, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@797cf65c key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1ef6d34c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7c51f34b, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@6cdba6dc, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@78aa1f72, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@e6b593f3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@302f7971, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+[2022-09-12 02:30:39.270] [INFO ] [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:13:45.975] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 2116 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:13:45.978] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:13:50.640] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:13:50.641] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:13:50.643] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 2 ms
+[2022-09-12 03:13:50.694] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 5.718 seconds (JVM running for 8.214)
+[2022-09-12 03:13:51.309] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.springboot.test.data.repository.ProductRepositoryTest], using SpringBootContextLoader
+[2022-09-12 03:13:51.311] [INFO ] [main] org.springframework.test.context.support.AbstractContextLoader Could not detect default resource locations for test class [com.springboot.test.data.repository.ProductRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+[2022-09-12 03:13:51.312] [INFO ] [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [com.springboot.test.data.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[2022-09-12 03:13:51.372] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration com.springboot.test.TestApplication for test class com.springboot.test.data.repository.ProductRepositoryTest
+[2022-09-12 03:13:51.377] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+[2022-09-12 03:13:51.378] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@423c246a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5ea40c10, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@d3b2b6c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@641792f0, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@472bf56c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3911b515, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6da58910, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@35fd1646, org.springframework.test.context.event.EventPublishingTestExecutionListener@2d651500, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@19e8a4a4, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@58445380, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@55621e8, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1ee957, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5c0fa074, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@262d3026]
+[2022-09-12 03:13:51.457] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Starting ProductRepositoryTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 2116 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:13:51.460] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest The following 1 profile is active: "db"
+[2022-09-12 03:13:51.838] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:13:51.967] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:13:52.570] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:13:52.706] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:13:52.865] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:13:53.560] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:13:53.792] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:13:53.899] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:13:55.200] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:13:55.219] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:13:55.976] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Started ProductRepositoryTest in 4.592 seconds (JVM running for 13.496)
+[2022-09-12 03:13:56.004] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Began transaction (1) for test context [DefaultTestContext@31197769 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@5b3216b7, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@40324819 testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@6a4a9fa1 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@486e9d1d, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@43935e9c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@72465eb2, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7b18658a, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@88d0937e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@3820cfe, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@753125f]; rollback [true]
+[2022-09-12 03:13:56.180] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Rolled back transaction for test: [DefaultTestContext@31197769 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@5b3216b7, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@40324819 testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@6a4a9fa1 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@486e9d1d, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@43935e9c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@72465eb2, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7b18658a, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@88d0937e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@3820cfe, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+[2022-09-12 03:13:56.377] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] input number: 123
+[2022-09-12 03:13:56.378] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] product number: 123, name: Ææ
+[2022-09-12 03:13:56.389] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] productDTO: com.springboot.test.data.dto.ProductDto@79aa053f
+[2022-09-12 03:13:56.418] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] saveProduct: Product(number=null, name=Ææ, price=1000, stock=1234, createdAt=null, updatedAt=null)
+[2022-09-12 03:13:56.427] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.springboot.test.TestApplicationTests], using SpringBootContextLoader
+[2022-09-12 03:13:56.431] [INFO ] [main] org.springframework.test.context.support.AbstractContextLoader Could not detect default resource locations for test class [com.springboot.test.TestApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+[2022-09-12 03:13:56.433] [INFO ] [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [com.springboot.test.TestApplicationTests]: TestApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[2022-09-12 03:13:56.449] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration com.springboot.test.TestApplication for test class com.springboot.test.TestApplicationTests
+[2022-09-12 03:13:56.457] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+[2022-09-12 03:13:56.459] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6a8b6846, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@ea36068, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@69c97c74, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7ce2e22, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@36b6bfc5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2303295b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@18bcb93, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@77424abe, org.springframework.test.context.event.EventPublishingTestExecutionListener@74099b04, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4efa2d2f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1172b030, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@74000f1a, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@4ce97b25, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5365a4c2, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@57927dae]
+[2022-09-12 03:13:56.511] [INFO ] [main] com.springboot.test.TestApplicationTests Starting TestApplicationTests using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 2116 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:13:56.511] [INFO ] [main] com.springboot.test.TestApplicationTests The following 1 profile is active: "db"
+[2022-09-12 03:13:56.984] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:13:57.006] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:13:57.321] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:13:57.330] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2022-09-12 03:13:57.334] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2022-09-12 03:13:57.335] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:13:57.435] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:13:57.435] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:13:57.443] [WARN ] [main] org.springframework.web.context.support.GenericWebApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+[2022-09-12 03:13:57.444] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:13:57.447] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Shutdown initiated...
+[2022-09-12 03:13:57.456] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Shutdown completed.
+[2022-09-12 03:13:57.466] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-09-12 03:13:57.540] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.springboot.test.controller.ProductController required a bean of type 'com.springboot.test.service.ProductService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.springboot.test.service.ProductService' in your configuration.
+
+[2022-09-12 03:13:57.553] [ERROR] [main] org.springframework.test.context.TestContextManager Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@6a8b6846] to prepare test instance [com.springboot.test.TestApplicationTests@54c2e26d]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 67 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 85 common frames omitted
+[2022-09-12 03:13:57.618] [INFO ] [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:13:57.621] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:13:57.634] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2022-09-12 03:15:28.845] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 15792 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:15:28.849] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:15:31.093] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:15:31.094] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:15:31.095] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:15:31.133] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.019 seconds (JVM running for 4.512)
+[2022-09-12 03:18:47.074] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 12964 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:18:47.076] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:18:49.417] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:18:49.417] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:18:49.419] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 2 ms
+[2022-09-12 03:18:49.465] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.106 seconds (JVM running for 4.682)
+[2022-09-12 03:22:17.098] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 24444 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:22:17.100] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:22:19.854] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:22:19.855] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:22:19.856] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:22:19.908] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.632 seconds (JVM running for 5.474)
+[2022-09-12 03:22:57.551] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 15220 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:22:57.553] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:23:00.302] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:23:00.302] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:23:00.303] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:23:00.351] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.666 seconds (JVM running for 5.655)
+[2022-09-12 03:29:00.165] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 27620 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:29:00.167] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:29:02.474] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:29:02.474] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:29:02.475] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:29:02.522] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.062 seconds (JVM running for 4.709)
+[2022-09-12 03:30:55.379] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 14628 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:30:55.381] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:30:57.688] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:30:57.688] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:30:57.690] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 2 ms
+[2022-09-12 03:30:57.739] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.047 seconds (JVM running for 4.697)
+[2022-09-12 03:32:26.942] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 10872 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:32:26.944] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:32:29.409] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:32:29.409] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:32:29.410] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:32:29.458] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.295 seconds (JVM running for 4.931)
+[2022-09-12 03:34:39.207] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 16028 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:34:39.209] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:34:41.568] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:34:41.568] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:34:41.569] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:34:41.618] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.143 seconds (JVM running for 4.715)
+[2022-09-12 03:35:40.099] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 19828 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:35:40.100] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:35:42.482] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:35:42.483] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:35:42.484] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+[2022-09-12 03:35:42.527] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 3.188 seconds (JVM running for 5.252)
+[2022-09-12 03:35:58.953] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 21376 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:35:58.955] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:36:02.770] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:36:02.770] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:36:02.772] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 2 ms
+[2022-09-12 03:36:02.841] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 5.094 seconds (JVM running for 7.816)
+[2022-09-12 03:36:03.519] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.springboot.test.data.repository.ProductRepositoryTest], using SpringBootContextLoader
+[2022-09-12 03:36:03.524] [INFO ] [main] org.springframework.test.context.support.AbstractContextLoader Could not detect default resource locations for test class [com.springboot.test.data.repository.ProductRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+[2022-09-12 03:36:03.526] [INFO ] [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [com.springboot.test.data.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[2022-09-12 03:36:03.599] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration com.springboot.test.TestApplication for test class com.springboot.test.data.repository.ProductRepositoryTest
+[2022-09-12 03:36:03.601] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+[2022-09-12 03:36:03.602] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5bd817, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@522c4079, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@6fb4ea51, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@54fdead9, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@ab80b31, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3a27ad97, org.springframework.test.context.transaction.TransactionalTestExecutionListener@72893ee0, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4919a94a, org.springframework.test.context.event.EventPublishingTestExecutionListener@332d2db, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4fe8c3f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3f3bdc7e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3b6c712a, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2e5dd896, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5eb22616, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@3f8bc992]
+[2022-09-12 03:36:03.665] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Starting ProductRepositoryTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 21376 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:36:03.665] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest The following 1 profile is active: "db"
+[2022-09-12 03:36:03.996] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:36:04.102] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 87 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:36:04.716] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:36:04.852] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:36:04.968] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:36:05.749] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:36:05.982] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:36:06.074] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:36:07.187] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:36:07.204] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:36:07.868] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Started ProductRepositoryTest in 4.263 seconds (JVM running for 12.844)
+[2022-09-12 03:36:07.898] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Began transaction (1) for test context [DefaultTestContext@a3d6307 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@6fe2dcc1, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@47d53365 testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@4fe3cc90 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1cd6b1bd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@402f8592, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@36224f93, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@19b75b2b, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@97595cf2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@544e3679, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@357d4c50]; rollback [true]
+[2022-09-12 03:36:08.047] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Rolled back transaction for test: [DefaultTestContext@a3d6307 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@6fe2dcc1, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@47d53365 testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@4fe3cc90 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1cd6b1bd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@402f8592, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@36224f93, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@19b75b2b, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@97595cf2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@544e3679, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+[2022-09-12 03:36:08.240] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] input number: 123
+[2022-09-12 03:36:08.241] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] product number: 123, name: Ææ
+[2022-09-12 03:36:08.248] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] productDTO: com.springboot.test.data.dto.ProductDto@3a2fed
+[2022-09-12 03:36:08.274] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] saveProduct: Product(number=null, name=Ææ, price=1000, stock=1234, createdAt=null, updatedAt=null)
+[2022-09-12 03:36:08.284] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.springboot.test.TestApplicationTests], using SpringBootContextLoader
+[2022-09-12 03:36:08.285] [INFO ] [main] org.springframework.test.context.support.AbstractContextLoader Could not detect default resource locations for test class [com.springboot.test.TestApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+[2022-09-12 03:36:08.286] [INFO ] [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [com.springboot.test.TestApplicationTests]: TestApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[2022-09-12 03:36:08.298] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration com.springboot.test.TestApplication for test class com.springboot.test.TestApplicationTests
+[2022-09-12 03:36:08.304] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+[2022-09-12 03:36:08.304] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3618aece, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3f02e0d2, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@af9867c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@cf01828, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@7f6da9a6, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5741c2e9, org.springframework.test.context.transaction.TransactionalTestExecutionListener@114d741b, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1df01f42, org.springframework.test.context.event.EventPublishingTestExecutionListener@f42b5c3, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@56cd6848, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2c5a3326, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@314d23e0, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2bbb74a7, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1689c6b0, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@6b370444]
+[2022-09-12 03:36:08.352] [INFO ] [main] com.springboot.test.TestApplicationTests Starting TestApplicationTests using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 21376 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:36:08.352] [INFO ] [main] com.springboot.test.TestApplicationTests The following 1 profile is active: "db"
+[2022-09-12 03:36:08.777] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:36:08.802] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:36:09.101] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:36:09.114] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Starting...
+[2022-09-12 03:36:09.118] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Start completed.
+[2022-09-12 03:36:09.119] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:36:09.201] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:36:09.201] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:36:09.206] [WARN ] [main] org.springframework.web.context.support.GenericWebApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+[2022-09-12 03:36:09.206] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:36:09.209] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Shutdown initiated...
+[2022-09-12 03:36:09.216] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-2 - Shutdown completed.
+[2022-09-12 03:36:09.223] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-09-12 03:36:09.267] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.springboot.test.controller.ProductController required a bean of type 'com.springboot.test.service.ProductService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.springboot.test.service.ProductService' in your configuration.
+
+[2022-09-12 03:36:09.272] [ERROR] [main] org.springframework.test.context.TestContextManager Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@3618aece] to prepare test instance [com.springboot.test.TestApplicationTests@1cb65a6e]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 67 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 85 common frames omitted
+[2022-09-12 03:36:09.317] [INFO ] [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:36:09.319] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:36:09.328] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2022-09-12 03:39:53.491] [INFO ] [main] com.springboot.test.TestApplicationTests Starting TestApplicationTests using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 4008 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:39:53.492] [INFO ] [main] com.springboot.test.TestApplicationTests The following 1 profile is active: "db"
+[2022-09-12 03:39:54.429] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:39:54.517] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:39:55.338] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:39:55.417] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:39:55.634] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:39:56.115] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:39:56.223] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:39:56.266] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:39:57.088] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:39:57.100] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:39:57.118] [WARN ] [main] org.springframework.web.context.support.GenericWebApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+[2022-09-12 03:39:57.119] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:39:57.121] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:39:57.134] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2022-09-12 03:39:57.145] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-09-12 03:39:57.180] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.springboot.test.controller.ProductController required a bean of type 'com.springboot.test.service.ProductService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.springboot.test.service.ProductService' in your configuration.
+
+[2022-09-12 03:39:57.193] [ERROR] [main] org.springframework.test.context.TestContextManager Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@2ccca26f] to prepare test instance [com.springboot.test.TestApplicationTests@73a5d86c]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 71 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 89 common frames omitted
+[2022-09-12 03:44:37.641] [INFO ] [main] com.springboot.test.TestApplicationTests Starting TestApplicationTests using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 8172 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:44:37.643] [INFO ] [main] com.springboot.test.TestApplicationTests The following 1 profile is active: "db"
+[2022-09-12 03:44:38.813] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:44:38.893] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:44:39.658] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:44:39.741] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:44:39.998] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:44:40.503] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:44:40.602] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:44:40.659] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:44:41.476] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:44:41.488] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:44:41.513] [WARN ] [main] org.springframework.web.context.support.GenericWebApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+[2022-09-12 03:44:41.514] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:44:41.520] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:44:41.529] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2022-09-12 03:44:41.543] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-09-12 03:44:41.578] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.springboot.test.controller.ProductController required a bean of type 'com.springboot.test.service.ProductService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.springboot.test.service.ProductService' in your configuration.
+
+[2022-09-12 03:44:41.585] [ERROR] [main] org.springframework.test.context.TestContextManager Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4212a0c8] to prepare test instance [com.springboot.test.TestApplicationTests@b4d83ac]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 71 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 89 common frames omitted
+[2022-09-12 03:45:11.834] [INFO ] [main] com.springboot.test.TestApplicationTests Starting TestApplicationTests using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 27372 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:45:11.836] [INFO ] [main] com.springboot.test.TestApplicationTests The following 1 profile is active: "db"
+[2022-09-12 03:45:12.771] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:45:12.846] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:45:13.629] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:45:13.719] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:45:13.975] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:45:14.473] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:45:14.577] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:45:14.616] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:45:15.488] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:45:15.507] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:45:15.541] [WARN ] [main] org.springframework.web.context.support.GenericWebApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+[2022-09-12 03:45:15.541] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:45:15.545] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:45:15.560] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
+[2022-09-12 03:45:15.569] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-09-12 03:45:15.608] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.springboot.test.controller.ProductController required a bean of type 'com.springboot.test.service.ProductService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.springboot.test.service.ProductService' in your configuration.
+
+[2022-09-12 03:45:15.617] [ERROR] [main] org.springframework.test.context.TestContextManager Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@7ec3394b] to prepare test instance [com.springboot.test.TestApplicationTests@990b86b]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:235)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:54)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'productController' defined in file [C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test\target\classes\com\springboot\test\controller\ProductController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 71 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.springboot.test.service.ProductService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 89 common frames omitted
+[2022-09-12 03:47:03.928] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Starting ProductControllerTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 6424 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:47:03.930] [INFO ] [main] com.springboot.test.controller.ProductControllerTest The following 1 profile is active: "db"
+[2022-09-12 03:47:07.427] [INFO ] [main] org.springframework.boot.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+[2022-09-12 03:47:07.427] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+[2022-09-12 03:47:07.430] [INFO ] [main] org.springframework.test.web.servlet.TestDispatcherServlet Completed initialization in 3 ms
+[2022-09-12 03:47:07.485] [INFO ] [main] com.springboot.test.controller.ProductControllerTest Started ProductControllerTest in 4.586 seconds (JVM running for 6.999)
+[2022-09-12 03:47:08.037] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.springboot.test.data.repository.ProductRepositoryTest], using SpringBootContextLoader
+[2022-09-12 03:47:08.039] [INFO ] [main] org.springframework.test.context.support.AbstractContextLoader Could not detect default resource locations for test class [com.springboot.test.data.repository.ProductRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+[2022-09-12 03:47:08.039] [INFO ] [main] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [com.springboot.test.data.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+[2022-09-12 03:47:08.071] [INFO ] [main] org.springframework.boot.test.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration com.springboot.test.TestApplication for test class com.springboot.test.data.repository.ProductRepositoryTest
+[2022-09-12 03:47:08.074] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+[2022-09-12 03:47:08.076] [INFO ] [main] org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@27eff770, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6822e70d, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@98474c2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5e365ad0, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@63a6211, org.springframework.test.context.support.DirtiesContextTestExecutionListener@795fe754, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5357bed9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3fdb9eb9, org.springframework.test.context.event.EventPublishingTestExecutionListener@6aa449b9, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6cc776fe, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@208bcc9, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6145d467, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2964a077, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7ec35323, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@39ea56c6]
+[2022-09-12 03:47:08.140] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Starting ProductRepositoryTest using Java 11.0.16 on DESKTOP-OR4BTQ0 with PID 6424 (started by Kim_Jin_Han in C:\Users\Kim_Jin_Han\Desktop\Programming\Git\ProgrammingLearn\Spring\bootcoreguide\test)
+[2022-09-12 03:47:08.140] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest The following 1 profile is active: "db"
+[2022-09-12 03:47:08.447] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-09-12 03:47:08.561] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 98 ms. Found 1 JPA repository interfaces.
+[2022-09-12 03:47:09.099] [INFO ] [main] org.hibernate.jpa.internal.util.LogHelper HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-09-12 03:47:09.227] [INFO ] [main] org.hibernate.Version HHH000412: Hibernate ORM core version 5.6.10.Final
+[2022-09-12 03:47:09.318] [INFO ] [main] org.hibernate.annotations.common.Version HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-09-12 03:47:09.992] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Starting...
+[2022-09-12 03:47:10.195] [INFO ] [main] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Start completed.
+[2022-09-12 03:47:10.316] [INFO ] [main] org.hibernate.dialect.Dialect HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+[2022-09-12 03:47:11.490] [INFO ] [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-09-12 03:47:11.508] [INFO ] [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:47:12.158] [INFO ] [main] com.springboot.test.data.repository.ProductRepositoryTest Started ProductRepositoryTest in 4.076 seconds (JVM running for 11.672)
+[2022-09-12 03:47:12.189] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Began transaction (1) for test context [DefaultTestContext@63cdd1f6 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@401a087c, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@131670dd testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@4faae136 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@7926352f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1129829c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@1e40fbb3, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@39023dbf, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@97595cf2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@586cc15d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@25711db8]; rollback [true]
+[2022-09-12 03:47:12.343] [INFO ] [main] org.springframework.test.context.transaction.TransactionContext Rolled back transaction for test: [DefaultTestContext@63cdd1f6 testClass = ProductRepositoryTest, testInstance = com.springboot.test.data.repository.ProductRepositoryTest@401a087c, testMethod = save@ProductRepositoryTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@131670dd testClass = ProductRepositoryTest, locations = '{}', classes = '{class com.springboot.test.TestApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[[ImportsContextCustomizer@4faae136 key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@7926352f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1129829c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@1e40fbb3, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@39023dbf, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@97595cf2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@586cc15d, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+[2022-09-12 03:47:12.530] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] input number: 123
+[2022-09-12 03:47:12.531] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [getProduct] product number: 123, name: Ææ
+[2022-09-12 03:47:12.538] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] productDTO: com.springboot.test.data.dto.ProductDto@3a2fed
+[2022-09-12 03:47:12.556] [INFO ] [main] com.springboot.test.service.impl.ProductServiceImpl [saveProduct] saveProduct: Product(number=null, name=Ææ, price=1000, stock=1234, createdAt=null, updatedAt=null)
+[2022-09-12 03:47:12.591] [INFO ] [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-09-12 03:47:12.596] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown initiated...
+[2022-09-12 03:47:12.851] [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource HikariPool-1 - Shutdown completed.
